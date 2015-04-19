@@ -1,3 +1,6 @@
+/* Source: http://www.cs.ucsb.edu/~chris/teaching/cs170/projects/proj5.html */
+
+
 #ifndef _DISK_H_
 #define _DISK_H_
 
