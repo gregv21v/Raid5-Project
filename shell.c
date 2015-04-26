@@ -10,16 +10,37 @@
 #define CMDLEN	1024
 
 
+/* List of Commands: 
+	ls
+	makedisk [disk-name]
+	opendisk [disk-name]
+	closedisk [disk-name]
+	writefile [file-name] [local-file-name]
+	readfile [file-name] 
+
+*/
+
+
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
 
-int main()
+int main(int argc, char **argv)
 {
-  printf("Welcome to your file system");
+	char *** argv;
+	int argc;
+	
+	char command[CMDLEN];
+  	printf("Welcome to your file system");
 
-
-  return 0;
+	while(strcmp(command_str, "exit") != 0 && strcmp(command_str, "quit") != 0)
+	{
+		get_command(command);
+		build_argument_array(&argv, &argc, command);
+	}
+	
+	
+  	return 0;
 
 }
 
