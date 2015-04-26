@@ -24,7 +24,8 @@ CFLAGS=-g -Wall -pedantic -I head
 # The name of the object files (modify as needed)
 # Basically this is just all our C files with a .o
 # extension.
-OBJECTS= disk.o 
+OBJECTS= disk.o \
+	 shell.o
 
 # How to link together all the object files
 # Do NOT modify
