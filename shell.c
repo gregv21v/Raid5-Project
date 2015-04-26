@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 	char command[CMDLEN];
   	printf("Welcome to your file system");
 
-	while(strcmp(command_str, "exit") != 0 && strcmp(command_str, "quit") != 0)
+	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
