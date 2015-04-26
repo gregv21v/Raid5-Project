@@ -39,13 +39,26 @@ int main(int argc, char **argv)
 	{
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
-		if(strcmp(command,"makedisk")==0)
+		if(strcmp(arguments[0],"makedisk")==0)
 		{
-			error=make_disk(arguments[0]);
+			error=make_disk(arguments[1]);
 			if(error==0)
 			{
 				printf("Disk created\n");
 			}
+		
+		}
+		else if(strcmp(arguments[0],"opendisk")==0)
+		{
+			error=open_disk(arguments[1]);
+			if(error==0)
+			{
+				printf("Disk was opened successfully");
+			}
+		}
+		else
+		{
+			printf("Command not recognized\n");
 		}
 	}
 	
