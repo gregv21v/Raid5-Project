@@ -12,10 +12,10 @@
 
 
 typedef struct File {
-	char * name;
-	int start;
-	int blockNumber;
-	int diskNumber;
+	char name[30];
+	unsigned int start;
+	unsigned int blockNumber;
+	unsigned char diskNumber;
 } file_t;
 
 
@@ -34,6 +34,7 @@ void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
 void list_files(file_t * files);
+void write_table(file_t * table);
 
 int main(int argc, char **argv)
 {
@@ -44,15 +45,17 @@ int main(int argc, char **argv)
 	int i = 0;
 	for(i = 0; i < MAX_FILES; i++) 
 	{
-		table[i].name = NULL;
+		strcpy(table[i].name, "");
 		table[i].start = 0;
 		table[i].blockNumber = 0;
 		table[i].diskNumber = 0;
 	}
 
-	table[0].name = "Car Facts";
-	table[1].name = "Some other stuff";
-	table[2].name = "Something else";
+	strcpy(table[0].name, "Car Facts");
+	strcpy(table[1].name, "Some other stuff");
+	strcpy(table[2].name, "Something else");
+
+	printf("Unsigned Int Length: %d\n", sizeof(unsigned int));
 
 
 	char ** arguments;
@@ -77,9 +80,14 @@ int main(int argc, char **argv)
 }
 
 
-/* write_table(file_t * table) */
+void write_table(file_t * table) 
+{
+	
+}
 /* load_table(file_t * table) */
 /* find_in_table(char * filename) */
+
+
 
 
 
@@ -88,7 +96,7 @@ void list_files(file_t * table)
 	int i = 0; 
 	for(i = 0; i < MAX_FILES; i++) 
 	{
-		if(table[i].name != NULL)
+		if(strcmp(table[i].name, "") != 0)
 			printf("%s\n", table[i].name);
 	}
 }
