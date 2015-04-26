@@ -1,5 +1,10 @@
 
 #include <stdio.h>
+#include <assert.h>
+#include <errno.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
 
 /* Define the maximum command length */
 #define CMDLEN	1024
@@ -14,7 +19,7 @@ int main()
   printf("Welcome to your file system");
 
 
-
+  return 0;
 
 }
 
