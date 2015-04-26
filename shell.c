@@ -1,6 +1,10 @@
 
 #include <stdio.h>
 
+/* Define the maximum command length */
+#define CMDLEN	1024
+
+
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
