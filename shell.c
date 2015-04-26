@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <disk.h>
+#include <unistd.h>
 
 /* Define the maximum command length */
 #define CMDLEN	1024
@@ -58,7 +59,12 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			printf("Command not recognized\n");
+			/*We can change the creation of files later if we want*/	
+			error=execvp(arguments[0],arguments);
+			if(error==-1)
+			{
+				printf("Execution failed\n");
+			}
 		}
 	}
 	
