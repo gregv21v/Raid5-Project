@@ -8,6 +8,15 @@
 
 /* Define the maximum command length */
 #define CMDLEN	1024
+#define MAX_FILES 20
+
+
+typedef struct File {
+	char * name;
+	int start;
+	int blockNumber;
+	int diskNumber;
+} file_t;
 
 
 /* List of Commands: 
@@ -24,24 +33,64 @@
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
+void list_files(file_t * files);
 
 int main(int argc, char **argv)
 {
-	char *** arguments;
+
+	file_t table[MAX_FILES];
+
+	/* initialize files */
+	int i = 0;
+	for(i = 0; i < MAX_FILES; i++) 
+	{
+		table[i].name = NULL;
+		table[i].start = 0;
+		table[i].blockNumber = 0;
+		table[i].diskNumber = 0;
+	}
+
+	table[0].name = "Car Facts";
+	table[1].name = "Some other stuff";
+	table[2].name = "Something else";
+
+
+	char ** arguments;
 	int argumentCount;
 	
 	char command[CMDLEN];
-  	printf("Welcome to your file system");
+  	printf("Welcome to your file system\n");
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
+
+		if(strcmp(command, "ls") == 0) {
+			list_files(table);
+		}
 	}
 	
 	
   	return 0;
 
+}
+
+
+/* write_table(file_t * table) */
+/* load_table(file_t * table) */
+/* find_in_table(char * filename) */
+
+
+
+void list_files(file_t * table) 
+{
+	int i = 0; 
+	for(i = 0; i < MAX_FILES; i++) 
+	{
+		if(table[i].name != NULL)
+			printf("%s\n", table[i].name);
+	}
 }
 
 
