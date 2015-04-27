@@ -12,12 +12,12 @@
 #define CMDLEN	1024
 #define MAX_FILES 20
 
-// total size: 64 bytes 512/64 which leaves 8 files per block
+/* total size: 64 bytes 512/64 which leaves 8 files per block*/
 typedef struct File {
-	char name[55];	// 31 bytes
-	unsigned int start; // 4 bytes 
-	unsigned int blockNumber; // 4 bytes
-	unsigned char diskNumber; // 1 byte
+	char name[55];	/* 31 bytes*/
+	unsigned int start; /* 4 bytes*/ 
+	unsigned int blockNumber; /* 4 bytes*/
+	unsigned char diskNumber; /* 1 byte*/
 } file_t;
 
 
@@ -75,12 +75,22 @@ int main(int argc, char **argv)
 		{
 			list_files(table);
 		} 
-		else if(strcmp(arguments[0],"makedisk") == 0)
+		else if(strcmp(arguments[0],"makedisk") == 0)/* create the three disks*/
 		{
-			error = make_disk(arguments[1]);
+			error = make_disk("disk_0");
 			if(error == 0)
 			{
 				printf("Disk created\n");
+			}
+			error= make_disk("disk_1");
+			if(error==0)
+			{
+				printf("disk created\n");
+			}
+			error=make_disk("disk_2");
+			if(error==0)
+			{
+				printf("disk created\n");
 			}
 		
 		}
