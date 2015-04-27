@@ -5,17 +5,19 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <disk.h>
+#include <unistd.h>
 
 /* Define the maximum command length */
 #define CMDLEN	1024
 #define MAX_FILES 20
 
-
+// total size: 64 bytes 512/64 which leaves 8 files per block
 typedef struct File {
-	char name[30];
-	unsigned int start;
-	unsigned int blockNumber;
-	unsigned char diskNumber;
+	char name[55];	// 31 bytes
+	unsigned int start; // 4 bytes 
+	unsigned int blockNumber; // 4 bytes
+	unsigned char diskNumber; // 1 byte
 } file_t;
 
 
@@ -41,6 +43,12 @@ int main(int argc, char **argv)
 
 	file_t table[MAX_FILES];
 
+	char command[CMDLEN];
+		char ** arguments;
+		int argumentCount;
+		
+	int error;
+
 	/* initialize files */
 	int i = 0;
 	for(i = 0; i < MAX_FILES; i++) 
@@ -55,13 +63,7 @@ int main(int argc, char **argv)
 	strcpy(table[1].name, "Some other stuff");
 	strcpy(table[2].name, "Something else");
 
-	printf("Unsigned Int Length: %d\n", sizeof(unsigned int));
 
-
-	char ** arguments;
-	int argumentCount;
-	
-	char command[CMDLEN];
   	printf("Welcome to your file system\n");
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
@@ -69,8 +71,35 @@ int main(int argc, char **argv)
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
 
-		if(strcmp(command, "ls") == 0) {
+		if(strcmp(command, "ls") == 0) 
+		{
 			list_files(table);
+		} 
+		else if(strcmp(arguments[0],"makedisk") == 0)
+		{
+			error = make_disk(arguments[1]);
+			if(error == 0)
+			{
+				printf("Disk created\n");
+			}
+		
+		}
+		else if(strcmp(arguments[0],"opendisk") == 0)
+		{
+			error = open_disk(arguments[1]);
+			if(error==0)
+			{
+				printf("Disk was opened successfully");
+			}
+		}
+		else
+		{
+			/*We can change the creation of files later if we want*/	
+			error = execvp(arguments[0],arguments);
+			if(error == -1)
+			{
+				printf("Execution failed\n");
+			}
 		}
 	}
 	
