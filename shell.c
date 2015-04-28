@@ -95,12 +95,12 @@ int main(int argc, char **argv)
 			error= make_disk("disk_1");
 			if(error==0)
 			{
-				printf("disk created\n");
+				printf("Disk created\n");
 			}
 			error=make_disk("disk_2");
 			if(error==0)
 			{
-				printf("disk created\n");
+				printf("Disk created\n");
 			}
 		
 		}
