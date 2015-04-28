@@ -38,12 +38,9 @@ void get_command(char *);
 
 int main(int argc, char **argv)
 {
-
-	file_t table[MAX_FILES];
-
 	char command[CMDLEN];
-		char ** arguments;
-		int argumentCount;
+	char ** arguments;
+	int argumentCount;
 		
 	int error;
 
