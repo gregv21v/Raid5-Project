@@ -77,7 +77,7 @@ void filetable_add_file(FileTable * table, File * file)
 		theTable->tail->next = (file_t *) file;
 		theTable->tail = theTable->tail->next;
 	}
-	
+	theTable->size++;
 }
 
 
