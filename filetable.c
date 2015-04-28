@@ -34,7 +34,7 @@
 	Creates the list
 
 */
-FileTable * file_list_create() 
+FileTable * filetable_create() 
 {
 	list_t * new_list = NULL;
 	new_list = (list_t *) calloc(1, sizeof(list_t));
