@@ -81,7 +81,7 @@ int main(int argc, char **argv)
 
 		if(strcmp(command, "ls") == 0) 
 		{
-			list_files(table);
+			filetable_list_files(table);
 		} 
 		else if(strcmp(arguments[0],"makedisk") == 0)/* create the three disks*/
 		{
