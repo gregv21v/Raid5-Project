@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 	int error;
 
 	/* initialize files */
-	FileTable * table = filetable_create();
+	list_t * table = filetable_create();
 
 	file_t * files[5];
 
