@@ -1,5 +1,5 @@
 /* Source: http://www.cs.ucsb.edu/~chris/teaching/cs170/projects/proj5.html */
-
+/* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
 
 #include <stdio.h>
 #include <stdlib.h>
