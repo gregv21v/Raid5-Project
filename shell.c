@@ -1,3 +1,4 @@
+/* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
 
 #include <stdio.h>
 #include <assert.h>
@@ -10,15 +11,13 @@
 
 /* Define the maximum command length */
 #define CMDLEN	1024
-#define MAX_FILES 20
 
-/* total size: 64 bytes 512/64 which leaves 8 files per block*/
-typedef struct File {
-	char name[55];	/* 31 bytes*/
-	unsigned int start; /* 4 bytes*/ 
-	unsigned int blockNumber; /* 4 bytes*/
-	unsigned char diskNumber; /* 1 byte*/
-} file_t;
+/*Define the disk names*/
+#define DISK_0 "disk_0"
+#define DISK_1 "disk_1"
+#define DISK_2 "disk_2"
+
+
 
 
 /* List of Commands: 
@@ -35,33 +34,39 @@ typedef struct File {
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
-void list_files(file_t * files);
-void write_table(file_t * table);
+/*void write_table(file_t * table); */
 
 int main(int argc, char **argv)
 {
-
-	file_t table[MAX_FILES];
-
 	char command[CMDLEN];
-		char ** arguments;
-		int argumentCount;
+	char ** arguments;
+	int argumentCount;
 		
 	int error;
 
 	/* initialize files */
-	int i = 0;
-	for(i = 0; i < MAX_FILES; i++) 
+	FileTable * table = filetable_create();
+
+	file_t * files[5];
+
+	int i;
+	for(i = 0; i < 5; i++)
 	{
-		strcpy(table[i].name, "");
-		table[i].start = 0;
-		table[i].blockNumber = 0;
-		table[i].diskNumber = 0;
+		files[i] = (file_t *) malloc(sizeof(file_t));
 	}
 
-	strcpy(table[0].name, "Car Facts");
-	strcpy(table[1].name, "Some other stuff");
-	strcpy(table[2].name, "Something else");
+	strcpy(files[0]->name, "File1");
+	strcpy(files[1]->name, "File2");
+	strcpy(files[2]->name, "File3");
+	strcpy(files[3]->name, "File4");
+	strcpy(files[4]->name, "File5");
+
+
+	for(i = 0; i < 5; i++)
+	{
+		filetable_add_file(table, files[i]);
+	}
+
 
 
   	printf("Welcome to your file system\n");
@@ -73,7 +78,7 @@ int main(int argc, char **argv)
 
 		if(strcmp(command, "ls") == 0) 
 		{
-			list_files(table);
+			filetable_list_files(table);
 		} 
 		else if(strcmp(arguments[0],"makedisk") == 0)/* create the three disks*/
 		{
@@ -94,13 +99,20 @@ int main(int argc, char **argv)
 			}
 		
 		}
-		else if(strcmp(arguments[0],"opendisk") == 0)
+		else if(strcmp(arguments[0],"write") == 0)
 		{
-			error = open_disk(arguments[1]);
-			if(error==0)
-			{
-				printf("Disk was opened successfully");
-			}
+			error = open_disk("disk_0");
+			error = open_disk("disk_1");
+			error = open_disk("disk_2");
+
+
+			/* write to the disks*/
+
+			error=close_disk("disk_0");
+			error=close_disk("disk_1");
+			error=close_disk("disk_2");
+
+			
 		}
 		else
 		{
@@ -119,26 +131,12 @@ int main(int argc, char **argv)
 }
 
 
-void write_table(file_t * table) 
-{
-	
-}
+
+
+/* void write_table(file_t * table) */
 /* load_table(file_t * table) */
 /* find_in_table(char * filename) */
 
-
-
-
-
-void list_files(file_t * table) 
-{
-	int i = 0; 
-	for(i = 0; i < MAX_FILES; i++) 
-	{
-		if(strcmp(table[i].name, "") != 0)
-			printf("%s\n", table[i].name);
-	}
-}
 
 
 /*
