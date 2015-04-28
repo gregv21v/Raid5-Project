@@ -42,7 +42,7 @@ FileTable * file_list_create()
 	new_list->head = NULL;
 	new_list->tail = NULL;
 
-	return (FileTable *) new_list;
+	return new_list;
 }
 
 
@@ -50,29 +50,27 @@ FileTable * file_list_create()
 	Adds a file to the list
 
 */
-void filetable_add_file(FileTable * table, File * file)
+void filetable_add_file(list_t * table, file_t * file)
 {
-	list_t * theTable = (list_t *) table;
 
-	if(theTable->head == NULL) /* this is the first element in the list */
+	if(table->head == NULL) /* this is the first element in the list */
 	{
-		theTable->head = (file_t *) file;
-		theTable->tail = (file_t *) file;
+		table->head = (file_t *) file;
+		table->tail = (file_t *) file;
 	}
 	else /* there are other elements in the list */
 	{
-		theTable->tail->next = (file_t *) file;
-		theTable->tail = theTable->tail->next;
+		table->tail->next = (file_t *) file;
+		table->tail = table->tail->next;
 	}
-	theTable->size++;
+	table->size++;
 }
 
 
-void filetable_display(FileTable * table) 
+void filetable_display(list_t * table) 
 {
-	list_t * theTable = (list_t *) table;
 
-	file_t * current = theTable->head;
+	file_t * current = table->head;
 
 	while(current != NULL)
 	{
@@ -87,11 +85,9 @@ void filetable_display(FileTable * table)
 
 }
 
-void filetable_list_files(FileTable * table)
+void filetable_list_files(list_t * table)
 {
-	list_t * theTable = (list_t *) table;
-
-	file_t * current = theTable->head;
+	file_t * current = table->head;
 
 	while(current != NULL)
 	{
