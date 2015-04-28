@@ -57,10 +57,6 @@ int main(int argc, char **argv)
 		table[i].diskNumber = 0;
 	}
 
-	strcpy(table[0].name, "Car Facts");
-	strcpy(table[1].name, "Some other stuff");
-	strcpy(table[2].name, "Something else");
-
 
   	printf("Welcome to your file system\n");
 
