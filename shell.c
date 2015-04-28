@@ -8,6 +8,8 @@
 #include <disk.h>
 #include <unistd.h>
 
+/*nothing*/
+
 /* Define the maximum command length */
 #define CMDLEN	1024
 #define MAX_FILES 20
