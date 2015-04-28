@@ -1,3 +1,4 @@
+/* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
 
 #include <stdio.h>
 #include <assert.h>
@@ -8,8 +9,6 @@
 #include <disk.h>
 #include <unistd.h>
 
-/*nothing*/
-
 /* Define the maximum command length */
 #define CMDLEN	1024
 #define MAX_FILES 20
@@ -18,6 +17,15 @@
 #define DISK_0 "disk_0"
 #define DISK_1 "disk_1"
 #define DISK_2 "disk_2"
+
+/* total size: 64 bytes 512/64 which leaves 8 files per block*/
+typedef struct File {
+	char name[55];	/* 31 bytes*/
+	unsigned int start; /* 4 bytes*/ 
+	unsigned int blockNumber; /* 4 bytes*/
+	unsigned char diskNumber; /* 1 byte*/
+} file_t;
+
 
 /* List of Commands: 
 	ls
@@ -42,8 +50,8 @@ int main(int argc, char **argv)
 	file_t table[MAX_FILES];
 
 	char command[CMDLEN];
-	char ** arguments;
-	int argumentCount;
+		char ** arguments;
+		int argumentCount;
 		
 	int error;
 
@@ -126,13 +134,26 @@ int main(int argc, char **argv)
 
 
 
-/* void write_table(file_t * table) */
+void write_table(file_t * table) 
+{
+	
+}
 /* load_table(file_t * table) */
 /* find_in_table(char * filename) */
 
 
 
 
+
+void list_files(file_t * table) 
+{
+	int i = 0; 
+	for(i = 0; i < MAX_FILES; i++) 
+	{
+		if(strcmp(table[i].name, "") != 0)
+			printf("%s\n", table[i].name);
+	}
+}
 
 
 /*
