@@ -28,7 +28,7 @@ typedef struct list {
 } list_t;
 
 
-list_t * filetable_create();
+FileTable * filetable_create();
 void filetable_add_file(list_t * table, file_t * file);
 void filetable_display(list_t * table);
 void filetable_list_files(list_t * table);
