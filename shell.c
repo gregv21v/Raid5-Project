@@ -48,14 +48,28 @@ int main(int argc, char **argv)
 	int error;
 
 	/* initialize files */
-	int i = 0;
-	for(i = 0; i < MAX_FILES; i++) 
+	FileTable * table = filetable_create();
+
+	file_t * files[5];
+
+	int i;
+	for(i = 0; i < 5; i++)
 	{
-		strcpy(table[i].name, "");
-		table[i].start = 0;
-		table[i].blockNumber = 0;
-		table[i].diskNumber = 0;
+		files[i] = (file_t *) malloc(sizeof(file_t));
 	}
+
+	strcpy(files[0]->name, "File1");
+	strcpy(files[1]->name, "File2");
+	strcpy(files[2]->name, "File3");
+	strcpy(files[3]->name, "File4");
+	strcpy(files[4]->name, "File5");
+
+
+	for(i = 0; i < 5; i++)
+	{
+		filetable_add_file(table, files[i]);
+	}
+
 
 
   	printf("Welcome to your file system\n");
