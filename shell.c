@@ -106,16 +106,16 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			error = open_disk("disk_0");
-			error = open_disk("disk_1");
-			error = open_disk("disk_2");
+			error = open_disk(DISK_0);
+			error = open_disk(DISK_1);
+			error = open_disk(DISK_2);
 
 
 			/* write to the disks*/
 
-			error=close_disk("disk_0");
-			error=close_disk("disk_1");
-			error=close_disk("disk_2");
+			error=close_disk(DISK_0);
+			error=close_disk(DISK_1);
+			error=close_disk(DISK_2);
 
 			
 		}
