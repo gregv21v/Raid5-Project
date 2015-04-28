@@ -26,20 +26,7 @@
 #include "filetable.h"
 
 
-typedef struct node {
-	char name[33];	/* 33 bytes */
-	unsigned int start; /* 4 bytes */ 
-	unsigned int blockNumber; /* 4 bytes */
-	unsigned char diskNumber; /* 1 byte */
-	struct node * next; /* not saved */
-} file_t;
 
-
-typedef struct list {
-	int size;
-	struct node * head; /* link to the last element */
-	struct node * tail; /* link to the first element */
-} list_t;
 
 
 
