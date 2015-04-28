@@ -11,7 +11,6 @@
 
 /* Define the maximum command length */
 #define CMDLEN	1024
-#define MAX_FILES 20
 
 /*Define the disk names*/
 #define DISK_0 "disk_0"
