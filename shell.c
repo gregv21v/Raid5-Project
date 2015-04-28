@@ -12,6 +12,11 @@
 #define CMDLEN	1024
 #define MAX_FILES 20
 
+/*Define the disk names*/
+#define DISK_0 "disk_0"
+#define DISK_1 "disk_1"
+#define DISK_2 "disk_2"
+
 /* total size: 64 bytes 512/64 which leaves 8 files per block*/
 typedef struct File {
 	char name[55];	/* 31 bytes*/
@@ -94,13 +99,20 @@ int main(int argc, char **argv)
 			}
 		
 		}
-		else if(strcmp(arguments[0],"opendisk") == 0)
+		else if(strcmp(arguments[0],"write") == 0)
 		{
-			error = open_disk(arguments[1]);
-			if(error==0)
-			{
-				printf("Disk was opened successfully");
-			}
+			error = open_disk("disk_0");
+			error = open_disk("disk_1");
+			error = open_disk("disk_2");
+
+
+			/* write to the disks*/
+
+			error=close_disk("disk_0");
+			error=close_disk("disk_1");
+			error=close_disk("disk_2");
+
+			
 		}
 		else
 		{
@@ -117,6 +129,8 @@ int main(int argc, char **argv)
   	return 0;
 
 }
+
+
 
 
 void write_table(file_t * table) 
