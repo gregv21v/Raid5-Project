@@ -140,7 +140,6 @@ int main(int argc, char **argv)
 
 /* void write_table(file_t * table) */
 /* load_table(file_t * table) */
-/* find_in_table(char * filename) */
 
 
 
