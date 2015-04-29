@@ -109,20 +109,9 @@ void filetable_find(list_t * table, char * filename)
 {
 	file_t * current = table->head;
 
-	while(current != NULL)
-	{
-		/* display the details of the current file */
-		printf("%s\n", current->name);
+	for(; strcmp(current->name, filename) != 0; current = current->next);
 
-		if(strcmp(current->name, filename) == 0)
-		{
-			/* You have found the file */
-			break;
-		}
-		
-		current = current->next;
-	}	
-
+	return current;
 }
 
 
