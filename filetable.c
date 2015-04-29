@@ -105,7 +105,7 @@ void filetable_list_files(list_t * table)
 	pre: The table refers to a valid list_t struct, and the filename is a valid string
 	post: Returns a pointer to the file found or NULL if not found
 */
-void filetable_find(list_t * table, char * filename) 
+file_t * filetable_find(list_t * table, char * filename) 
 {
 	file_t * current = table->head;
 
