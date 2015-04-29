@@ -104,6 +104,7 @@ int main(int argc, char **argv)
 			}
 		
 		}
+		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
 			error = open_disk("DISK_0");
@@ -112,6 +113,7 @@ int main(int argc, char **argv)
 
 
 			/* write to the disks*/
+			
 
 			error=close_disk("DISK_0");
 			error=close_disk("DISK_1");
