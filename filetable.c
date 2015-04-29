@@ -100,4 +100,31 @@ void filetable_list_files(list_t * table)
 }
 
 
+/*
+	Finds a file by name in the table.
+	pre: The table refers to a valid list_t struct, and the filename is a valid string
+	post: Returns a pointer to the file found or NULL if not found
+*/
+void filetable_find(list_t * table, char * filename) 
+{
+	file_t * current = table->head;
+
+	while(current != NULL)
+	{
+		/* display the details of the current file */
+		printf("%s\n", current->name);
+
+		if(strcmp(current->name, filename) == 0)
+		{
+			/* You have found the file */
+			break;
+		}
+		
+		current = current->next;
+	}	
+
+}
+
+
+
 
