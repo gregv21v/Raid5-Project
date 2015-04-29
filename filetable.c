@@ -18,21 +18,12 @@
 	The last 8 bytes store the address of the next block.
 */
 
-
-/*
-	So with this new volumn system are we just storing 
-*/
-
 #include "filetable.h"
-
-
-
-
-
 
 /*
 	Creates the list
-
+	pre: none
+	post: a pointer to a new file table is created
 */
 list_t * filetable_create() 
 {
@@ -48,7 +39,8 @@ list_t * filetable_create()
 
 /*
 	Adds a file to the list
-
+	pre: File points to a valid file_t struct in memory, and table points to a valid list_t in memory.
+	post: Adds the file to the end of the table.
 */
 void filetable_add_file(list_t * table, file_t * file)
 {
@@ -66,7 +58,11 @@ void filetable_add_file(list_t * table, file_t * file)
 	table->size++;
 }
 
-
+/*
+	Displays the file names along with all the other data in the file_t struct.
+	pre: table points to a valid list_t struct.
+	post: Displays the file names, and other details about the files in the table.
+*/
 void filetable_display(list_t * table) 
 {
 
@@ -85,6 +81,11 @@ void filetable_display(list_t * table)
 
 }
 
+/*
+	Displays the file names. This is used for the ls command.
+	pre: table points to a valid list_t struct.
+	post: Displays the file names.
+*/
 void filetable_list_files(list_t * table)
 {
 	file_t * current = table->head;
