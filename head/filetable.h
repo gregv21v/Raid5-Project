@@ -9,7 +9,7 @@
 #define __FILETABLE_H
 
 #include <unistd.h>
-
+#include <string.h>
 
 
 typedef struct node {
