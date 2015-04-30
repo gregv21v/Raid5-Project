@@ -14,10 +14,9 @@
 
 typedef struct node {
 	char name[29];	/* 29 bytes */
-	unsigned int start; /* 4 bytes */ 
-	unsigned int blockNumber; /* 4 bytes */
-	unsigned int blockCount; /* 4 bytes */
-	unsigned char diskNumber; /* 1 byte */
+	unsigned int start; /* 4 bytes: The block that the file starts on. */ 
+	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */
+	unsigned char diskNumber; /* 1 byte: The disk the block stays on */
 	struct node * next; /* not saved */
 } file_t;
 
