@@ -108,11 +108,33 @@ int main(int argc, char **argv)
 		else if(strcmp(arguments[0],"write") == 0)
 		{
 			/* load a file from the local filesystem */
+			char* buffer;/*The buffer to hold the text of the file*/
+			int fileSize;/*the size of the file*/
+			int numBlocks;/*number of blocks the file will require*/
+			
+			/*Open the file and get its size*/
+			FILE* f=fopen(arguments[1],buffer);
+			fseek(f,0,SEEK_END);
+			fileSize=ftell(f);
+			numBlocks=(fileSize%512)+1;/*calculate the blocks needed*/
+			fseek(f,0,SEEK_SET);
+			
+			*buffer=(char *)malloc(sizeof(size+1));/*Allocate space for the buffer*/
+			
+			/*To Do:
+				*load file into buffer
+				*write buffer to the blocks
+			*/	
+			
+			
+			
+			
 			
 			error = open_disk("DISK_0");
 			error = open_disk("DISK_1");
 			error = open_disk("DISK_2");
 
+			
 
 			/* write to the disks*/
 			/* find the last entry in the file table */
