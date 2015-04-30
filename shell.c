@@ -169,8 +169,11 @@ int main(int argc, char **argv)
 /* list_t * load_table() */
 /* 	Adds a new file to the volumn
 	store_in_volumn(file_t * file, char * data, int dataSize) */
-/* 	Loads the file from the local file system
-	char * load_file(char * filename) */
+/*Loads the file from the local file system */
+char * load_file(char * filename) 
+{
+	int file = 
+}
 
 
 
