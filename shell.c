@@ -165,10 +165,25 @@ int main(int argc, char **argv)
 
 
 
-/* void write_table(file_t * table) */
+void write_table(file_t * table)
+{
+	char * buffer = (char *) malloc(28 * table->size);
+	int error = 0;
+	/* Write all the file descriptors to the buffer */
+	int i;
+	for(i = 0; i < 18; i++) 
+	{
+		memcpy() 	
+	}
+	
+	
+}
 /* list_t * load_table() */
-/* 	Adds a new file to the volumn
-	store_in_volumn(file_t * file, char * data, int dataSize) */
+/* 	Adds a new file to the volumn */
+void store_in_volumn(file_t * file, char * data, int dataSize) 
+{
+	
+}
 /*Loads the file from the local file system */
 char * load_file(char * filename) 
 {
