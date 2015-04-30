@@ -136,9 +136,9 @@ int main(int argc, char **argv)
 				block_read(currentBlock,buffer);/*Read the block into the buffer string*/
 				
 				/* while the character is not the termination character */
-				while(buffer[i]!='\0')/*Print out the block*/
+				while((char)buffer[i]!='\0')/*Print out the block*/
 				{
-					printf("%s",buffer[i]);
+					printf("%c",(char)buffer[i]);
 					i++;
 				}
 				currentBlock++;
