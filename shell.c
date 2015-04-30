@@ -113,6 +113,8 @@ int main(int argc, char **argv)
 
 
 			/* write to the disks*/
+			/* find the last entry in the file table */
+			/* store the new file after that entry */
 			
 
 			error=close_disk("DISK_0");
@@ -142,6 +144,9 @@ int main(int argc, char **argv)
 
 /* void write_table(file_t * table) */
 /* load_table(file_t * table) */
+/* 	Adds a new file to the volumn
+	store_in_volumn(file_t * file, char * data, int dataSize) */
+
 
 
 
