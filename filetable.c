@@ -73,7 +73,7 @@ void filetable_display(list_t * table)
 		/* display the details of the current file */
 		printf("%s\n", current->name);
 		printf("Start: %d\n", current->start);
-		printf("Block Number: %d\n", current->blockNumber);
+		printf("Block Count: %d\n", current->blockCount);
 		printf("Disk Number: %d\n", current->diskNumber);
 
 		current = current->next;
