@@ -123,6 +123,23 @@ int main(int argc, char **argv)
 
 			
 		}
+		else if(strcmp(arguments[0],"readfile")==0)
+		{
+			char* buffer=malloc((12*sizeof(char)));
+			file_t* file=filetable_find(table,arguments[1]);
+			int currentBlock=file->start;
+			while(currentBlock<=file->end)
+			{
+				int i=0;
+				block_read(currentBlock,buffer);
+				while(buffer[i]!= NULL)
+				{
+					printf(buffer[i]);
+					i++;
+				}
+				currentBlock=file->next;
+			}
+		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)
 		{
 			/*We can change the creation of files later if we want*/	
