@@ -13,9 +13,10 @@
 
 
 typedef struct node {
-	char name[33];	/* 33 bytes */
+	char name[29];	/* 29 bytes */
 	unsigned int start; /* 4 bytes */ 
 	unsigned int blockNumber; /* 4 bytes */
+	unsigned int blockCount; /* 4 bytes */
 	unsigned char diskNumber; /* 1 byte */
 	struct node * next; /* not saved */
 } file_t;
