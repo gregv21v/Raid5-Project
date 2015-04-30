@@ -107,6 +107,8 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
+			/* load a file from the local filesystem */
+			
 			error = open_disk("DISK_0");
 			error = open_disk("DISK_1");
 			error = open_disk("DISK_2");
@@ -126,7 +128,7 @@ int main(int argc, char **argv)
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
 			char buffer [512];/*Buffer to read from the block*/
-			file_t* file=filetable_find(table,arguments[1]);
+			file_t* file=filetable_find(table, arguments[1]);
 			int startBlock=file->start;
 			int currentBlock=startBlock;
 			int endBlock=startBlock+(file->blockCount);
@@ -164,9 +166,12 @@ int main(int argc, char **argv)
 
 
 /* void write_table(file_t * table) */
-/* load_table(file_t * table) */
+/* list_t * load_table() */
 /* 	Adds a new file to the volumn
 	store_in_volumn(file_t * file, char * data, int dataSize) */
+/* 	Loads the file from the local file system
+	char * load_file(char * filename) */
+
 
 
 
