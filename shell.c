@@ -125,16 +125,16 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
-			char* buffer=malloc((512*sizeof(char)));
+			char buffer [512];/*Buffer to read from the block*/
 			file_t* file=filetable_find(table,arguments[1]);
 			int startBlock=file->start;
 			int currentBlock=startBlock;
-			int endBlock=startBlock+file->blockCount;
+			int endBlock=startBlock+(file->blockCount);
 			while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 			{
 				int i=0;
 				block_read(currentBlock,buffer);/*Read the block into the buffer string*/
-				while(buffer[i]!= NULL)
+				while(buffer[i]!= NULL)/*Print out the block*/
 				{
 					printf(buffer[i]);
 					i++;
