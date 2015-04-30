@@ -11,7 +11,8 @@
 #include <unistd.h>
 #include <string.h>
 
-
+/* Each file descriptor is 28 bytes large. */
+/* That leaves 8 bytes to store the address to the next block */
 typedef struct node {
 	char name[29];	/* 29 bytes */
 	unsigned int start; /* 4 bytes: The block that the file starts on. */ 
