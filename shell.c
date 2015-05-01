@@ -108,11 +108,13 @@ int main(int argc, char **argv)
 		else if(strcmp(arguments[0],"write") == 0)
 		{
 			/* load a file from the local filesystem */
+			
+			
 			char* buffer;/*The buffer to hold the text of the file*/
 			int fileSize;/*the size of the file*/
 			int numBlocks;/*number of blocks the file will require*/
-			int startBlock;
-			int endBlock;
+			int startBlock;/*The block the file will start on*/
+			int endBlock;/*The block the file will end on*/
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],buffer);
@@ -122,36 +124,29 @@ int main(int argc, char **argv)
 			fseek(f,0,SEEK_SET);
 			
 			*buffer=(char *)malloc(sizeof(size+1));/*Allocate space for the buffer*/
-			fread(buffer,fileSize,1,f);
+			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 			
 			startBlock=(table->last->start)+(table->last->blockCount)+1;
 			endBlock=startBlock+numBlocks;
 			
 			
+			/*Need to add file to the table*/
 			
-			/*To Do:
-				*load file into buffer
-				*write buffer to the blocks
-			*/	
-			
-			
-			
-			
-			
+			/*Open the disks*/
 			error = open_disk("DISK_0");
 			error = open_disk("DISK_1");
 			error = open_disk("DISK_2");
 
+			/*Write the blocks*/
 			int i=startBlock;
 			for(i;i<endBlock+1;i++)
 			{
 				block_write(i,buffer);
 			}
-			/* write to the disks*/
-			/* find the last entry in the file table */
-			/* store the new file after that entry */
+			
 			free(buffer);
 
+			/*Close the disks*/
 			error=close_disk("DISK_0");
 			error=close_disk("DISK_1");
 			error=close_disk("DISK_2");
