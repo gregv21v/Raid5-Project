@@ -130,7 +130,7 @@ int main(int argc, char **argv)
 			endBlock=startBlock+numBlocks;
 			
 			
-			/*Need to add file to the table*/
+			/*Need to add file to table*/
 			
 			/*Open the disks*/
 			error = open_disk("DISK_0");
