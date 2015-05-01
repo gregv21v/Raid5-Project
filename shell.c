@@ -111,6 +111,8 @@ int main(int argc, char **argv)
 			char* buffer;/*The buffer to hold the text of the file*/
 			int fileSize;/*the size of the file*/
 			int numBlocks;/*number of blocks the file will require*/
+			int startBlock;
+			int endBlock;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],buffer);
@@ -120,6 +122,12 @@ int main(int argc, char **argv)
 			fseek(f,0,SEEK_SET);
 			
 			*buffer=(char *)malloc(sizeof(size+1));/*Allocate space for the buffer*/
+			fread(buffer,fileSize,1,f);
+			
+			startBlock=(table->last->start)+(table->last->blockCount)+1;
+			endBlock=startBlock+numBlocks;
+			
+			
 			
 			/*To Do:
 				*load file into buffer
@@ -134,12 +142,15 @@ int main(int argc, char **argv)
 			error = open_disk("DISK_1");
 			error = open_disk("DISK_2");
 
-			
-
+			int i=startBlock;
+			for(i;i<endBlock+1;i++)
+			{
+				block_write(i,buffer);
+			}
 			/* write to the disks*/
 			/* find the last entry in the file table */
 			/* store the new file after that entry */
-			
+			free(buffer);
 
 			error=close_disk("DISK_0");
 			error=close_disk("DISK_1");
