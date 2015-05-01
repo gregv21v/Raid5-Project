@@ -38,7 +38,7 @@
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
-/*void write_table(file_t * table); */
+void write_table(list_t * table); 
 
 int main(int argc, char **argv)
 {
@@ -173,7 +173,7 @@ int main(int argc, char **argv)
 
 
 
-char * write_table(file_t * table)
+char * write_table(list_t * table)
 {
 	int size = 18 * table->size;
 	char * buffer = (char *) malloc(size);
