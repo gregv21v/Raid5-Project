@@ -110,23 +110,23 @@ int main(int argc, char **argv)
 			/* load a file from the local filesystem */
 			
 			
-			char* buffer;/*The buffer to hold the text of the file*/
-			int fileSize;/*the size of the file*/
-			int numBlocks;/*number of blocks the file will require*/
-			int startBlock;/*The block the file will start on*/
-			int endBlock;/*The block the file will end on*/
+			char* buffer; /*The buffer to hold the text of the file*/
+			int fileSize; /*the size of the file*/
+			int numBlocks; /*number of blocks the file will require*/
+			int startBlock; /*The block the file will start on*/
+			int endBlock; /*The block the file will end on*/
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],buffer);
 			fseek(f,0,SEEK_END);
 			fileSize=ftell(f);
-			numBlocks=(fileSize%512)+1;/*calculate the blocks needed*/
+			numBlocks= (fileSize%512)+1;/*calculate the blocks needed*/
 			fseek(f,0,SEEK_SET);
 			
 			*buffer=(char *)malloc(sizeof(size+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 			
-			startBlock=(table->last->start)+(table->last->blockCount)+1;
+			startBlock=(table->tail->start) + (table->tail->blockCount)+1;
 			endBlock=startBlock+numBlocks;
 			
 			
