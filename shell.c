@@ -64,12 +64,19 @@ int main(int argc, char **argv)
 	strcpy(files[2]->name, "File3");
 	strcpy(files[3]->name, "File4");
 	strcpy(files[4]->name, "File5");
+	
+	
+	
 
 
 	for(i = 0; i < 5; i++)
 	{
 		filetable_add_file(table, files[i]);
 	}
+	
+	
+	char * buf = write_table(table);
+	display_buffer(buf, 18 * table->size);
 
 
 
@@ -125,22 +132,23 @@ int main(int argc, char **argv)
 
 			
 		}
+		/* Read a file from the filesystem */
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
-			char buffer [512];/*Buffer to read from the block*/
-			file_t* file=filetable_find(table, arguments[1]);
-			int startBlock=file->start;
-			int currentBlock=startBlock;
-			int endBlock=startBlock+(file->blockCount);
-			while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
+			char buffer [512]; /*Buffer to read from the block*/
+			file_t* file = filetable_find(table, arguments[1]);
+			int startBlock = file->start;
+			int currentBlock = startBlock;
+			int endBlock = startBlock + (file->blockCount);
+			while(currentBlock <= endBlock) /*Iterate through the blocks of the file*/
 			{
 				int i=0;
-				block_read(currentBlock,buffer);/*Read the block into the buffer string*/
+				block_read(currentBlock,buffer); /*Read the block into the buffer string*/
 				
 				/* while the character is not the termination character */
-				while((char)buffer[i]!='\0')/*Print out the block*/
+				while( buffer[i] != '\0') /*Print out the block*/
 				{
-					printf("%c",(char)buffer[i]);
+					printf("%c", buffer[i]);
 					i++;
 				}
 				currentBlock++;
@@ -165,30 +173,62 @@ int main(int argc, char **argv)
 
 
 
-void write_table(file_t * table)
+char * write_table(file_t * table)
 {
-	char * buffer = (char *) malloc(28 * table->size);
+	int size = 18 * table->size;
+	char * buffer = (char *) malloc(size);
+	int current = 0; /* the position you are writing to in the buffer */
 	int error = 0;
-	/* Write all the file descriptors to the buffer */
+
 	int i;
-	for(i = 0; i < 18; i++) 
+	file_t * currentNode = table->head;
+	
+	/* Write all the file descriptors to the buffer */
+	while(currentNode != NULL) 
 	{
-		memcpy() 	
+		/* Write the name */
+		memcpy(buffer+current, currentNode->name, 29);
+		current += 29;
+		
+		/* Write the start */
+		memset(buffer+current, currentNode->start, 4);
+		current += 4;
+		
+		/* Write the blockCount */
+		memset(buffer+current, currentNode->blockCount, 4);
+		current += 4;
+		
+		/* Write the disk number */
+		memset(buffer+current, currentNode->diskNumber, 1);
+		current += 1;
+		
+		currentNode = currentNode->next;
 	}
 	
+	/* Store the data in the volumn */
+	
+	return buffer;
+	
 	
 }
+
+
+void display_buffer(char * buffer, int size) 
+{
+	int i = 0;
+	for(i = 0; i < size; i++) 
+	{
+		printf("%c", buffer[i]);
+	}
+}
+
+
 /* list_t * load_table() */
 /* 	Adds a new file to the volumn */
-void store_in_volumn(file_t * file, char * data, int dataSize) 
-{
-	
-}
+/* void store_in_volumn(file_t * file, char * data, int dataSize) */
 /*Loads the file from the local file system */
-char * load_file(char * filename) 
-{
-	int file = 
-}
+/* char * load_file(char * filename) */
+
 
 
 
