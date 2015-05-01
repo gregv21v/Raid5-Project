@@ -175,7 +175,7 @@ int main(int argc, char **argv)
 
 char * write_table(list_t * table)
 {
-	int size = 18 * table->size;
+	int size = 38 * table->size; /* 38 is the file descriptor size in bytes */
 	char * buffer = (char *) malloc(size);
 	int current = 0; /* the position you are writing to in the buffer */
 	int error = 0;
