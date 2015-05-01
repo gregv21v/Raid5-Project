@@ -76,11 +76,11 @@ int main(int argc, char **argv)
 	
 	
 	char * buf = write_table(table);
-	display_buffer(buf, 18 * table->size);
+	display_buffer(buf, 38 * table->size);
 
 
 
-  	printf("Welcome to your file system\n");
+  	/*printf("Welcome to your file system\n");*/
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
