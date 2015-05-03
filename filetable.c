@@ -20,21 +20,10 @@
 
 #include "filetable.h"
 
-/*
-	Creates the list
-	pre: none
-	post: a pointer to a new file table is created
-*/
-list_t * filetable_create() 
-{
-	list_t * new_list = NULL;
-	new_list = (list_t *) calloc(1, sizeof(list_t));
-	new_list->size = 0;
-	new_list->head = NULL;
-	new_list->tail = NULL;
 
-	return new_list;
-}
+int currentBlockNumber = 0;
+char * currentBlock = NULL; /* Buffer to store the currently selected block temporarily. */
+
 
 
 /*
@@ -42,20 +31,21 @@ list_t * filetable_create()
 	pre: File points to a valid file_t struct in memory, and table points to a valid list_t in memory.
 	post: Adds the file to the end of the table.
 */
-void filetable_add_file(list_t * table, file_t * file)
+void filetable_add_file(list_t * table, file_t * )
 {
 
-	if(table->head == NULL) /* this is the first element in the list */
+	/* find the last entry in the file table */
+	fileDescriptor_t * descriptors[FILES_PER_BLOCK];
+	
+	
+	int i = 0; 
+	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
-		table->head = (file_t *) file;
-		table->tail = (file_t *) file;
+		memcpy(descriptors[i]->name, currentBlock
 	}
-	else /* there are other elements in the list */
-	{
-		table->tail->next = (file_t *) file;
-		table->tail = table->tail->next;
-	}
-	table->size++;
+	
+	
+	/* add the file at that position */
 }
 
 /*
