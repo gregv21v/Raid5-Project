@@ -39,6 +39,8 @@ void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
 char * write_table(list_t * table); 
+void display_buffer(char * buffer, int size);
+
 
 int main(int argc, char **argv)
 {
