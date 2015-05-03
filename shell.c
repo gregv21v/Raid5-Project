@@ -191,15 +191,15 @@ char * write_table(list_t * table)
 		current += 29;
 		
 		/* Write the start */
-		memset(buffer+current, currentNode->start, 4);
+		memset(buffer+current, 'a', 4);
 		current += 4;
 		
 		/* Write the blockCount */
-		memset(buffer+current, currentNode->blockCount, 4);
+		memset(buffer+current, 'a', 4);
 		current += 4;
 		
 		/* Write the disk number */
-		memset(buffer+current, currentNode->diskNumber, 1);
+		memset(buffer+current, 'a', 1);
 		current += 1;
 		
 		currentNode = currentNode->next;
