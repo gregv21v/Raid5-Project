@@ -149,7 +149,8 @@ int main(int argc, char **argv)
 			error = open_disk(DISK_2);
 
 			/*Write the blocks*/
-			for(i=startBlock;i<endBlock+1;i++)
+			error=0;
+			for(i=startBlock;i<(endBlock+1);i++)
 			{
 				error+=block_write(i,buffer);
 			}
