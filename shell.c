@@ -143,6 +143,9 @@ int main(int argc, char **argv)
 			startBlock=(table->tail->start) + (table->tail->blockCount)+1;
 			endBlock=startBlock+numBlocks;
 			
+			/*create the new file_t*/
+			file_t* newFile;
+			newFile=(file_t*)malloc(sizeof(file_t));
 			
 			/*Need to add file to table*/
 			
@@ -158,6 +161,7 @@ int main(int argc, char **argv)
 			}
 			
 			free(buffer);
+			
 
 			/*Close the disks*/
 			error=close_disk("DISK_0");
