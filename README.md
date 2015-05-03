@@ -6,7 +6,7 @@ Project Specifications:
   <li>Write file</li>
   <li>Read file</li>
   <li>List files</li>
-  <li>Rebuild Thread:
+  <li>Rebuild Thread: <br>
     <ul>
       <li>Remove disk</li>
       <li>Add disk<li>
