@@ -146,13 +146,18 @@ int main(int argc, char **argv)
 			/*create the new file_t*/
 			file_t* newFile;
 			newFile=(file_t*)malloc(sizeof(file_t));
+			strcpy(newFile->name,arguments[1]);
+			newFile->start=startBlock;
+			newFile->blockCount=numBlocks;
+			newFile->diskNumber=(startBlock%2);
 			
-			/*Need to add file to table*/
+			/*Add file to table*/
+			filetable_add_file(table,newFile);
 			
 			/*Open the disks*/
-			error = open_disk("DISK_0");
-			error = open_disk("DISK_1");
-			error = open_disk("DISK_2");
+			error = open_disk(DISK_0);
+			error = open_disk(DISK_1);
+			error = open_disk(DISK_2);
 
 			/*Write the blocks*/
 			for(i=startBlock;i<endBlock+1;i++)
@@ -164,9 +169,9 @@ int main(int argc, char **argv)
 			
 
 			/*Close the disks*/
-			error=close_disk("DISK_0");
-			error=close_disk("DISK_1");
-			error=close_disk("DISK_2");
+			error=close_disk(DISK_0);
+			error=close_disk(DISK_1);
+			error=close_disk(DISK_2);
 
 			
 		}
