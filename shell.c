@@ -131,7 +131,7 @@ int main(int argc, char **argv)
 			int endBlock; /*The block the file will end on*/
 			
 			/*Open the file and get its size*/
-			FILE* f=fopen(arguments[1],buffer);
+			FILE* f=fopen(arguments[1],"w");
 			fseek(f,0,SEEK_END);
 			fileSize=ftell(f);
 			numBlocks= (fileSize%512)+1;/*calculate the blocks needed*/
