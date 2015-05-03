@@ -165,6 +165,7 @@ int main(int argc, char **argv)
 				newFile->blockCount=numBlocks;
 				newFile->diskNumber=(startBlock%2);
 				filetable_add_file(table,newFile);
+				printf("file added to table\n");
 			}
 			
 			free(buffer);
