@@ -38,7 +38,6 @@
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
-/*void write_table(file_t * table); */
 
 int main(int argc, char **argv)
 {
@@ -73,7 +72,8 @@ int main(int argc, char **argv)
 
 
 
-  	printf("Welcome to your file system\n");
+  	/* Load the file table into memory */
+  	/* Start the rebuild thread */
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
@@ -185,6 +185,7 @@ int main(int argc, char **argv)
 		}
 	}
 	
+	/* Store the file table on disks 1 and 2 */
 	
   	return 0;
 
@@ -198,10 +199,7 @@ int main(int argc, char **argv)
 /* 	Adds a new file to the volumn
 	store_in_volumn(file_t * file, char * data, int dataSize) */
 /*Loads the file from the local file system */
-char * load_file(char * filename) 
-{
-	int file = 
-}
+
 
 
 
