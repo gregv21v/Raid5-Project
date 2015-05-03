@@ -11,28 +11,18 @@
 #include <unistd.h>
 #include <string.h>
 
+#define FILES_PER_BLOCK 18
 
-typedef struct node {
+
+typedef struct fileDescriptor {
 	char name[29];	/* 29 bytes */
 	unsigned int start; /* 4 bytes: The block that the file starts on. */ 
 	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */
 	unsigned char diskNumber; /* 1 byte: The disk the block stays on */
-	struct node * next; /* not saved */
-} file_t;
+} fileDescriptor_t;
 
 
-typedef struct list {
-	int size;
-	struct node * head; /* link to the last element */
-	struct node * tail; /* link to the first element */
-} list_t;
 
-
-list_t * filetable_create();
-void filetable_add_file(list_t * table, file_t * file);
-void filetable_display(list_t * table);
-void filetable_list_files(list_t * table);
-file_t * filetable_find(list_t * table, char * filename);
 
 
 
