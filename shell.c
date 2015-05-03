@@ -50,7 +50,7 @@ int main(int argc, char **argv)
 		
 	int error;
 
-	/* initialize files */
+	/* Example file table */
 	list_t * table = filetable_create();
 
 	file_t * files[5];
@@ -79,10 +79,10 @@ int main(int argc, char **argv)
 	
 	char * buf = write_table(table);
 	display_buffer(buf, 38 * table->size);
-	
-
 	printf("\n");
-  	/*printf("Welcome to your file system\n");*/
+ 
+  	
+  	/* Load the file table into memory */
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
@@ -167,6 +167,8 @@ int main(int argc, char **argv)
 		}
 	}
 	
+	/* Write the file table to the volume */
+	
 	
   	return 0;
 
@@ -175,10 +177,10 @@ int main(int argc, char **argv)
 
 
 
-char * write_table(list_t * table)
+void write_table_to_buffer(list_t * table, char * buffer, int * size)
 {
-	int size = 38 * table->size; /* 38 is the file descriptor size in bytes */
-	char * buffer = (char *) malloc(size);
+	*size = 38 * table->size; /* 38 is the file descriptor size in bytes */
+	buffer = (char *) malloc(size);
 	int current = 0; /* the position you are writing to in the buffer */
 	int error = 0;
 
@@ -206,12 +208,6 @@ char * write_table(list_t * table)
 		
 		currentNode = currentNode->next;
 	}
-	
-	/* Store the data in the volumn */
-	
-	return buffer;
-	
-	
 }
 
 
