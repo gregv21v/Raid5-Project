@@ -1,5 +1,19 @@
-# Raid5-Project
+# Raid4-Project
 A Raid4 Simulator
+
+Project Specifications:
+<ul>
+  <li>Write file</li>
+  <li>Read file</li>
+  <li>List files</li>
+  <li>Rebuild Thread:
+    <ul>
+      <li>Remove disk</li>
+      <li>Add disk<li>
+    </ul>
+  </li>
+</ul>
+
 
 
 Due May 7 at 8:00 AM. So essentially we should have to it done by the 6th.
