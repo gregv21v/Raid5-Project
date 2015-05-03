@@ -38,7 +38,7 @@
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
-char * write_table(list_t * table); 
+void write_table_to_buffer(list_t * table, char * buffer, int * size); 
 void display_buffer(char * buffer, int size);
 
 
@@ -76,9 +76,12 @@ int main(int argc, char **argv)
 		filetable_add_file(table, files[i]);
 	}
 	
+	char * buff;
+	int size;
 	
-	char * buf = write_table(table);
-	display_buffer(buf, 38 * table->size);
+	write_table(table, buff, &size);
+	
+	display_buffer(buff, size);
 	printf("\n");
  
   	
