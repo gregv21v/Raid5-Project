@@ -92,15 +92,29 @@ int main(int argc, char **argv)
 			{
 				printf("Disk created\n");
 			}
+			else
+			{
+				printf("Error creating disk 1.\n");
+			}
+			
 			error= make_disk("disk_1");
 			if(error==0)
 			{
 				printf("Disk created\n");
 			}
+			else
+			{
+				printf("Error creating disk 2.\n");
+			}
+			
 			error=make_disk("disk_2");
 			if(error==0)
 			{
 				printf("Disk created\n");
+			}
+			else
+			{
+				printf("Error creating disk 3.\n");
 			}
 		
 		}
