@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 			numBlocks= (fileSize%512)+1;/*calculate the blocks needed*/
 			fseek(f,0,SEEK_SET);
 			
-			*buffer=(char *)malloc(sizeof(char)*fileSize+1);/*Allocate space for the buffer*/
+			*buffer=(char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 			
 			startBlock=(table->tail->start) + (table->tail->blockCount)+1;
@@ -138,8 +138,7 @@ int main(int argc, char **argv)
 			error = open_disk("DISK_2");
 
 			/*Write the blocks*/
-			i=startBlock;
-			for(i;i<endBlock+1;i++)
+			for(i=startBlock;i<endBlock+1;i++)
 			{
 				block_write(i,buffer);
 			}
