@@ -9,7 +9,7 @@ Project Specifications:
   <li>Rebuild Thread: <br>
     <ul>
       <li>Remove disk</li>
-      <li>Add disk<li>
+      <li>Add disk</li>
     </ul>
   </li>
 </ul>
