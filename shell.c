@@ -143,17 +143,6 @@ int main(int argc, char **argv)
 			startBlock=(table->tail->start) + (table->tail->blockCount)+1;
 			endBlock=startBlock+numBlocks;
 			
-			/*create the new file_t*/
-			file_t* newFile;
-			newFile=(file_t*)malloc(sizeof(file_t));
-			strcpy(newFile->name,arguments[1]);
-			newFile->start=startBlock;
-			newFile->blockCount=numBlocks;
-			newFile->diskNumber=(startBlock%2);
-			
-			/*Add file to table*/
-			filetable_add_file(table,newFile);
-			
 			/*Open the disks*/
 			error = open_disk(DISK_0);
 			error = open_disk(DISK_1);
@@ -162,18 +151,29 @@ int main(int argc, char **argv)
 			/*Write the blocks*/
 			for(i=startBlock;i<endBlock+1;i++)
 			{
-				block_write(i,buffer);
+				error+=block_write(i,buffer);
+			}
+			
+			/*create the new file_t*/
+			/*add to table if all writes successful*/
+			if(error==0)
+			{
+				file_t* newFile;
+				newFile=(file_t*)malloc(sizeof(file_t));
+				strcpy(newFile->name,arguments[1]);
+				newFile->start=startBlock;
+				newFile->blockCount=numBlocks;
+				newFile->diskNumber=(startBlock%2);
+				filetable_add_file(table,newFile);
 			}
 			
 			free(buffer);
 			
-
 			/*Close the disks*/
 			error=close_disk(DISK_0);
 			error=close_disk(DISK_1);
 			error=close_disk(DISK_2);
 
-			
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
