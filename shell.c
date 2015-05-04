@@ -139,9 +139,16 @@ int main(int argc, char **argv)
 			
 			buffer=(char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
+
+			/*Create new file_t and add to table*/
+				file_t* newFile;
+				newFile=(file_t*)malloc(sizeof(file_t));
+				strcpy(newFile->name,arguments[1]);
+				newFile->blockCount=numBlocks;
+				newFile->start=filetable_add_file(newFile->name,newFile->blockCount);
+				printf("file added to table\n");
 			
-			startBlock=(table->tail->start) + (table->tail->blockCount)+1;
-			endBlock=startBlock+numBlocks;
+			endBlock=(newFile->start)+(newFile->blockCount);
 			
 			/*Open the disks*/
 			error = open_disk(DISK_0);
@@ -150,23 +157,16 @@ int main(int argc, char **argv)
 
 			/*Write the blocks*/
 			error=0;
-			for(i=startBlock;i<(endBlock+1);i++)
+			for(i=(newFile->start);i<(endBlock+1);i++)
 			{
 				error+=block_write(i,buffer);
 			}
 			
-			/*create the new file_t*/
-			/*add to table if all writes successful*/
-			if(error==0)
+			/*remove file if all writes not successful*/
+			if(error!=0)
 			{
-				file_t* newFile;
-				newFile=(file_t*)malloc(sizeof(file_t));
-				strcpy(newFile->name,arguments[1]);
-				newFile->start=startBlock;
-				newFile->blockCount=numBlocks;
-				newFile->diskNumber=(startBlock%2);
-				filetable_add_file(table,newFile);
-				printf("file added to table\n");
+				filetable_remove_file(newFile->name);
+				printf("Failed to execute all writes\n");
 			}
 			
 			free(buffer);
