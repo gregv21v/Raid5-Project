@@ -11,25 +11,31 @@
 #include <unistd.h>
 #include <string.h>
 
+#define FILES_PER_BLOCK 18
+#define NAME_MAX_LENGTH 30
+
+
 /* Each file descriptor is 28 bytes large. */
 /* That leaves 8 bytes to store the address to the next block */
-typedef struct node {
-	char name[29];	/* 29 bytes */
-	unsigned int start; /* 4 bytes: The block that the file starts on. */ 
+typedef struct FileDescriptor {
+	char name[NAME_MAX_LENTH];	/* 29 bytes */
+	unsigned int start; /* 4 bytes: The block that the file starts on in the volume. */ 
 	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */
-	unsigned char diskNumber; /* 1 byte: The disk the block stays on */
-	struct node * next; /* not saved */
-} file_t;
+} fileDescriptor_t;
 
 
-typedef struct list {
-	int size;
-	struct node * head; /* link to the last element */
-	struct node * tail; /* link to the first element */
-} list_t;
+typedef struct DescriptorBlock {
+	fileDescriptor_t * descriptors[FILES_PER_BLOCK];
+	unsigned int previousBlock;
+	unsigned int nextBlock;
+} descriptorBlock_t;
 
 
-list_t * filetable_create();
+
+
+
+
+
 void filetable_add_file(list_t * table, file_t * file);
 void filetable_display(list_t * table);
 void filetable_list_files(list_t * table);
