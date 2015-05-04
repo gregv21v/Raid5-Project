@@ -14,16 +14,6 @@
 /* Define the maximum command length */
 #define CMDLEN	1024
 
-
-
-/*Define the disk names*/
-#define DISK_0 "disk_0"
-#define DISK_1 "disk_1"
-#define DISK_2 "disk_2"
-
-
-
-
 /* List of Commands: 
 	ls
 	makedisk [disk-name]
