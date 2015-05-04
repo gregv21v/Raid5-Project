@@ -181,11 +181,12 @@ int main(int argc, char **argv)
 		{
 			char buffer [512]; /*Buffer to read from the block*/
 			file_t * file = filetable_find(table, arguments[1]);
-			if(file!=NULL)
+			if(file!=NULL)/*Read the file if it was found*/
 			{
 				int startBlock = file->start;
 				int currentBlock = startBlock;
 				int endBlock = startBlock + (file->blockCount);
+				
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
 					int i = 0;
@@ -200,7 +201,7 @@ int main(int argc, char **argv)
 					currentBlock++;
 				}
 			}
-			else
+			else /*The file was not found*/
 			{
 				printf("File not found\n");
 			}
