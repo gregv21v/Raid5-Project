@@ -88,6 +88,9 @@ descriptorBlock_t * descriptorBlock_load_last()
         }
     }
 }
+
+
+
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
 {
   file_t * current = table->head;
@@ -99,4 +102,14 @@ int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
 	  return index;
 	else 
 	  return -1;
+}
+
+
+void descriptorBlock_list_files(descriptorBlock_t * block)
+{
+	int i = 0;
+	for(i = 0; i < FILES_PER_BLOCK; i++)
+	{
+		printf("%s\n", block->descriptors[i]->name);
+	}
 }
