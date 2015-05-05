@@ -23,6 +23,7 @@ typedef struct DescriptorBlock {
 	unsigned int nextBlock;
 } descriptorBlock_t;
 
+descriptorBlock_t * descriptorBlock_create();
 void descriptorBlock_save(descriptorBlock_t * block);
 descriptorBlock_t * descriptorBlock_load(int address);
 descriptorBlock_t * descriptorBlock_load_last();
