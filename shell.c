@@ -104,14 +104,14 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			if()
 			
 			
 			char* buffer; /*The buffer to hold the text of the file*/
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
-			int startBlock; /*The block the file will start on*/
 			int endBlock; /*The block the file will end on*/
+			int i;
+			file_t* newFile;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],"w");
@@ -124,7 +124,6 @@ int main(int argc, char **argv)
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
-				file_t* newFile;
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
