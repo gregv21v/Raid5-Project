@@ -47,28 +47,8 @@ int main(int argc, char **argv)
 		
 	int error;
 
-	/* initialize files */
+	/* initialize table */
 	list_t * table = filetable_create();
-
-	file_t * files[5];
-
-	int i;
-	for(i = 0; i < 5; i++)
-	{
-		files[i] = (file_t *) malloc(sizeof(file_t));
-	}
-
-	strcpy(files[0]->name, "File1");
-	strcpy(files[1]->name, "File2");
-	strcpy(files[2]->name, "File3");
-	strcpy(files[3]->name, "File4");
-	strcpy(files[4]->name, "File5");
-
-
-	for(i = 0; i < 5; i++)
-	{
-		filetable_add_file(table, files[i]);
-	}
 
 
 
@@ -121,7 +101,7 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			/* load a file from the local filesystem */
+			if()
 			
 			
 			char* buffer; /*The buffer to hold the text of the file*/
@@ -145,7 +125,7 @@ int main(int argc, char **argv)
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
-				newFile->start=filetable_add_file(newFile->name,newFile->blockCount);
+				newFile->start=filetable_add_file(table,newFile->name,newFile->blockCount);
 				printf("file added to table\n");
 			
 			endBlock=(newFile->start)+(newFile->blockCount);
@@ -165,7 +145,7 @@ int main(int argc, char **argv)
 			/*remove file if all writes not successful*/
 			if(error!=0)
 			{
-				filetable_remove_file(newFile->name);
+				filetable_remove_file(table,newFile->name);
 				printf("Failed to execute all writes\n");
 			}
 			
