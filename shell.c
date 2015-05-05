@@ -40,6 +40,9 @@ int main(int argc, char **argv)
 	
 	
 	/* Testing... */
+		make_disk(DISK_0);
+		make_disk(DISK_1);
+		make_disk(DISK_2);
 		
 		char testBlock[512];
 		strcpy(testBlock, "Testing...");
