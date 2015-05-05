@@ -41,10 +41,12 @@ descriptorBlock_t * descriptorBlock_load(int address)
     char * buffer = volume_load(address);
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
+	int offset = 0;
+	int i = 0;
 	
 	block->address = address;
 	
-	int offset = 0;
+	
 	
 	/* read the first 4 bytes as the address of the previous block */
 	memcpy(block->previousBlock, buffer, 4);
