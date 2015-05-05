@@ -1,6 +1,8 @@
 #ifndef __DESCRIPTORBLOCK_H
 #define __DESCRIPTORBLOCK_H
 
+#define FILES_PER_BLOCK 18
+
 typedef struct DescriptorBlock {
 	int address; /* not saved */
 	fileDescriptor_t * descriptors[FILES_PER_BLOCK];
