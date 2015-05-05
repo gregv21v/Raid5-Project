@@ -12,7 +12,7 @@
 
 typedef struct DescriptorBlock {
 	int address; /* not saved */
-	fileDescriptor_t * descriptors[FILES_PER_BLOCK];
+	file_t * descriptors[FILES_PER_BLOCK];
 	unsigned int previousBlock;
 	unsigned int nextBlock;
 } descriptorBlock_t;
