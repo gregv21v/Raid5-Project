@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
 #include "descriptorblock.h"
 #include "volume.h"
 
@@ -73,6 +72,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	
 	return block;  
 }
+
 descriptorBlock_t * descriptorBlock_load_last()
 {
     descriptorBlock_t * current = descriptorBlock_load(0);
@@ -89,8 +89,6 @@ descriptorBlock_t * descriptorBlock_load_last()
         }
     }
 }
-
-
 
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
 {
