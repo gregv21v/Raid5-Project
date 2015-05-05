@@ -396,10 +396,10 @@ void* threadHandler()
 				printf("Would you like to rebuild the disk? (y/n)\n");
 				scanf("%s", &choice);
 				
-				if(strcmp(choice,'y') == 0)
+				if(choice == 'y')
 					rebuild_disk(disk_number);
 				
-			}while(strcmp(choice,'y') != 0);
+			}while(choice != 'y');
 			break;
 		case 2:
 			/* nothing we can do here really */
@@ -412,7 +412,7 @@ void* threadHandler()
 				printf("Would you like to initialize the system? (y/n)\n");
 				scanf("%s", &choice);
 				
-				if(strcmp(choice,"y") == 0)
+				if(choice == 'y')
 				{
 					make_error = make_disk("disk_0");
 					if(make_error == 0)
@@ -444,7 +444,7 @@ void* threadHandler()
 						printf("Error creating disk 3.\n");
 					}
 				}
-			}while(strcmp(choice,"y") != 0);
+			}while(choice != 'y');
 			
 			break;
 		default:
@@ -521,11 +521,11 @@ int rebuild_disk(int disk_number)
 		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
 		{
 			open_disk(DISK_0);
-			block_read(block_number,&buffer_a);
+			block_read(block_number,buffer_a);
 			close_disk(DISK_0);
 			
 			open_disk(DISK_1);
-			block_read(block_number,&buffer_b);
+			block_read(block_number,buffer_b);
 			close_disk(DISK_1);
 			
 			for(i = 0;i<512;i++)
@@ -534,7 +534,7 @@ int rebuild_disk(int disk_number)
 			}
 			
 			open_disk(DISK_2);
-			block_write(block_number,&parity_buffer);
+			block_write(block_number,parity_buffer);
 			close_disk(DISK_2);
 		}
 	}
