@@ -35,6 +35,7 @@
 
 */
 
+int rebuild_disk(int);
 void * threadHandler();
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
@@ -53,6 +54,7 @@ int main(int argc, char **argv)
 
 	/* Thread stuff */
 	pthread_t tid;
+	pthread_mutex_t lock;
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
 
@@ -338,3 +340,206 @@ int build_argument_array(char***argv, int* argc, char* cmd)
 	return 0;
 }
 
+void* threadHandler()
+{
+	/* Check to see if all of the disks are there */
+	/* if any disk is not there, note which one is gone */
+	int open_error;
+	int disk_number;
+	int make_error;
+	char choice;
+	int disk_errors;
+	
+	while(1)
+	{
+		/* grab the lock */
+		pthread_mutex_lock(&lock);
+		
+		disk_errors = 0;
+		disk_number = 0;
+		make_error = 0;
+		initialize_choice = 'n';
+		
+		/* try to open disk 0 */
+		open_error = open_disk(DISK_0);
+		if(open_error == -1)
+		{
+			disk_number = 0;
+			disk_errors++;
+		}
+		close_disk(DISK_0);
+		
+		/* try to open disk 1 */
+		open_error = open_disk(DISK_1);
+		if(open_error == -1)
+		{
+			disk_number = 1;
+			disk_errors++;
+		}
+		close_disk(DISK_1);
+		
+		/* try to open disk 2 */
+		open_error = open_disk(DISK_2);
+		if(open_error == -1)
+		{
+			disk_number = 2;
+			disk_errors++;
+		}
+		close_disk(DISK_2);
+		
+		/* if all three are gone, we need to initialize the system */
+		switch(disk_errors)
+		{
+		case 1:
+			do
+			{
+				printf("Would you like to rebuild the disk? (y/n)\n");
+				scanf("%s", &choice);
+				
+				if(strcmp(choice,"y") == 0)
+					rebuild_disk(disk_number);
+				
+			}while(strcmp(choice,"y") != 0);
+			break;
+		case 2:
+			/* nothing we can do here really */
+			printf("We have encountered a problem with 2 out of 3 disks. Sorry, we cannot rebuild\n");
+			break;
+		case 3:
+			/* prompt the user to initialize the three disks */
+			do
+			{
+				printf("Would you like to initialize the system? (y/n)\n");
+				scanf("%s", &choice);
+				
+				if(strcmp(choice,"y") == 0)
+				{
+					make_error = make_disk("disk_0");
+					if(make_error == 0)
+					{
+						printf("Disk created\n");
+					}
+					else
+					{
+						printf("Error creating disk 1.\n");
+					}
+					
+					make_error = make_disk("disk_1");
+					if(make_error == 0)
+					{
+						printf("Disk created\n");
+					}
+					else
+					{
+						printf("Error creating disk 2.\n");
+					}
+					
+					make_error = make_disk("disk_2");
+					if(make_error == 0)
+					{
+						printf("Disk created\n");
+					}
+					else
+					{
+						printf("Error creating disk 3.\n");
+					}
+				}
+			}while(strcmp(choice,"y") != 0);
+			
+			break;
+		default:
+			/* no error, do nothing */
+			break;	
+		}/* end switch */
+		
+		pthread_mutex_unlock(&lock);
+	}/* end outside while */
+	
+}
+
+int rebuild_disk(int disk_number)
+{
+	/* a 512 byte section off a disk */
+	char * buffer_a = (char *) malloc(512);
+	char * buffer_b = (char *) malloc(512);
+	char * parity_buffer = (char *) malloc(512);
+	int block_number;
+	int i;
+	
+	/* make a new disk */
+	if(disk_number == 0)
+	{
+		make_disk(DISK_0);
+		
+		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
+		{
+			open_disk(DISK_1);
+			block_read(block_number,buffer_a);
+			close_disk(DISK_1);
+			
+			open_disk(DISK_2);
+			block_read(block_number,buffer_b);
+			close_disk(DISK_2);
+			
+			for(i = 0;i<512;i++)
+			{
+				parity_buffer[i] = buffer_a[i] ^ buffer_b[i];
+			}
+			
+			open_disk(DISK_0);
+			block_write(block_number,parity_buffer);
+			close_disk(DISK_0);
+		}
+	}
+	else if(disk_number == 1)
+	{
+		make_disk(DISK_1);
+		
+		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
+		{
+			open_disk(DISK_0);
+			block_read(block_number,buffer_a);
+			close_disk(DISK_0);
+			
+			open_disk(DISK_2);
+			block_read(block_number,buffer_b);
+			close_disk(DISK_2);
+			
+			for(i = 0;i<512;i++)
+			{
+				parity_buffer[i] = buffer_a[i] ^ buffer_b[i];
+			}
+			
+			open_disk(DISK_1);
+			block_write(block_number,parity_buffer);
+			close_disk(DISK_1);
+		}
+	}else if(disk_number == 2)
+	{
+		make_disk(DISK_2);
+		
+		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
+		{
+			open_disk(DISK_0);
+			block_read(block_number,&buffer_a);
+			close_disk(DISK_0);
+			
+			open_disk(DISK_1);
+			block_read(block_number,&buffer_b);
+			close_disk(DISK_1);
+			
+			for(i = 0;i<512;i++)
+			{
+				parity_buffer[i] = buffer_a[i] ^ buffer_b[i];
+			}
+			
+			open_disk(DISK_2);
+			block_write(block_number,&parity_buffer);
+			close_disk(DISK_2);
+		}
+	}
+	
+	
+	
+	return 0;
+}
