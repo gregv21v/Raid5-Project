@@ -190,6 +190,14 @@ int main(int argc, char **argv)
 				printf("File not found\n");
 			}
 		}
+		else if(strcmp(arguments[0],"delete")==0)
+		{
+			file_t* file=filetable_find(table,arguments[1]);
+			
+			/*Need a remove file command*/
+			
+			printf("File was removed successfully\n");
+		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)
 		{
 			/*We can change the creation of files later if we want*/	
