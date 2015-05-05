@@ -2,11 +2,25 @@
 
 char * load_volume(int address)
 {
- 
+    char * temp;
+    /* Open Disk */
+    if(address % 2 == 0) 
+    {
+        error = open_disk(DISK_0);
+    }
+     else 
+    {
+        error = open_disk(DISK_1);
+    }
+      
+      read_block((int) (address / 2), temp);
+      
+    close_disk();
+    return temp;
   
 }
 
-int store_volume(int address, char * block)
+void store_volume(int address, char * block)
 {
   int error = 0;
   
@@ -61,16 +75,15 @@ int store_volume(int address, char * block)
   close_disk();
   
   /* XOR disk 0 and 2's blocks */
+  int i = 0;
+  for(i = 0; i < 512; i++)
+  {
+      parityBlock[i] = disk0Block[i] ^ disk1Block[i];
+  }
   
   
   write_block((int) (address / 2), parityBlock);
-  
-  
-  
-  
-  
-  
-  return error;
+
   
   
 
