@@ -1,8 +1,9 @@
-
 #include <stdio.h> /* printf */
 
 #include "disk.h"
 #include "volume.h"
+
+
 
 
 /* displays the raw data at the specified address */
@@ -11,7 +12,7 @@ void volume_display_block_raw(int address)
     	char * buffer = volume_load_block(address);
     
     	int i = 0;
-	for(; i < 512; i++) 
+	for(; i < size; i++) 
 	{
 	    if(i % 16 == 0 && i != 0)
 		    printf("%c", buffer[i]);
@@ -39,7 +40,7 @@ char * volume_load_block(int address)
   
 }
 
-void store_volume(int address, char * block)
+void volume_store_block(int address, char * block)
 {
   int error = 0;
   
