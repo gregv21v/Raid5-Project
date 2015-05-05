@@ -66,6 +66,8 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	memcpy(&(block->previousBlock), buffer, 4);
 	offset += 4;
 	
+	printf("%d", block->previousBlock);
+	
 	/* Load the current block into the file descriptor array */
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
