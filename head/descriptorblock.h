@@ -3,6 +3,8 @@
 
 #define FILES_PER_BLOCK 18
 
+#include "filedescriptor.h"
+
 typedef struct DescriptorBlock {
 	int address; /* not saved */
 	fileDescriptor_t * descriptors[FILES_PER_BLOCK];
