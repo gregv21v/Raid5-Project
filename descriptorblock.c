@@ -5,6 +5,18 @@
 #include "descriptorblock.h"
 #include "volume.h"
 
+
+descriptorBlock_t * descriptorBlock_create()
+{
+	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
+	
+	int i = 0;
+	for(i = 0; i < FILES_PER_BLOCK; i++) 
+	{
+		block->descriptors[i] = (file_t *) malloc(sizeof(file_t));
+	}
+}
+
 void descriptorBlock_save(descriptorBlock_t * block)
 {
 	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
