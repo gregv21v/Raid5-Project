@@ -1,6 +1,5 @@
 #include <stdio.h> /* printf */
 
-#include "disk.h"
 #include "volume.h"
 
 
@@ -34,7 +33,7 @@ char * volume_load_block(int address)
         error = open_disk(DISK_1);
     }
       
-      read_block((int) (address / 2), temp);
+    read_block((int) (address / 2), temp);
       
     close_disk();
     return temp;
