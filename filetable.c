@@ -169,71 +169,13 @@ file_t * nextFile(table_t * table)
 
 descriptorBlock_t * load_descriptor_block(int address)
 {
-	char * buffer = volume_load(address);
 	
-	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
-	
-	block->address = address;
-	
-	int offset = 0;
-	
-	/* read the first 4 bytes as the address of the previous block */
-	memcpy(block->previousBlock, buffer, 4);
-	offset += 4;
-	
-	/* Load the current block into the file descriptor array */
-	for(i = 0; i < FILES_PER_BLOCK; i++) 
-	{
-		/* Copy the name from the block */
-		memcpy(descriptors[i]->name, buffer + offset, 29);
-		offset += 29;
-		
-		/* Copy the start block address from the block */
-		memcpy(descriptors[i]->start, buffer + offset, 4);
-		offset += 4;
-		
-		/* Copy the block cout from the block */
-		memcpy(descriptors[i]->blockCount, buffer + offset, 4);
-		offset += 4;
-	}
-	
-	/* read the last 4 bytes as the address of the next block */
-	memcpy(block->nextBlock, buffer+offset, 4);
-	
-	return block;
 }
 
 
 char * convertToBlock(fileDescriptors * descriptors)
 {
-	char * buffer = (char *) malloc(512)
-	
-	int offset = 0;
-	
-	/* read the first 4 bytes as the address of the previous block */
-	memcpy(block, block->previousBlock, 4);
-	offset += 4;
-	
-	/* Load the current block into the file descriptor array */
-	for(i = 0; i < FILES_PER_BLOCK; i++) 
-	{
-		/* Copy the name from the block */
-		memcpy(currentBlock + offset, descriptors[i]->name, 29);
-		offset += 29;
-		
-		/* Copy the start block address from the block */
-		memcpy(currentBlock + offset, descriptors[i]->start, 4);
-		offset += 4;
-		
-		/* Copy the block cout from the block */
-		memcpy(currentBlock + offset, descriptors[i]->blockCount, 4);
-		offset += 4;
-	}
-	
-	/* read the last 4 bytes as the address of the next block */
-	memcpy(block+offset, block->nextBlock, 4);
-	
-	return block;
+
 }
 
 
