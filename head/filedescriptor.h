@@ -8,8 +8,8 @@
 #ifndef __FILEDESCRIPTOR_H
 #define __FILEDESCRIPTOR_H
 
-
-#define NAME_MAX_LENGTH 30
+#define FILE_DESCRIPTOR_SIZE 36
+#define NAME_MAX_LENGTH (36-8)
 
 /* Each file descriptor is 38 bytes large. */
 /* That leaves 8 bytes to store the address to the next block */
