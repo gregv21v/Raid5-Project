@@ -43,9 +43,9 @@ char * volume_load_block(int address)
 
 void volume_store_block(int address, char * block)
 {
-	char * disk0Block = (char *) malloc(512);
-	char * disk1Block = (char *) malloc(512);
-	char * parityBlock = (char *) malloc(512);
+	char * disk0Block = NULL;
+	char * disk1Block = NULL;
+	char * parityBlock = NULL;
 	int error = 0;
 	int i = 0;	/* a general iterator variable */
 	
@@ -77,7 +77,7 @@ void volume_store_block(int address, char * block)
 	
 	
 	
-	/* update the parity disk */
+	
 	open_disk(DISK_0);
 		block_read((int) (address / 2), disk0Block);
 	close_disk();
@@ -86,6 +86,7 @@ void volume_store_block(int address, char * block)
 		block_read((int) (address / 2), disk1Block);
 	close_disk();
 	
+	/* Update the parity disk */
 	open_disk(DISK_2);
 		block_read((int) (address / 2), parityBlock);
 	
@@ -96,7 +97,6 @@ void volume_store_block(int address, char * block)
 		}
 	
 		block_write((int) (address / 2), parityBlock);
-		
 	close_disk();
 	
 	free(disk0Block);
