@@ -52,9 +52,9 @@ int main(int argc, char **argv)
 		
 		volume_store_block(0, testBlock);
 
-		char * returnedBlock = volume_load_block(0);
+		//char * returnedBlock = volume_load_block(0);
 		
-		printf("%s", returnedBlock);
+		//printf("%s", returnedBlock);
 		
 	
 		
