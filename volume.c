@@ -8,9 +8,9 @@
 /* displays the raw data at the specified address */
 void volume_display_block_raw(int address)
 {
-    	char * buffer = volume_load_block(address);
+    char * buffer = volume_load_block(address);
     
-    	int i = 0;
+    int i = 0;
 	for(; i < 512; i++) 
 	{
 	    if(i % 16 == 0 && i != 0)
@@ -33,7 +33,7 @@ char * volume_load_block(int address)
         error = open_disk(DISK_1);
     }
       
-    read_block((int) (address / 2), temp);
+    block_read((int) (address / 2), temp);
       
     close_disk();
     return temp;
@@ -83,15 +83,15 @@ void volume_store_block(int address, char * block)
   
   /* update the parity disk */
   open_disk(DISK_0);
-    read_block((int) (address / 2), disk0Block);
+    block_read((int) (address / 2), disk0Block);
   close_disk();
   
   open_disk(DISK_1);
-    read_block((int) (address / 2), disk1Block);
+    block_read((int) (address / 2), disk1Block);
   close_disk();
   
   open_disk(DISK_2);
-    read_block((int) (address / 2), parityBlock);
+    block_read((int) (address / 2), parityBlock);
   close_disk();
   
   /* XOR disk 0 and 2's blocks */
@@ -102,7 +102,7 @@ void volume_store_block(int address, char * block)
   }
   
   
-  write_block((int) (address / 2), parityBlock);
+  block_write((int) (address / 2), parityBlock);
 
   
   
