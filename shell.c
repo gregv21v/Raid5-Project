@@ -45,7 +45,6 @@ int main(int argc, char **argv)
 		make_disk(DISK_2);
 		
 		char * testBlock = (char *) malloc(512);
-		char * str = "Testing...";
 		memcpy(testBlock, "Testing", strlen("Testing"));
 		
 		printf("%s", testBlock);
