@@ -1,7 +1,3 @@
-
-
-
-
 #ifndef __DESCRIPTORBLOCK_H
 #define __DESCRIPTORBLOCK_H
 
