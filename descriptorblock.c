@@ -24,11 +24,11 @@ void descriptorBlock_save(descriptorBlock_t * block)
 		offset += 29;
 		
 		/* Copy the start block address from the block */
-		memcpy(buffer + offset, block->descriptors[i]->start, 4);
+		memcpy(buffer + offset, &(block->descriptors[i]->start), 4);
 		offset += 4;
 		
 		/* Copy the block cout from the block */
-		memcpy(buffer + offset,  block->descriptors[i]->blockCount, 4);
+		memcpy(buffer + offset,  &(block->descriptors[i]->blockCount), 4);
 		offset += 4;
 	}
 	
