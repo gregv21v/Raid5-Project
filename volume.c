@@ -88,15 +88,16 @@ void volume_store_block(int address, char * block)
 	
 	open_disk(DISK_2);
 		block_read((int) (address / 2), parityBlock);
+	
+		/* XOR disk 0 and 2's blocks */
+		for(i = 0; i < 512; i++)
+		{
+			parityBlock[i] = disk0Block[i] ^ disk1Block[i];
+		}
+	
+		block_write((int) (address / 2), parityBlock);
+		
 	close_disk();
-	
-	/* XOR disk 0 and 2's blocks */
-	for(i = 0; i < 512; i++)
-	{
-		parityBlock[i] = disk0Block[i] ^ disk1Block[i];
-	}
-	
-	block_write((int) (address / 2), parityBlock);
 	
 	free(disk0Block);
 	free(disk1Block);
