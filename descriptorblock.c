@@ -60,6 +60,8 @@ void descriptorBlock_save(descriptorBlock_t * block)
 descriptorBlock_t * descriptorBlock_load(int address)
 {
 	char * buffer = volume_load_block(address);
+	volume_display_block_raw(address);
+	
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	int offset = 0;
