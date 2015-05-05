@@ -1,16 +1,15 @@
+#include <stdlib.h> /* malloc */
+
 
 #include "descriptorblock.h"
-
-
-
-
-
+#include "volume.h"
 
 void descriptorBlock_save(descriptorBlock_t * block)
 {
-    char * buffer = (char *) malloc(512)
+	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
-	int offset = 0;
+	int offset = 0; /* the offset from the beginning of the buffer that you are looking at. */
+	int i = 0; /* general purpose iterator */
 	
 	/* read the first 4 bytes as the address of the previous block */
 	memcpy(buffer, block->previousBlock, 4);
@@ -55,15 +54,15 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		memcpy(descriptors[i]->name, buffer + offset, 29);
+		memcpy(block->descriptors[i]->name, buffer + offset, 29);
 		offset += 29;
 		
 		/* Copy the start block address from the block */
-		memcpy(descriptors[i]->start, buffer + offset, 4);
+		memcpy(block->descriptors[i]->start, buffer + offset, 4);
 		offset += 4;
 		
 		/* Copy the block cout from the block */
-		memcpy(descriptors[i]->blockCount, buffer + offset, 4);
+		memcpy(block->descriptors[i]->blockCount, buffer + offset, 4);
 		offset += 4;
 	}
 	
