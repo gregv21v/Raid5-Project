@@ -15,6 +15,8 @@ descriptorBlock_t * descriptorBlock_create()
 	{
 		block->descriptors[i] = (file_t *) malloc(sizeof(file_t));
 	}
+	
+	return block;
 }
 
 void descriptorBlock_save(descriptorBlock_t * block)
