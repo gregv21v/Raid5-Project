@@ -9,7 +9,6 @@
 #include <disk.h>
 #include <unistd.h>
 
-#include "filetable.h"
 
 /* Define the maximum command length */
 #define CMDLEN	1024
