@@ -13,7 +13,7 @@ void descriptorBlock_save(descriptorBlock_t * block)
 	int i = 0; /* general purpose iterator */
 	
 	/* read the first 4 bytes as the address of the previous block */
-	memcpy(buffer, block->previousBlock, 4);
+	memcpy(buffer, &(block->previousBlock), 4);
 	offset += 4;
 	
 	/* Load the current block into the file descriptor array */
@@ -33,7 +33,7 @@ void descriptorBlock_save(descriptorBlock_t * block)
 	}
 	
 	/* read the last 4 bytes as the address of the next block */
-	memcpy(buffer + offset, block->nextBlock, 4);
+	memcpy(buffer + offset, &(block->nextBlock), 4);
 	
 	volume_store(block->address, buffer);   
 }
