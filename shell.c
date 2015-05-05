@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 	/* Thread stuff */
 	pthread_t tid;
 	pthread_mutex_t lock;
+	pthread_mutex_init(&lock,NULL);
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
 
