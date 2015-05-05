@@ -1,5 +1,6 @@
 #include <stdlib.h> /* malloc */
 #include <stdio.h>
+#include <string.h>
 
 
 #include "descriptorblock.h"
