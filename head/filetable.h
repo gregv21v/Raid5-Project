@@ -21,7 +21,7 @@ typedef struct Table {
 
 
 void filetable_init(table_t * table); /* initializes last file block */
-void filetable_add_file(table_t * table, char * name, int blockCount);
+void filetable_add_file(table_t * table, char * name, int blockCount); /* adds to the end of the last file block */
 
 
 
