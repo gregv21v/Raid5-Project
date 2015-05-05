@@ -46,18 +46,20 @@ int main(int argc, char **argv)
 		
 		printf("%s", testBlock);
 		
-	
-		//volume_store_block()
 		
-		//volume_load_block()
+		volume_store_block(0, testBlock);
+
+		testBlock = volume_load_block(0);
+		
+		printf("%s", testBlock);
 		
 	
-	
+		
 	
 	
 	
 	/* -------------------- */
-	
+	printf("\n");
 
 
 
