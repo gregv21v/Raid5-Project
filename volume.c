@@ -8,9 +8,9 @@
 /* displays the raw data at the specified address */
 void volume_display_block_raw(int address)
 {
-    char * buffer = volume_load_block(address);
+    	char * buffer = volume_load_block(address);
     
-    int i = 0;
+    	int i = 0;
 	for(; i < 512; i++) 
 	{
 	    if(i % 16 == 0 && i != 0)
