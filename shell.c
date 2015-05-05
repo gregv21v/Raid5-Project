@@ -34,7 +34,7 @@
 
 */
 
-
+void * threadHandler();
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
@@ -318,4 +318,15 @@ int build_argument_array(char***argv, int* argc, char* cmd)
 	}
 
 	return 0;
+}
+
+void* threadHandler()
+{
+	/* Check to see if all of the disks are there */
+	
+	/* if any disk is not there, note which one is gone */
+	
+	/* if all three are gone, we need to initialize the system */
+	
+	/* If two are gone, oh well, nothing we can do */
 }
