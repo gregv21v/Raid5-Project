@@ -19,4 +19,8 @@ typedef struct FileDescriptor {
 } file_t;
 
 
+file_t * file_create();
+
+
+
 #endif	
