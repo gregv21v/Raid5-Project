@@ -1,4 +1,5 @@
 #include <stdio.h> /* printf */
+#include <stdlib.h> /* malloc */
 
 #include "volume.h"
 
