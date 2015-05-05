@@ -25,5 +25,6 @@ void descriptorBlock_save(descriptorBlock_t * block);
 descriptorBlock_t * descriptorBlock_load(int address);
 descriptorBlock_t * descriptorBlock_load_last();
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename); /* returns -1 if the file is not found */
+void descriptorBlock_list_files(descriptorBlock_t * block);
 
 #endif 
