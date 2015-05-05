@@ -14,7 +14,7 @@
 /* Each file descriptor is 28 bytes large. */
 /* That leaves 8 bytes to store the address to the next block */
 typedef struct FileDescriptor {
-	char name[NAME_MAX_LENTH];	/* 29 bytes */
+	char name[NAME_MAX_LENGTH];	/* 29 bytes */
 	unsigned int start; /* 4 bytes: The block that the file starts on in the volume. */ 
 	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */
 } fileDescriptor_t;
