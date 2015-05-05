@@ -104,15 +104,14 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			
+			if()
 			
 			
 			char* buffer; /*The buffer to hold the text of the file*/
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
+			int startBlock; /*The block the file will start on*/
 			int endBlock; /*The block the file will end on*/
-			int i;
-			file_t* newFile;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],"w");
@@ -125,10 +124,11 @@ int main(int argc, char **argv)
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
+				file_t* newFile;
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
-				newFile->start=(table->tail->start)+(table->tail->blockCount)+1;
+				newFile->start=(table->last->start)+(table->last->blockCount)+1;
 				filetable_add_file(table,newFile);
 				printf("file added to table\n");
 			
@@ -334,10 +334,56 @@ int build_argument_array(char***argv, int* argc, char* cmd)
 void* threadHandler()
 {
 	/* Check to see if all of the disks are there */
-	
 	/* if any disk is not there, note which one is gone */
+	int open_error;
+	int disk_number;
+	int disk_errors = 0;
+	
+	/* try to open disk 0 */
+	open_error = open_disk(DISK_0);
+	if(open_error == -1)
+	{
+		disk_number = 0;
+		disk_errors++;
+	}
+	
+	/* try to open disk 1 */
+	open_error = open_disk(DISK_1);
+	if(open_error == -1)
+	{
+		disk_number = 1;
+		disk_errors++;
+	}
+	
+	/* try to open disk 2 */
+	open_error = open_disk(DISK_2);
+	if(open_error == -1)
+	{
+		disk_number = 2;
+		disk_errors++;
+	}
 	
 	/* if all three are gone, we need to initialize the system */
+	switch(disk_errors)
+	{
+	case 1:
+		rebuild_disk(disk_number);
+		break;
+	case 2:
+		/* nothing we can do here really */
+		printf("We have encountered a problem with 2 out of 3 disks. Sorry, we cannot rebuild\n");
+		break;
+	case 3:
+		/* prompt the user to initialize the three disks */
+		printf("Would you like to initialize the system? (y/n)\n");
+		scanf("%s", &initialize_choice);
+		
+		
+		break;
+	default:
+		/* no error, do nothing */
+		break;	
+	}
 	
 	/* If two are gone, oh well, nothing we can do */
 }
