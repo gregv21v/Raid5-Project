@@ -38,6 +38,7 @@ int main(int argc, char **argv)
 	char ** arguments;
 	int argumentCount;
 	int error = 0;
+	int i = 0;
 	
 	
 	/* Testing... */
@@ -48,7 +49,19 @@ int main(int argc, char **argv)
 		/* save a descriptor block */
 		descriptorBlock_t * desBlock = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 		
+		for(i = 0; i < FILES_PER_BLOCK; i++)
+		{
+			desBlock->descriptors[i] = (fileDescriptor_t *) malloc(sizeof(fileDescriptor_t));
+		}
 		
+		/* Add some files to the block */
+		strcpy(desBlock->descriptors[0]->name, "File1");
+		strcpy(desBlock->descriptors[1]->name, "File2");
+		strcpy(desBlock->descriptors[2]->name, "File3");
+		strcpy(desBlock->descriptors[3]->name, "File4");
+		
+		descriptorBlock_list_files(desBlock);
+
 		//descriptorBlock_save(desBlock);
 		
 	
