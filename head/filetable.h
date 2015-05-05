@@ -13,22 +13,10 @@
 
 #include "descriptorBlock.h"
 
-#define FILES_PER_BLOCK 18
-#define NAME_MAX_LENGTH 30
-
-
-
-
-
 typedef struct Table {
 	fileDescriptor_t * currentFile;
 	descriptorBlock_t * currentFileBlock;
 	descriptorBlock_t * lastFileBlock;
 } table_t;
-
-
-
-
-
 
 #endif	/* __FILETABLE_H */
