@@ -125,7 +125,8 @@ int main(int argc, char **argv)
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
-				newFile->start=filetable_add_file(table,newFile->name,newFile->blockCount);
+				newFile->start=(table->last->start)+(table->last->blockCount)+1;
+				filetable_add_file(table,newFile);
 				printf("file added to table\n");
 			
 			endBlock=(newFile->start)+(newFile->blockCount);
@@ -145,7 +146,7 @@ int main(int argc, char **argv)
 			/*remove file if all writes not successful*/
 			if(error!=0)
 			{
-				filetable_remove_file(table,newFile->name);
+				/*filetable_remove_file(table,newFile->name);*/
 				printf("Failed to execute all writes\n");
 			}
 			
