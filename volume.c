@@ -22,6 +22,7 @@ void volume_display_block_raw(int address)
 
 char * volume_load_block(int address)
 {
+	int error = 0;	
     char * temp;
     /* Open Disk */
     if(address % 2 == 0) 
