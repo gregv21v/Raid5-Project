@@ -73,14 +73,7 @@ void volume_store_block(int address, char * block)
 	
 	
 	/* Close Disk */
-	if(address % 2 == 0) 
-	{
-		error = open_disk(DISK_0);
-	}
-	else 
-	{
-		error = open_disk(DISK_1);
-	}
+	close_disk();
 	
 	
 	
