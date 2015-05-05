@@ -1,5 +1,6 @@
 /* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
 
+#include <pthread.h>
 #include <stdio.h>
 #include <assert.h>
 #include <errno.h>
