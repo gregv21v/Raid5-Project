@@ -192,7 +192,7 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"delete")==0)
 		{
-			file_t* file=filetable_find(table,arguments[1]);
+			/*file_t* file=filetable_find(table,arguments[1]);*/
 			
 			/*Need a remove file command*/
 			
