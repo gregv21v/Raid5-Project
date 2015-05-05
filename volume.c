@@ -99,9 +99,9 @@ void volume_store_block(int address, char * block)
 		block_write((int) (address / 2), parityBlock);
 	close_disk();
 	
-	free(disk0Block);
+	/*free(disk0Block);
 	free(disk1Block);
-	free(parityBlock);
+	free(parityBlock);*/
 
   
   
