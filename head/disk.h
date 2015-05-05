@@ -5,8 +5,8 @@
 #define _DISK_H_
 
 /******************************************************************************/
-#define DISK_BLOCKS  8192      /* number of blocks on the disk                */
-#define BLOCK_SIZE   4096      /* block size on "disk"                        */
+#define DISK_BLOCKS  524288      /* number of blocks on the disk                */
+#define BLOCK_SIZE   512      /* block size on "disk"                        */
 
 /******************************************************************************/
 int make_disk(char *name);     /* create an empty, virtual disk file          */
