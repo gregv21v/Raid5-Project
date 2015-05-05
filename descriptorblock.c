@@ -89,6 +89,7 @@ descriptorBlock_t * descriptorBlock_load_last()
             current = NULL;
         }
     }
+    return current;
 }
 
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
