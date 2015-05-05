@@ -17,7 +17,7 @@ typedef struct FileDescriptor {
 	char name[NAME_MAX_LENGTH];	/* 29 bytes */
 	unsigned int start; /* 4 bytes: The block that the file starts on in the volume. */ 
 	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */
-} fileDescriptor_t;
+} file_t;
 
 
 #endif	
