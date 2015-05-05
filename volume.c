@@ -22,27 +22,31 @@ void volume_display_block_raw(int address)
 char * volume_load_block(int address)
 {
 	int error = 0;	
-    char * temp;
-    /* Open Disk */
-    if(address % 2 == 0) 
-    {
-        error = open_disk(DISK_0);
-    }
-     else 
-    {
-        error = open_disk(DISK_1);
-    }
-      
-    block_read((int) (address / 2), temp);
-      
-    close_disk();
-    return temp;
+	char * temp;
+	/* Open Disk */
+	if(address % 2 == 0) 
+	{
+	    error = open_disk(DISK_0);
+	}
+	 else 
+	{
+	    error = open_disk(DISK_1);
+	}
+	  
+	block_read((int) (address / 2), temp);
+	  
+	close_disk();
+	return temp;
   
 }
 
 void volume_store_block(int address, char * block)
 {
+	char * disk0Block;
+	char * disk1Block;
+	char * parityBlock;
 	int error = 0;
+	int i = 0;	/* a general iterator variable */
 	
 	/* disk setup:
 		Disk 0        Disk 1
@@ -77,9 +81,7 @@ void volume_store_block(int address, char * block)
 		error = open_disk(DISK_1);
 	}
 	
-	char * disk0Block;
-	char * disk1Block;
-	char * parityBlock;
+	
 	
 	/* update the parity disk */
 	open_disk(DISK_0);
@@ -95,7 +97,6 @@ void volume_store_block(int address, char * block)
 	close_disk();
 	
 	/* XOR disk 0 and 2's blocks */
-	int i = 0;
 	for(i = 0; i < 512; i++)
 	{
 		parityBlock[i] = disk0Block[i] ^ disk1Block[i];
