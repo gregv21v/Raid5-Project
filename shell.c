@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 		
 		for(i = 0; i < FILES_PER_BLOCK; i++)
 		{
-			desBlock->descriptors[i] = (fileDescriptor_t *) malloc(sizeof(fileDescriptor_t));
+			desBlock->descriptors[i] = (file_t *) malloc(sizeof(file_t));
 		}
 		
 		/* Add some files to the block */
