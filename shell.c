@@ -37,6 +37,27 @@ int main(int argc, char **argv)
 	char ** arguments;
 	int argumentCount;
 	int error = 0;
+	
+	
+	/* Testing... */
+		
+		char testBlock[512];
+		strcpy(testBlock, "Testing...");
+		
+		printf("%s", testBlock);
+		
+	
+		//volume_store_block()
+		
+		//volume_load_block()
+		
+	
+	
+	
+	
+	
+	/* -------------------- */
+	
 
 
 
