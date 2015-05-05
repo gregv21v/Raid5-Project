@@ -19,4 +19,10 @@ typedef struct Table {
 	descriptorBlock_t * lastFileBlock;
 } table_t;
 
+
+void filetable_init(table_t * table); /* initializes last file block */
+void filetable_add_file(table_t * table, char * name, int blockCount);
+
+
+
 #endif	/* __FILETABLE_H */
