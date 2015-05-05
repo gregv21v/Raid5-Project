@@ -93,8 +93,6 @@ descriptorBlock_t * descriptorBlock_load_last()
 
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
 {
-  file_t * current = table->head;
-  
   int index = 0;
 	for(; index < FILES_PER_BLOCK && strcmp(current->name, filename) != 0; index++);
 
