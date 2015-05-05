@@ -11,7 +11,7 @@
 
 #include "disk.h"
 #include "volume.h"
-#include "descriptorBlock.h"
+#include "descriptorblock.h"
 
 
 /* Define the maximum command length */
