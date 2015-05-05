@@ -358,7 +358,7 @@ void* threadHandler()
 		disk_errors = 0;
 		disk_number = 0;
 		make_error = 0;
-		initialize_choice = 'n';
+		choice = 'n';
 		
 		/* try to open disk 0 */
 		open_error = open_disk(DISK_0);
@@ -396,10 +396,10 @@ void* threadHandler()
 				printf("Would you like to rebuild the disk? (y/n)\n");
 				scanf("%s", &choice);
 				
-				if(strcmp(choice,"y") == 0)
+				if(strcmp(choice,'y') == 0)
 					rebuild_disk(disk_number);
 				
-			}while(strcmp(choice,"y") != 0);
+			}while(strcmp(choice,'y') != 0);
 			break;
 		case 2:
 			/* nothing we can do here really */
