@@ -324,6 +324,7 @@ void* threadHandler()
 			disk_number = 0;
 			disk_errors++;
 		}
+		close_disk(DISK_0);
 		
 		/* try to open disk 1 */
 		open_error = open_disk(DISK_1);
@@ -332,6 +333,7 @@ void* threadHandler()
 			disk_number = 1;
 			disk_errors++;
 		}
+		close_disk(DISK_1);
 		
 		/* try to open disk 2 */
 		open_error = open_disk(DISK_2);
@@ -340,6 +342,7 @@ void* threadHandler()
 			disk_number = 2;
 			disk_errors++;
 		}
+		close_disk(DISK_2);
 		
 		/* if all three are gone, we need to initialize the system */
 		switch(disk_errors)
@@ -405,10 +408,6 @@ void* threadHandler()
 			/* no error, do nothing */
 			break;	
 		}/* end switch */
-		
-		close_disk(DISK_0);
-		close_disk(DISK_1);
-		close_disk(DISK_2);
 		
 		pthread_mutex_unlock(&lock);
 	}/* end outside while */
