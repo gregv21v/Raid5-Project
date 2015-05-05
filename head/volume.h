@@ -9,7 +9,7 @@
 #define DISK_1 "disk_1"
 #define DISK_2 "disk_2"
 
-
+void volume_display_block_raw(int address);
 char * volume_load(int address);
 void volume_store(int address, char * block);
 
