@@ -1,4 +1,5 @@
 #include <stdlib.h> /* malloc */
+#include <stdio.h>
 
 
 #include "descriptorblock.h"
@@ -38,15 +39,13 @@ void descriptorBlock_save(descriptorBlock_t * block)
 }
 descriptorBlock_t * descriptorBlock_load(int address)
 {
-    char * buffer = volume_load(address);
+	char * buffer = volume_load(address);
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	int offset = 0;
 	int i = 0;
 	
 	block->address = address;
-	
-	
 	
 	/* read the first 4 bytes as the address of the previous block */
 	memcpy(block->previousBlock, buffer, 4);
