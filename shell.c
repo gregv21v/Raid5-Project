@@ -65,7 +65,7 @@ int main(int argc, char **argv)
 		descriptorBlock_save(desBlock);
 		
 		
-		descriptorBlock_t * loadedBlock = descriptorBlock_load();
+		descriptorBlock_t * loadedBlock = descriptorBlock_load(0);
 		
 	
 		
