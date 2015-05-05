@@ -111,6 +111,8 @@ int main(int argc, char **argv)
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
 			int endBlock; /*The block the file will end on*/
+			int i;
+			file_t* newFile;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],"w");
@@ -123,11 +125,10 @@ int main(int argc, char **argv)
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
-				file_t* newFile;
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
-				newFile->start=(table->last->start)+(table->last->blockCount)+1;
+				newFile->start=(table->tail->start)+(table->tail->blockCount)+1;
 				filetable_add_file(table,newFile);
 				printf("file added to table\n");
 			
