@@ -498,7 +498,7 @@ int rebuild_disk(int disk_number)
 	
 	
 	
-	
+	return 0;
 }
 
 
