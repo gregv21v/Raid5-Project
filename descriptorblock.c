@@ -20,7 +20,7 @@ void descriptorBlock_save(descriptorBlock_t * block)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		memcpy(buffer + offset, block->descriptors[i]->name, 29);
+		memcpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
 		offset += 29;
 		
 		/* Copy the start block address from the block */
@@ -56,7 +56,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		memcpy(block->descriptors[i]->name, buffer + offset, 29);
+		memcpy(block->descriptors[i]->name, buffer + offset, NAME_LENGTH);
 		offset += 29;
 		
 		/* Copy the start block address from the block */
