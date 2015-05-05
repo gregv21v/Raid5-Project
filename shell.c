@@ -9,6 +9,9 @@
 #include <disk.h>
 #include <unistd.h>
 
+#include "disk.h"
+#include "volume.h"
+
 
 /* Define the maximum command length */
 #define CMDLEN	1024
