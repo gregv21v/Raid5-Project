@@ -70,7 +70,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		memcpy(block->descriptors[i]->name, buffer + offset, NAME_LENGTH);
+		strncpy(block->descriptors[i]->name, buffer + offset, NAME_LENGTH);
 		offset += 29;
 		
 		/* Copy the start block address from the block */
