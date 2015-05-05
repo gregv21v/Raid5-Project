@@ -35,11 +35,12 @@ void descriptorBlock_save(descriptorBlock_t * block)
 	/* read the last 4 bytes as the address of the next block */
 	memcpy(buffer + offset, &(block->nextBlock), 4);
 	
-	volume_store(block->address, buffer);   
+	volume_store_block(block->address, buffer);   
 }
+
 descriptorBlock_t * descriptorBlock_load(int address)
 {
-	char * buffer = volume_load(address);
+	char * buffer = volume_load_block(address);
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	int offset = 0;
