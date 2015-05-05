@@ -35,7 +35,7 @@ void descriptorBlock_save(descriptorBlock_t * block)
 	{
 		/* Copy the name from the block */
 		memcpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
-		offset += 29;
+		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
 		memcpy(buffer + offset, &(block->descriptors[i]->start), 4);
