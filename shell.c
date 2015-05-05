@@ -51,7 +51,7 @@ int main(int argc, char **argv)
 		printf("%s", testBlock);
 		
 		
-		//volume_store_block(0, testBlock);
+		volume_store_block(0, testBlock);
 
 		//char * returnedBlock = volume_load_block(0);
 		
