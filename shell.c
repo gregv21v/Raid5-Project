@@ -46,7 +46,7 @@ int main(int argc, char **argv)
 		
 		char * testBlock = (char *) malloc(512);
 		char * str = "Testing...";
-		strcpy(testBlock, str, strlen(str));
+		strcpy(testBlock, str);
 		
 		printf("%s", testBlock);
 		
