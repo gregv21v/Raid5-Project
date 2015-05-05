@@ -1,11 +1,17 @@
 #ifndef __DESCRIPTORBLOCK_H
 #define __DESCRIPTORBLOCK_H
 
-#define FILES_PER_BLOCK 18
+#define FILES_PER_BLOCK 14
+
 
 /*
 	File Descriptor Block on Disk
 	previous block address | descriptor data | next block addresss 
+	
+	FILES_PER_BLOCK * FILES_SIZE = 504, leaving 8 bytes for the next and previous block addresses
+	
+	FILES_PER_BLOCK = 14 
+	FILES_DESCRIPTOR_SIZE = 36
 */
 
 #include "filedescriptor.h"
