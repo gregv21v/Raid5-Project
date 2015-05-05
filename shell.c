@@ -50,7 +50,10 @@ int main(int argc, char **argv)
 	/* initialize table */
 	list_t * table = filetable_create();
 
-
+	/* Thread stuff */
+	pthread_t tid;
+	/* Create the thread, giving it threadHandler() as a function */
+	pthread_create(&tid, NULL, threadHandler, NULL);
 
   	/* Load the file table into memory */
   	/* Start the rebuild thread */
