@@ -40,7 +40,7 @@ char * volume_load_block(int address)
   
 }
 
-void store_volume(int address, char * block)
+void volume_store_block(int address, char * block)
 {
   int error = 0;
   
