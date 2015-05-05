@@ -22,7 +22,7 @@ typedef struct Table {
 
 table_t * filetable_create(); /* initializes last file block */
 int filetable_find_last_free(table_t * table);
-void filetable_add_file(table_t * table, char * name, int blockCount); /* adds to the end of the last file block */
+int filetable_add_file(table_t * table, char * name, int blockCount); /* adds to the end of the last file block */
 
 
 
