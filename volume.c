@@ -64,7 +64,7 @@ void volume_store_block(int address, char * block)
   }
 
   /* write to the address space (disks 0, and 1) */
-  write_block((int) (address / 2), block);
+  block_write((int) (address / 2), block);
   
   
   /* Close Disk */
