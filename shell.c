@@ -127,7 +127,7 @@ int main(int argc, char **argv)
 				newFile=(file_t*)malloc(sizeof(file_t));
 				strcpy(newFile->name,arguments[1]);
 				newFile->blockCount=numBlocks;
-				newFile->start=(table->last->start)+(table->last->blockCount)+1;
+				newFile->start=(table->tail->start)+(table->tail->blockCount)+1;
 				filetable_add_file(table,newFile);
 				printf("file added to table\n");
 			
