@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 	char command[CMDLEN];
 	char ** arguments;
 	int argumentCount;
-
+	int error = 0;
 
 
 
@@ -87,32 +87,7 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
-			char buffer [512]; /*Buffer to read from the block*/
-			file_t * file = filetable_find(table, arguments[1]);
-			if(file!=NULL)/*Read the file if it was found*/
-			{
-				int startBlock = file->start;
-				int currentBlock = startBlock;
-				int endBlock = startBlock + (file->blockCount);
-				
-				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
-				{
-					int i = 0;
-					block_read(currentBlock, buffer);/*Read the block into the buffer string*/
-				
-					/* while the character is not the termination character */
-					while(buffer[i] != '\0')/*Print out the block*/
-					{
-						printf("%c", buffer[i]);
-						i++;
-					}
-					currentBlock++;
-				}
-			}
-			else /*The file was not found*/
-			{
-				printf("File not found\n");
-			}
+			
 		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)
 		{
