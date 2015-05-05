@@ -13,7 +13,7 @@ descriptorBlock_t * descriptorBlock_create()
 	int i = 0;
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
-		block->descriptors[i] = (file_t *) malloc(sizeof(file_t));
+		block->descriptors[i] = file_create();
 	}
 	
 	return block;
