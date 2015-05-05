@@ -14,16 +14,6 @@
 /* Define the maximum command length */
 #define CMDLEN	1024
 
-
-
-/*Define the disk names*/
-#define DISK_0 "disk_0"
-#define DISK_1 "disk_1"
-#define DISK_2 "disk_2"
-
-
-
-
 /* List of Commands: 
 	ls
 	makedisk [disk-name]
@@ -44,36 +34,9 @@ int main(int argc, char **argv)
 	char command[CMDLEN];
 	char ** arguments;
 	int argumentCount;
-		
-	int error;
-
-	/* initialize files */
-	list_t * table = filetable_create();
-
-	file_t * files[5];
-
-	int i;
-	for(i = 0; i < 5; i++)
-	{
-		files[i] = (file_t *) malloc(sizeof(file_t));
-	}
-
-	strcpy(files[0]->name, "File1");
-	strcpy(files[1]->name, "File2");
-	strcpy(files[2]->name, "File3");
-	strcpy(files[3]->name, "File4");
-	strcpy(files[4]->name, "File5");
-
-
-	for(i = 0; i < 5; i++)
-	{
-		filetable_add_file(table, files[i]);
-	}
 
 
 
-  	/* Load the file table into memory */
-  	/* Start the rebuild thread */
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
@@ -82,8 +45,7 @@ int main(int argc, char **argv)
 
 		if(strcmp(command, "ls") == 0) 
 		{
-			filetable_list_files(table);
-			/*filetable_display(table); */
+			/* do nothing */
 		} 
 		else if(strcmp(arguments[0],"makedisk") == 0)/* create the three disks*/
 		{
@@ -121,60 +83,7 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			/* load a file from the local filesystem */
-			
-			
-			char* buffer; /*The buffer to hold the text of the file*/
-			int fileSize; /*the size of the file*/
-			int numBlocks; /*number of blocks the file will require*/
-			int startBlock; /*The block the file will start on*/
-			int endBlock; /*The block the file will end on*/
-			
-			/*Open the file and get its size*/
-			FILE* f=fopen(arguments[1],"w");
-			fseek(f,0,SEEK_END);
-			fileSize=ftell(f);
-			numBlocks= (fileSize%512)+1;/*calculate the blocks needed*/
-			fseek(f,0,SEEK_SET);
-			
-			buffer=(char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
-			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
-
-			/*Create new file_t and add to table*/
-				file_t* newFile;
-				newFile=(file_t*)malloc(sizeof(file_t));
-				strcpy(newFile->name,arguments[1]);
-				newFile->blockCount=numBlocks;
-				newFile->start=filetable_add_file(newFile->name,newFile->blockCount);
-				printf("file added to table\n");
-			
-			endBlock=(newFile->start)+(newFile->blockCount);
-			
-			/*Open the disks*/
-			error = open_disk(DISK_0);
-			error = open_disk(DISK_1);
-			error = open_disk(DISK_2);
-
-			/*Write the blocks*/
-			error=0;
-			for(i=(newFile->start);i<(endBlock+1);i++)
-			{
-				error+=block_write(i,buffer);
-			}
-			
-			/*remove file if all writes not successful*/
-			if(error!=0)
-			{
-				filetable_remove_file(newFile->name);
-				printf("Failed to execute all writes\n");
-			}
-			
-			free(buffer);
-			
-			/*Close the disks*/
-			error=close_disk(DISK_0);
-			error=close_disk(DISK_1);
-			error=close_disk(DISK_2);
+			/* do nothing */
 
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
