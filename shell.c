@@ -134,15 +134,24 @@ int main(int argc, char **argv)
 			endBlock=(newFile->start)+(newFile->blockCount);
 			
 			/*Open the disks*/
-			error = open_disk(DISK_0);
-			error = open_disk(DISK_1);
-			error = open_disk(DISK_2);
+			
 
 			/*Write the blocks*/
 			error=0;
 			for(i=(newFile->start);i<(endBlock+1);i++)
 			{
-				error+=block_write(i,buffer);
+				if(i%2==0)
+				{
+					open_disk(DISK_0);
+					error+=block_write(i,buffer);
+					close_disk(DISK_0);
+				}
+				else
+				{
+					open_disk(DISK_1);
+					error+=block_write(i,buffer);
+					close_disk(DISK_1);
+				}
 			}
 			
 			/*remove file if all writes not successful*/
@@ -155,9 +164,7 @@ int main(int argc, char **argv)
 			free(buffer);
 			
 			/*Close the disks*/
-			error=close_disk(DISK_0);
-			error=close_disk(DISK_1);
-			error=close_disk(DISK_2);
+		
 
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
