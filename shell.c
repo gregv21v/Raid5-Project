@@ -41,6 +41,8 @@ void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
 
+pthread_mutex_t lock;
+
 int main(int argc, char **argv)
 {
 	char command[CMDLEN];
@@ -54,7 +56,7 @@ int main(int argc, char **argv)
 
 	/* Thread stuff */
 	pthread_t tid;
-	pthread_mutex_t lock;
+	
 	pthread_mutex_init(&lock,NULL);
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
