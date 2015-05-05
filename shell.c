@@ -104,13 +104,12 @@ int main(int argc, char **argv)
 		/* writes a file that is on the local filesystem to the disk */
 		else if(strcmp(arguments[0],"write") == 0)
 		{
-			if()
+			
 			
 			
 			char* buffer; /*The buffer to hold the text of the file*/
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
-			int startBlock; /*The block the file will start on*/
 			int endBlock; /*The block the file will end on*/
 			
 			/*Open the file and get its size*/
