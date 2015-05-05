@@ -36,7 +36,7 @@
 */
 
 int rebuild_disk(int);
-void * threadHandler();
+void * threadHandler(void *);
 void sanitize_string(char *);
 int build_argument_array(char***, int*, char*);
 void get_command(char *);
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	pthread_mutex_t lock;
 	pthread_mutex_init(&lock,NULL);
 	/* Create the thread, giving it threadHandler() as a function */
-	pthread_create(&tid, NULL, threadHandler, NULL);
+	pthread_create(&tid, NULL, threadHandler, &lock);
 
   	/* Load the file table into memory */
   	/* Start the rebuild thread */
@@ -341,7 +341,7 @@ int build_argument_array(char***argv, int* argc, char* cmd)
 	return 0;
 }
 
-void* threadHandler()
+void* threadHandler(void * lock)
 {
 	/* Check to see if all of the disks are there */
 	/* if any disk is not there, note which one is gone */
