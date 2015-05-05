@@ -11,7 +11,7 @@
 
 #define NAME_MAX_LENGTH 30
 
-/* Each file descriptor is 28 bytes large. */
+/* Each file descriptor is 38 bytes large. */
 /* That leaves 8 bytes to store the address to the next block */
 typedef struct FileDescriptor {
 	char name[NAME_MAX_LENGTH];	/* 29 bytes */
