@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 	pthread_mutex_t lock;
 	pthread_mutex_init(&lock,NULL);
 	/* Create the thread, giving it threadHandler() as a function */
-	pthread_create(&tid, NULL, threadHandler, &lock);
+	pthread_create(&tid, NULL, threadHandler, lock);
 
   	/* Load the file table into memory */
   	/* Start the rebuild thread */
