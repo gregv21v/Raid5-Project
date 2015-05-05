@@ -14,6 +14,6 @@ typedef struct DescriptorBlock {
 
 void descriptorBlock_save(descriptorBlock * block);
 descriptorBlock_t * descriptorBlock_load(int address);
-descriptorBlock_t * descriptorBlock_find_last();
+descriptorBlock_t * descriptorBlock_load_last();
 
 #endif 
