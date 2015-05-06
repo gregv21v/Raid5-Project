@@ -23,9 +23,7 @@ table_t * filetable_create()
 int filetable_add_file(table_t * table, char * name, int blockCount)
 {
 	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
-	
-	printf("Added %d ? ", added);
-	
+
 	if(added == -1) 
 	{
 		/* a new block needs to be created to add this file */
@@ -43,8 +41,6 @@ int filetable_add_file(table_t * table, char * name, int blockCount)
 		
 		free(table->lastFileBlock);
 
-	
-		
 		return newBlock->descriptors[index]->start;
 	}
 	else
