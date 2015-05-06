@@ -46,6 +46,10 @@ int main(int argc, char **argv)
 		make_disk(DISK_1);
 		make_disk(DISK_2);
 		
+		/* Volume function test */
+		
+		
+		
 		/* create a descriptor block */
 		descriptorBlock_t * desBlock = descriptorBlock_create();
 
