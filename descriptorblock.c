@@ -182,7 +182,8 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 	int i = 0;
 	for(i = 0; i < FILES_PER_BLOCK; i++)
 	{
-		printf("%s\n", block->descriptors[i]->name);
+		if(strcmp(block->descriptors[i]->name, "*removed*") != 0)
+			printf("%s\n", block->descriptors[i]->name);
 	}
 }
 
