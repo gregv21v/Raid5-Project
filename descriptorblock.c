@@ -69,7 +69,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	int i = 0;
 	
 	
-	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
+	descriptorBlock_t * block = descriptorBlock_create();
 	int offset = 0;
 	
 	block->address = address;
