@@ -150,9 +150,7 @@ void descriptorBlock_display_details(descriptorBlock_t * block)
 
 	for(i = 0; i < FILES_PER_BLOCK; i++)
 	{
-		printf("Name: %s\n", block->descriptors[i]->name);
-		printf("Start: %d\n", block->descriptors[i]->start);
-		printf("BlockCount: %d\n", block->descriptors[i]->blockCount);
+		printf("%s | %d | %d", block->descriptors[i]->name, block->descriptors[i]->start, block->descriptors[i]->blockCount);
 	}
 	
 	printf("Next: %d\n", block->nextBlock);
