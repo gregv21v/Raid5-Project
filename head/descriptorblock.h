@@ -24,7 +24,7 @@ typedef struct DescriptorBlock {
 } descriptorBlock_t;
 
 
-descriptorBlock_t * descriptorBlock_create(); /* tested */
+descriptorBlock_t * descriptorBlock_create(int address); /* tested */
 void descriptorBlock_store(descriptorBlock_t * block); /* tested */
 descriptorBlock_t * descriptorBlock_load(int address); /* tested */
 descriptorBlock_t * descriptorBlock_load_last();
@@ -32,5 +32,7 @@ descriptorBlock_t * descriptorBlock_load_last();
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename); /* returns -1 if the file is not found */
 									   /* tested */
 void descriptorBlock_list_files(descriptorBlock_t * block); /* tested */
+
+void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach);
 
 #endif 
