@@ -59,7 +59,7 @@ void filetable_list_files(table_t * table)
 	{
 		descriptorBlock_list_files(current);
 		if(current->nextBlock != 0)
-			current = descriptorBlock_store(current->nextBlock);
+			current = descriptorBlock_load(current->nextBlock);
 	}
 }
 
@@ -71,7 +71,7 @@ void filetable_display_details(table_t * table)
 	{
 		descriptorBlock_display_details(current);
 		if(current->nextBlock != 0)
-			current = descriptorBlock_store(current->nextBlock);
+			current = descriptorBlock_load(current->nextBlock);
 	}
 }
 
