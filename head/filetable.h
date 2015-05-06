@@ -25,6 +25,4 @@ void filetable_remove_file(table_t * table, char * name);
 void filetable_list_files(table_t * table);
 void filetable_display_details(table_t * table);
 
-
-
 #endif	/* __FILETABLE_H */
