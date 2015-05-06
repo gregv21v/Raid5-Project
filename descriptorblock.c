@@ -36,7 +36,8 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	/* read the first 4 bytes as the address of the previous block */
 	printf("%s", buffer);
 	
-	memcpy(buffer, (char *)&block->previousBlock, 4);
+	memcpy(buffer, &offset, 4);
+	//memcpy(buffer, (char *)&block->previousBlock, 4);
 	printf("%s", buffer);
 	offset += 4;
 	
