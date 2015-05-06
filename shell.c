@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 
 		descriptorBlock_store(desBlock);
 
-		int index = descriptorBlock_find_file(desBlock, "File1");
+		int index = descriptorBlock_find_file(desBlock, "File5");
 		
 		printf("%d", index);
 	
