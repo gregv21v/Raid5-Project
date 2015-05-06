@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
 		table_t * table = filetable_create();
 		
-		filetable_add_file(table, "Test", 100);
+		descriptorBlock_add_file(table->lastFileBlock, "Test", 100);
 		
 		filetable_display_details(table);
 		
