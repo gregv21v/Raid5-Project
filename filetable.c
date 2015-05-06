@@ -54,7 +54,14 @@ void filetable_add_file(table_t * table, char * name, int blockCount)
 
 void filetable_list_files(table_t * table)
 {
-		
+	descriptorBlock_t * current = table->lastFileBlock;
+	
+	while(current->nextBlock != 0)
+	{
+		descriptorBlock_list_files(current);
+		if(current->nextBlock != 0)
+			current = descriptorBlock_store(current->nextBlock);
+	}
 }
 
 void filetable_find_file(table_t * table, char * name)
