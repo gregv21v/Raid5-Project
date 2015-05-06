@@ -60,15 +60,6 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	/* read the last 4 bytes as the address of the next block */
 	memcpy(buffer + offset, &(block->nextBlock), 4);
 	
-	for(i = 0; i < 512; i++) 
-	{
-	    printf("%c", buffer[i]);
-	    if(i % 36 == 0 && i != 0)
-		  printf("\n");  
-		    
-	}
-	
-	
 	volume_store_block(block->address, buffer);   
 }
 
@@ -76,13 +67,6 @@ descriptorBlock_t * descriptorBlock_load(int address)
 {
 	char * buffer = volume_load_block(address);
 	int i = 0;
-	for(i = 0; i < 512; i++) 
-	{
-	    printf("%c", buffer[i]);
-	    if(i % 36 == 0 && i != 0)
-		  printf("\n");  
-		    
-	}
 	
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
@@ -94,7 +78,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	memcpy(&(block->previousBlock), buffer, 4);
 	offset += 4;
 	
-	printf("%d", block->previousBlock);
+	printf("Prev %d", block->previousBlock);
 	
 	/* Load the current block into the file descriptor array */
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
