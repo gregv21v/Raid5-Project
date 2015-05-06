@@ -47,10 +47,10 @@ int main(int argc, char **argv)
 		make_disk(DISK_1);
 		make_disk(DISK_2);
 
-		table_t * table = filetable_create();
+		descriptorBlock_t * block = descriptorBlock_create(0);
 		
-		filetable_add_file(table, "File1", 10);
-		filetable_display_details(table);
+		descriptorBlock_add_file(block, "Test", 10);
+		descriptorBlock_display_details(block);
 
 		
 	
