@@ -54,6 +54,9 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	/* read the last 4 bytes as the address of the next block */
 	memcpy(buffer + offset, &(block->nextBlock), 4);
 	
+	
+	printf("%s", buffer);
+	
 	volume_store_block(block->address, buffer);   
 }
 
