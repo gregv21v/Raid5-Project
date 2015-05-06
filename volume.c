@@ -35,6 +35,8 @@ char * volume_load_block(int address)
 	}
 	  
 	block_read((int) (address / 2), temp);
+	
+	printf("In volume load block: %s", temp);
 	  
 	close_disk();
 	return temp;
