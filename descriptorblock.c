@@ -165,6 +165,9 @@ int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blo
 		strcpy(block->descriptors[index]->name, filename);
 		block->descriptors[index]->start = descriptorBlock_find_last_free(block);
 		block->descriptors[index]->blockCount = blockCount;
+		
+		descriptorBlock_store(block);
+		
 		return 0;
 	} 
 	else 
