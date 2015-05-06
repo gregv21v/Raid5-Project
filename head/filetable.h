@@ -14,15 +14,15 @@
 #include "descriptorblock.h"
 
 typedef struct Table {
-	file_t * currentFile;
 	descriptorBlock_t * firstFileBlock;
 	descriptorBlock_t * lastFileBlock;
 } table_t;
 
 
 table_t * filetable_create(); /* initializes last file block */
-int filetable_find_last_free(table_t * table);
 int filetable_add_file(table_t * table, char * name, int blockCount); /* adds to the end of the last file block */
+void filetable_list_files(table_t * table);
+void filetable_display_details(table_t * table);
 
 
 
