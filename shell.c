@@ -117,6 +117,8 @@ int main(int argc, char **argv)
 			int numBlocks; /*number of blocks the file will require*/
 			int endBlock; /*The block the file will end on*/
 			int i;
+			int error;
+			descriptorBlock_t* lastBlockDescrip;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],"w");
@@ -131,8 +133,15 @@ int main(int argc, char **argv)
 			/*Create new file_t and add to table*/
 				filetable_add_file(table,arguments[1],numBlocks);
 				printf("file added to table\n");
-			
-			endBlock=(newFile->start)+(newFile->blockCount);
+				lastBlockDescrip=descriptorBlock_load_last();
+				error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
+				if(error==-1)/*create new block*/
+				{
+					lastBlockDescrip=descriptorBlock_create(0);
+					descriptorBlockStore(lastBlockDescrip);
+					error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
+				}
+
 			
 			/*Open the disks*/
 			
