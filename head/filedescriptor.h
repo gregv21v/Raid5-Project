@@ -21,6 +21,7 @@ typedef struct FileDescriptor {
 
 file_t * file_create();
 void file_destroy(file_t * file);
+void file_display(file_t * file);
 
 
 
