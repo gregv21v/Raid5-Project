@@ -35,7 +35,6 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	
 	/* read the first 4 bytes as the address of the previous block */
 	printf("%s", buffer);
-	printf("unsigned int size %d", sizeof(unsigned int));
 	
 	memcpy(buffer, (char *)&block->previousBlock, 4);
 	printf("%s", buffer);
