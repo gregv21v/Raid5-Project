@@ -7,3 +7,4 @@ Test a filetable with multiple descriptor blocks
 TODO:
 Add header comments to all functions 
 Check for memory leaks
+Figure out how to reload an existing table
