@@ -82,7 +82,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	{
 	
 		/* Copy the name from the block */
-		memcpy(&(block->descriptors[i]->name[0]), buffer + offset, NAME_LENGTH);
+		strncpy(&(block->descriptors[i]->name[0]), buffer + offset, NAME_LENGTH);
 		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
