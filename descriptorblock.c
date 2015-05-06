@@ -162,11 +162,11 @@ void descriptorBlock_display_details(descriptorBlock_t * block)
 int descriptorBlock_find_last_free(descriptorBlock_t * block)
 {
 	int index = descriptorBlock_find_file(block, "");
-	if(index != -1)
+	if(index == 0)
 	{
 		return block->descriptors[index]->start + block->descriptors[index]->blockCount;
 	}
-	else if(index == 0)
+	else if(index != -1)
 	{
 		return block->address + 1;
 	}
