@@ -1,6 +1,7 @@
 Tests:
 
 Test a filetable with multiple descriptor blocks
+filetable_remove_file()
 
 
 
@@ -8,3 +9,7 @@ TODO:
 Add header comments to all functions 
 Check for memory leaks
 Figure out how to reload an existing table
+
+
+Sperate ideas:
+A tag system. Add addition data to the file descriptor that describes the tag.
