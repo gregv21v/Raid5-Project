@@ -9,6 +9,12 @@
 
 #include "filetable.h"
 
+
+/*
+	Creates the table
+	Pre: None
+	Post: Adds a table to the volume with a reference in memory.
+*/
 table_t * filetable_create()
 {
 	table_t * table = (table_t *) malloc(sizeof(table_t));
@@ -19,8 +25,12 @@ table_t * filetable_create()
 	table->lastFileBlock = table->firstFileBlock; 
 }
 
-
-int filetable_add_file(table_t * table, char * name, int blockCount)
+/*
+	Adds a file to the table
+	Pre: table must be created, name length must be less than or equal to NAME_LENGTH.
+	Post: Adds a file to the table.
+*/
+int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 {
 	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 
@@ -51,6 +61,11 @@ int filetable_add_file(table_t * table, char * name, int blockCount)
 	
 }
 
+/*
+	Lists the files in the table
+	Pre: table has been created
+	Post: Lists the files int the table.
+*/
 void filetable_list_files(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
@@ -62,11 +77,15 @@ void filetable_list_files(table_t * table)
 	} while(current->nextBlock != 0);
 }
 
+/*
+	Displays all information about the files in the table
+	Pre: table has been created
+	Post: Lists all information about the files in the table.
+*/
 void filetable_display_details(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
-	
-	
+
 	do {
 		descriptorBlock_display_details(current);
 		if(current->nextBlock != 0)
@@ -75,6 +94,11 @@ void filetable_display_details(table_t * table)
 }
 
 
+/*
+	Removes a file from the table
+	Pre: table has been created, name is less than or equal to NAME_LENGTH
+	Post: The file is removed from the table.
+*/
 void filetable_remove_file(table_t * table, char * name)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
@@ -87,9 +111,14 @@ void filetable_remove_file(table_t * table, char * name)
 		
 	} while(current->nextBlock != 0 && index == -1);
 	
-	strcpy(current->descriptors[index]->name, "");
+	strcpy(current->descriptors[index]->name, "*removed*");
 }
 
+/*
+	Finds a file by name in the table
+	Pre: table has been created, name is less than or equal to NAME_LENGTH
+	Post: The file found is returned.
+*/
 file_t * filetable_find_file(table_t * table, char * name)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
