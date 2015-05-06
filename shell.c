@@ -193,19 +193,6 @@ int main(int argc, char **argv)
 }
 
 
-
-
-/* void write_table(file_t * table) */
-/* list_t * load_table() */
-/* 	Adds a new file to the volumn
-	store_in_volumn(file_t * file, char * data, int dataSize) */
-/*Loads the file from the local file system */
-
-
-
-
-
-
 /*
  * get_command
  * Description: This function fills the array cmd with the 
