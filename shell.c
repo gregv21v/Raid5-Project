@@ -48,6 +48,9 @@ int main(int argc, char **argv)
 		make_disk(DISK_2);
 
 		table_t * table = filetable_create();
+		
+		filetable_add_file(table, "File1", 10);
+		filetable_display_details(table);
 
 		
 	
