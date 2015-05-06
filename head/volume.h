@@ -1,3 +1,11 @@
+ /* 
+  * volume.h 
+  * Author: Gregory Venezia 
+  * Date: 4/27/2015 
+  * Course: CSC3320 
+  * Description: This provides an interface for interacting with the disks. 
+  */ 
+
 #ifndef __VOLUME_H 
 #define __VOLUME_H 
  
