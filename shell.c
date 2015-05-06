@@ -49,9 +49,9 @@ int main(int argc, char **argv)
 
 		table_t * table = filetable_create();
 		
-		filetable_add_file(table->lastFileBlock, "Test", 10);
-		filetable_add_file(table->lastFileBlock, "Test1", 10);
-		filetable_add_file(table->lastFileBlock, "Test3", 10);
+		filetable_add_file(table, "Test", 10);
+		filetable_add_file(table, "Test1", 10);
+		filetable_add_file(table, "Test3", 10);
 		
 		filetable_display_details(table);
 		
