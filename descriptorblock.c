@@ -41,6 +41,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 		/* Copy the name from the block */
 		printf("%s", block->descriptors[i]->name);
 		strncpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
+		printf("%s", block->descriptors[i]->name);
 		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
