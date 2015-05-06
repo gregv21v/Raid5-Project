@@ -14,9 +14,10 @@ table_t * filetable_create()
 	table_t * table = (table_t *) malloc(sizeof(table_t));
 	
 	/* find the last descriptor block */
-	table->lastFileBlock = descriptorBlock_load_last();
+	table->firstFileBlock = descriptorBlock_create(0);
 	/* TODO: Add condition for empty file table */
-	table->firstFileBlock = descriptorBlock_load(0); 
+	table->lastFileBlock = table->firstFileBlock; 
+	
 	table->currentFile = NULL;
 }
 
@@ -51,6 +52,18 @@ void filetable_list_files(table_t * table)
 	while(current->nextBlock != 0)
 	{
 		descriptorBlock_list_files(current);
+		if(current->nextBlock != 0)
+			current = descriptorBlock_store(current->nextBlock);
+	}
+}
+
+void filetable_display_details(table_t * table)
+{
+	descriptorBlock_t * current = table->lastFileBlock;
+	
+	while(current->nextBlock != 0)
+	{
+		descriptorBlock_display_details(current);
 		if(current->nextBlock != 0)
 			current = descriptorBlock_store(current->nextBlock);
 	}
