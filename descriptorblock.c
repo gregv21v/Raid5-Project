@@ -10,8 +10,8 @@ descriptorBlock_t * descriptorBlock_create()
 {
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	
-	block->previousBlock = 0;
-	block->nextBlock = 0;
+	block->previousBlock = 1;
+	block->nextBlock = 1;
 	
 	int i = 0;
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
