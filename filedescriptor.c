@@ -20,3 +20,8 @@ void file_destroy(file_t * file)
 {
     free(file);
 }
+
+void file_display(file_t * file)
+{
+    printf("%s |  %d  |  %d  \n", file->name, file->start, file->blockCount);
+}
