@@ -67,12 +67,12 @@ void filetable_display_details(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
 	
-	while(current->nextBlock != 0)
-	{
+	
+	do {
 		descriptorBlock_display_details(current);
 		if(current->nextBlock != 0)
 			current = descriptorBlock_load(current->nextBlock);
-	}
+	} while(current->nextBlock != 0);
 }
 
 void filetable_find_file(table_t * table, char * name)
