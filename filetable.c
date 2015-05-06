@@ -32,16 +32,18 @@ int filetable_add_file(table_t * table, char * name, int blockCount)
 		descriptorBlock_t * newBlock = descriptorBlock_create(descriptorBlock_find_last_free(table->lastFileBlock));
 	
 		descriptorBlock_attach(table->lastFileBlock, newBlock);
+
+		int index = descriptorBlock_add_file(newBlock, name, blockCount);
 		
 		/* update the blocks on the disk */
 		descriptorBlock_store(table->lastFileBlock);
 		descriptorBlock_store(newBlock);
 		
-		free(table->lastFileBlock);
-
 		table->lastFileBlock = newBlock;
 		
-		int index = descriptorBlock_add_file(newBlock, name, blockCount);
+		free(table->lastFileBlock);
+
+	
 		
 		return newBlock->descriptors[index]->start;
 	}
