@@ -12,6 +12,7 @@
 #include "disk.h"
 #include "volume.h"
 #include "descriptorblock.h"
+#include "filetable.h"
 
 
 /* Define the maximum command length */
@@ -46,32 +47,9 @@ int main(int argc, char **argv)
 		make_disk(DISK_1);
 		make_disk(DISK_2);
 
-		/* create a descriptor block */
-		descriptorBlock_t * desBlock = descriptorBlock_create(0);
-		descriptorBlock_t * nextBlock = descriptorBlock_create(1);
-		
-		descriptorBlock_attach(desBlock, nextBlock);
+		table_t * table = filetable_create();
 
-		/* Add some files to the block */
-		strcpy(desBlock->descriptors[0]->name, "File1");
-		strcpy(desBlock->descriptors[1]->name, "File2");
-		strcpy(desBlock->descriptors[2]->name, "File3");
-		strcpy(desBlock->descriptors[3]->name, "File4");
 		
-		/* Add some files to the next block */
-		strcpy(nextBlock->descriptors[0]->name, "File5");
-		strcpy(nextBlock->descriptors[1]->name, "File6");
-		strcpy(nextBlock->descriptors[2]->name, "File7");
-		strcpy(nextBlock->descriptors[3]->name, "File8");
-		
-		/* Save the blocks */
-		descriptorBlock_store(desBlock);
-		descriptorBlock_store(nextBlock);
-	
-		descriptorBlock_t * lastBlock = descriptorBlock_load_last();
-		
-		if(lastBlock != NULL)
-			descriptorBlock_list_files(lastBlock);
 	
 		
 	
