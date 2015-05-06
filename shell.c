@@ -1,4 +1,10 @@
-/* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
+/*
+ * shell.c
+ * Author: Andrew Joyal, Evan Vadenais, Greg Venezia 
+ * Date: 5/6/2015
+ * Course: CSC3320
+ * Description: The shell of the program.
+ */
 
 #include <stdio.h>
 #include <assert.h>
