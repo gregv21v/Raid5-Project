@@ -24,10 +24,10 @@ CFLAGS=-g -Wall -pedantic -I head
 # The name of the object files (modify as needed)
 # Basically this is just all our C files with a .o
 # extension.
-OBJECTS= disk.o \ 
+OBJECTS= volume.o \
+	disk.o \ 
 	filetable.o \
 	filedescriptor.o \
-	volume.o \
 	descriptorblock.o \
 	shell.o 
 	 
