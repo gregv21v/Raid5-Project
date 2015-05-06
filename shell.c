@@ -45,12 +45,7 @@ int main(int argc, char **argv)
 		make_disk(DISK_0);
 		make_disk(DISK_1);
 		make_disk(DISK_2);
-		
-		/* Volume function test */
-		
-		
-		
-		
+
 		/* create a descriptor block */
 		descriptorBlock_t * desBlock = descriptorBlock_create();
 
@@ -63,14 +58,11 @@ int main(int argc, char **argv)
 		//descriptorBlock_list_files(desBlock);
 
 		descriptorBlock_store(desBlock);
-		
-		
+
 		descriptorBlock_t * loadedBlock = descriptorBlock_load(0);
 		
-	
+		descriptorBlock_list_files(loadedBlock);
 		
-	
-	
 	
 	/* -------------------- */
 	printf("\n");
