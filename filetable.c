@@ -54,13 +54,12 @@ int filetable_add_file(table_t * table, char * name, int blockCount)
 void filetable_list_files(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
-	
-	while(current->nextBlock != 0)
-	{
+
+	do {
 		descriptorBlock_list_files(current);
 		if(current->nextBlock != 0)
 			current = descriptorBlock_load(current->nextBlock);
-	}
+	} while(current->nextBlock != 0);
 }
 
 void filetable_display_details(table_t * table)
@@ -75,8 +74,34 @@ void filetable_display_details(table_t * table)
 	} while(current->nextBlock != 0);
 }
 
+
+void filetable_remove_file(table_t * table, char * name)
+{
+	descriptorBlock_t * current = table->lastFileBlock;
+	int index = -1; /* the index of the file once its found */
+
+	do {
+		current = descriptorBlock_load(current->nextBlock);
+		
+		index = descriptorBlock_find_file(current, name);
+		
+	} while(current->nextBlock != 0 && index == -1);
+	
+	strcpy(current->descriptors[index]->name, "");
+}
+
 file_t * filetable_find_file(table_t * table, char * name)
 {
+	descriptorBlock_t * current = table->lastFileBlock;
+	int index = -1; /* the index of the file once its found */
+
+	do {
+		current = descriptorBlock_load(current->nextBlock);
+		
+		index = descriptorBlock_find_file(current, name);
+	} while(current->nextBlock != 0 && index == -1);
+	
+	return current->descriptors[index];
 	
 }
 
