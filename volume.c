@@ -33,11 +33,11 @@ char * volume_load_block(int address)
 	{
 	    error = open_disk(DISK_1);
 	}
+	printf("Address: %d", (int) (address / 2));
 	  
 	block_read((int) (address / 2), temp);
 	
 	printf("In volume load block: %s", temp);
-	printf("Error: %d", error);
 	  
 	close_disk();
 	return temp;
