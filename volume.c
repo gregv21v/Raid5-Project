@@ -28,15 +28,15 @@ char * volume_load_block(int address)
 	if(address % 2 == 0) 
 	{
 	    error = open_disk(DISK_0);
-	    printf("Disk 1");
 	}
 	 else 
 	{
 	    error = open_disk(DISK_1);
 	}
 	  
-	block_read((int) (address / 2), temp);
+	error = block_read((int) (address / 2), temp);
 	
+	printf("Error Code: %d", error);
 	printf("In volume load block: %s", temp);
 	  
 	close_disk();
