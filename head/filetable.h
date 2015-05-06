@@ -15,7 +15,7 @@
 
 typedef struct Table {
 	file_t * currentFile;
-	descriptorBlock_t * currentFileBlock;
+	descriptorBlock_t * firstFileBlock;
 	descriptorBlock_t * lastFileBlock;
 } table_t;
 
