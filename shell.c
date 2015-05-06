@@ -50,8 +50,8 @@ int main(int argc, char **argv)
 		table_t * table = filetable_create();
 		
 		filetable_add_file(table->lastFileBlock, "Test", 100);
-		filetable_add_file(table->lastFileBlock, "Test", 100);
-		filetable_add_file(table->lastFileBlock, "Test", 100);
+		filetable_add_file(table->lastFileBlock, "Test1", 100);
+		filetable_add_file(table->lastFileBlock, "Test3", 100);
 		
 		filetable_display_details(table);
 		
