@@ -19,9 +19,7 @@ descriptorBlock_t * descriptorBlock_create(int address)
 	{
 		block->descriptors[i] = file_create();
 	}
-	
-	
-	
+
 	return block;
 }
 
@@ -95,7 +93,8 @@ descriptorBlock_t * descriptorBlock_load(int address)
 descriptorBlock_t * descriptorBlock_load_last()
 {
     descriptorBlock_t * current = descriptorBlock_load(0);
-    while(current != NULL)
+    char last = 0;
+    while(!last)
     {
         /* Go to next block */
         if(current->nextBlock != 0) 
@@ -104,7 +103,7 @@ descriptorBlock_t * descriptorBlock_load_last()
         }
         else 
         {
-            current = NULL;
+            last = 1;
         }
     }
     return current;
