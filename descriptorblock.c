@@ -20,7 +20,7 @@
 	Pre: An address in the volume
 	Post: A pointer to that descriptor block is returned.
 */
-descriptorBlock_t * descriptorBlock_create(int address)
+descriptorBlock_t * descriptorBlock_create(unsigned int address)
 {
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	
@@ -97,7 +97,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	Pre: An address in the volume.
 	Post: Returns a descriptor block from the volume.
 */
-descriptorBlock_t * descriptorBlock_load(int address)
+descriptorBlock_t * descriptorBlock_load(unsigned int address)
 {
 	int i = 0; /* a general iterator */
 	int offset = 0; /* offset in the buffer */
@@ -156,7 +156,11 @@ descriptorBlock_t * descriptorBlock_load_last()
     return current;
 }
 
-
+/*
+	Find a file by name in this descriptor block.
+	Pre: block has already been created, and name length is less than or equal to NAME_LENGTH.
+	Post: Returns the index of the file in this block.
+*/
 int descriptorBlock_find_file(descriptorBlock_t * block, char * name)
 {
   	int index = 0;
@@ -168,7 +172,11 @@ int descriptorBlock_find_file(descriptorBlock_t * block, char * name)
 	  return -1;
 }
 
-
+/*
+	Lists the files in this descriptor block.
+	Pre: block has been created.
+	Post: Displays the names of the files.
+*/
 void descriptorBlock_list_files(descriptorBlock_t * block)
 {
 	int i = 0;
@@ -178,6 +186,11 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 	}
 }
 
+/*
+	List all the information about the file descriptors.
+	Pre: block has been created.
+	Post: Displays all the information about the files.
+*/
 void descriptorBlock_display_details(descriptorBlock_t * block)
 {
 	int i = 0;
@@ -191,7 +204,11 @@ void descriptorBlock_display_details(descriptorBlock_t * block)
 	printf("Next: %d\n", block->nextBlock);
 }
 
-
+/*
+	Finds the last free address in the volume.
+	Pre: block has been created.
+	Post: Returns the the address of the last free block in the volume.
+*/
 int descriptorBlock_find_last_free(descriptorBlock_t * block)
 {
 	int index = descriptorBlock_find_file(block, "");
@@ -209,7 +226,12 @@ int descriptorBlock_find_last_free(descriptorBlock_t * block)
 	}
 }
 
-int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blockCount)
+/*
+	Adds a file to this descriptor block.
+	Pre: block has been created, name is of length less than or equal to NAME_LENGTH.
+	Post: Returns the index of the file. If it was not created, it returns -1.
+*/
+int descriptorBlock_add_file(descriptorBlock_t * block, char * name, unsigned int blockCount)
 {
 	int index = descriptorBlock_find_file(block, "");
 	if(index != -1)
@@ -228,7 +250,11 @@ int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blo
 	}
 }
 
-
+/*
+	Attachs two blocks together.
+	Pre: Both blocks have been created.
+	Post: Links the two blocks together.
+*/
 void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach)
 {
 	block->nextBlock = blockToAttach->address;
