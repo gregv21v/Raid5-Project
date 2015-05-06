@@ -26,8 +26,8 @@ CFLAGS=-g -Wall -pedantic -I head
 # extension.
 OBJECTS= disk.o \ 
 	filetable.o \
+	filedescriptor.o \
 	volume.o \
-	filedescriptor.o \ 
 	descriptorblock.o \
 	shell.o 
 	 
