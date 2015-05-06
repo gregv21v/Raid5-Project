@@ -20,7 +20,7 @@ table_t * filetable_create()
 }
 
 
-void filetable_add_file(table_t * table, char * name, int blockCount)
+int filetable_add_file(table_t * table, char * name, int blockCount)
 {
 	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 	
@@ -39,8 +39,16 @@ void filetable_add_file(table_t * table, char * name, int blockCount)
 
 		table->lastFileBlock = newBlock;
 		
-		descriptorBlock_add_file(newBlock, name, blockCount);
+		int index = descriptorBlock_add_file(newBlock, name, blockCount);
+		
+		return newBlock->descriptors[index]->start;
 	}
+	else
+	{
+		return table->lastFileBlock->descriptors[added]->start;
+	}
+	
+	
 }
 
 void filetable_list_files(table_t * table)
