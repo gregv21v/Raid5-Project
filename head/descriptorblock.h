@@ -34,7 +34,7 @@
  } descriptorBlock_t; 
 
  descriptorBlock_t * descriptorBlock_create(int address); /* tested */ 
- void descriptorBlock_destroy();  
+ void descriptorBlock_destroy();  /* tested */
  void descriptorBlock_store(descriptorBlock_t * block); /* tested */ 
  descriptorBlock_t * descriptorBlock_load(int address); /* tested */ 
  descriptorBlock_t * descriptorBlock_load_last(); /* tested */ 
