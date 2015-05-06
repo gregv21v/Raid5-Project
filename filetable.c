@@ -75,7 +75,7 @@ void filetable_display_details(table_t * table)
 	} while(current->nextBlock != 0);
 }
 
-void filetable_find_file(table_t * table, char * name)
+file_t * filetable_find_file(table_t * table, char * name)
 {
 	
 }
