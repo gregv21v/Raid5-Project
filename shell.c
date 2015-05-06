@@ -74,7 +74,8 @@ int main(int argc, char **argv)
 	
 		descriptorBlock_t * lastBlock = descriptorBlock_load_last();
 		
-		descriptorBlock_list_files(lastBlock);
+		if(lastBlock != NULL)
+			descriptorBlock_list_files(lastBlock);
 	
 		
 	
