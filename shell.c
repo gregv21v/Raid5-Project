@@ -115,7 +115,7 @@ int main(int argc, char **argv)
 			char* buffer; /*The buffer to hold the text of the file*/
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
-			int endBlock; /*The block the file will end on*/
+			int startBlock; /*The block the file will end on*/
 			int i;
 			int error;
 			descriptorBlock_t* lastBlockDescrip;
@@ -131,7 +131,7 @@ int main(int argc, char **argv)
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
-				filetable_add_file(table,arguments[1],numBlocks);
+				startBlock=filetable_add_file(table,arguments[1],numBlocks);
 				printf("file added to table\n");
 				lastBlockDescrip=descriptorBlock_load_last();
 				error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
@@ -141,15 +141,11 @@ int main(int argc, char **argv)
 					descriptorBlockStore(lastBlockDescrip);
 					error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
 				}
-
-			
-			/*Open the disks*/
-			
-
-			/*Write the blocks*/
+			for(i=startBlock;i<=(startBlock+numBlocks);i++)
+			{
+				volume_store_block(i,buffer);
+			}
 		
-			
-			/*remove file if all writes not successful*/
 			if(error!=0)
 			{
 				/*filetable_remove_file(table,newFile->name);*/
@@ -157,10 +153,6 @@ int main(int argc, char **argv)
 			}
 			
 			free(buffer);
-			
-			/*Close the disks*/
-		
-
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
