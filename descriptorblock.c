@@ -143,6 +143,37 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 	}
 }
 
+
+int descriptorBlock_find_last_free(descriptorBlock_t * block)
+{
+	int index = descriptorBlock_find_file(block, "");
+	if(index != -1)
+	{
+		return block->descriptors[index]->start + block->descriptors[index]->blockCount;
+	}
+	else
+	{
+		return block->nextBlock + 1;
+	}
+}
+
+int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blockCount)
+{
+	int index = descriptorBlock_find_file(block, "");
+	if(index != -1)
+	{
+		strcpy(block->descriptors[index]->name, filename);
+		block->descriptors[index]->start = descriptorBlock_find_last_free(block);
+		block->descriptors[index]->blockCount = blockCount;
+		return 0;
+	} 
+	else 
+	{
+		return -1; /* you need to create a new block */
+	}
+}
+
+
 void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach)
 {
 	block->nextBlock = blockToAttach->address;
