@@ -40,7 +40,11 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	
 	memcpy(buffer, &offset, 4);
 	//memcpy(buffer, (char *)&block->previousBlock, 4);
-	printf("%s", buffer);
+	for(i = 0; i < 512; i++) 
+	{
+	    if(i % 16 == 0 && i != 0)
+		    printf("%c", buffer[i]);
+	}
 	offset += 4;
 	
 	/* Load the current block into the file descriptor array */
