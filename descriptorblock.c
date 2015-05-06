@@ -60,7 +60,7 @@ void descriptorBlock_save(descriptorBlock_t * block)
 descriptorBlock_t * descriptorBlock_load(int address)
 {
 	char * buffer = volume_load_block(address);
-	volume_display_block_raw(address);
+	println("%s", buffer);
 	
 	
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
@@ -79,7 +79,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		strncpy(&(block->descriptors[i]->name), buffer + offset, NAME_LENGTH);
+		strncpy(block->descriptors[i]->name, buffer + offset, NAME_LENGTH);
 		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
