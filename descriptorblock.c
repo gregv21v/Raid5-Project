@@ -143,6 +143,21 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 	}
 }
 
+void descriptorBlock_display_details(descriptorBlock_t * block)
+{
+	int i = 0;
+	printf("Prev: %d\n", block->previousBlock);
+
+	for(i = 0; i < FILES_PER_BLOCK; i++)
+	{
+		printf("Name: %s\n", block->descriptors[i]->name);
+		printf("Start: %d\n", block->descriptors[i]->start);
+		printf("BlockCount: %d\n", block->descriptors[i]->blockCount);
+	}
+	
+	printf("Next: %d\n", block->nextBlock);
+}
+
 
 int descriptorBlock_find_last_free(descriptorBlock_t * block)
 {
