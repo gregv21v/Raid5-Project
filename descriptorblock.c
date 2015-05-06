@@ -26,15 +26,17 @@ descriptorBlock_t * descriptorBlock_create()
 
 void descriptorBlock_store(descriptorBlock_t * block)
 {
-	unsigned char * buffer = (unsigned char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
+	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
 	memset(buffer, '-', 512);
 	
-	int offset = 0; /* the offset from the beginning of the buffer that you are looking at. */
+	int offset = 63; /* the offset from the beginning of the buffer that you are looking at. */
 	int i = 0; /* general purpose iterator */
 	
 	/* read the first 4 bytes as the address of the previous block */
 	printf("%s", buffer);
+	
+
 	
 	memcpy(buffer, &offset, 4);
 	//memcpy(buffer, (char *)&block->previousBlock, 4);
