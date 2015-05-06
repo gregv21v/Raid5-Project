@@ -26,7 +26,7 @@ descriptorBlock_t * descriptorBlock_create()
 
 void descriptorBlock_store(descriptorBlock_t * block)
 {
-	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
+	unsigned char * buffer = (unsigned char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
 	memset(buffer, '-', 512);
 	
