@@ -49,7 +49,7 @@ int main(int argc, char **argv)
 
 		table_t * table = filetable_create();
 		
-		printf("%d", filetable_add_file(table, "Test", 100));
+		filetable_add_file(table, "Test", 100);
 		
 		filetable_display_details(table);
 		
