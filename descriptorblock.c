@@ -38,8 +38,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	
 
 	
-	memcpy(buffer, &offset, 4);
-	//memcpy(buffer, (char *)&block->previousBlock, 4);
+	memcpy(buffer, (char *)&block->previousBlock, 4);
 	for(i = 0; i < 512; i++) 
 	{
 	    printf("%c", buffer[i]);
