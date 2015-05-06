@@ -122,12 +122,12 @@ descriptorBlock_t * descriptorBlock_load_last()
     return current;
 }
 
-int descriptorBlock_find_file(descriptorBlock_t * block, char * filename)
+int descriptorBlock_find_file(descriptorBlock_t * block, char * name)
 {
-  int index = 0;
-	for(; index < FILES_PER_BLOCK && strcmp(block->descriptors[index]->name, filename) != 0; index++);
+  	int index = 0;
+	for(; index < FILES_PER_BLOCK && strcmp(block->descriptors[index]->name, name) != 0; index++);
 
-  if(index < FILES_PER_BLOCK)
+  	if(index < FILES_PER_BLOCK)
 	  return index;
 	else 
 	  return -1;
@@ -162,7 +162,7 @@ void descriptorBlock_display_details(descriptorBlock_t * block)
 int descriptorBlock_find_last_free(descriptorBlock_t * block)
 {
 	int index = descriptorBlock_find_file(block, "");
-	printf("Index: %d", index);
+	printf("Index: %d\n", index);
 	if(index > 0 && index < FILES_PER_BLOCK)
 	{
 		return block->descriptors[index-1]->start + block->descriptors[index-1]->blockCount;
@@ -182,8 +182,8 @@ int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blo
 	int index = descriptorBlock_find_file(block, "");
 	if(index != -1)
 	{
-		strcpy(block->descriptors[index]->name, filename);
 		block->descriptors[index]->start = descriptorBlock_find_last_free(block);
+		strcpy(block->descriptors[index]->name, filename);
 		block->descriptors[index]->blockCount = blockCount;
 		
 		descriptorBlock_store(block);
