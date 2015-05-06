@@ -50,11 +50,7 @@ int main(int argc, char **argv)
 		descriptorBlock_t * desBlock = descriptorBlock_create(0);
 		descriptorBlock_t * nextBlock = descriptorBlock_create(1);
 		
-		desBlock->previousBlock = 0;
-		desBlock->nextBlock = 1;
-		
-		nextBlock->previousBlock = 0;
-		nextBlock->nextBlock = 0; /* indicating that this is the last descriptorBlock */
+		descriptorBlock_attach(desBlock, nextBlock);
 
 		/* Add some files to the block */
 		strcpy(desBlock->descriptors[0]->name, "File1");
