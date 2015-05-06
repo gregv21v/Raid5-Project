@@ -47,7 +47,14 @@ int main(int argc, char **argv)
 		make_disk(DISK_2);
 
 		/* create a descriptor block */
-		descriptorBlock_t * desBlock = descriptorBlock_create();
+		descriptorBlock_t * desBlock = descriptorBlock_create(0);
+		descriptorBlock_t * nextBlock = descriptorBlock_create(1);
+		
+		desBlock->previousBlock = 0;
+		desBlock->nextBlock = 1;
+		
+		nextBlock->previousBlock = 0;
+		nextBlock->nextBlock = 0; /* indicating that this is the last descriptorBlock */
 
 		/* Add some files to the block */
 		strcpy(desBlock->descriptors[0]->name, "File1");
@@ -55,13 +62,19 @@ int main(int argc, char **argv)
 		strcpy(desBlock->descriptors[2]->name, "File3");
 		strcpy(desBlock->descriptors[3]->name, "File4");
 		
-		//descriptorBlock_list_files(desBlock);
-
-		descriptorBlock_store(desBlock);
-
-		int index = descriptorBlock_find_file(desBlock, "File5");
+		/* Add some files to the next block */
+		strcpy(nextBlock->descriptors[0]->name, "File5");
+		strcpy(nextBlock->descriptors[1]->name, "File6");
+		strcpy(nextBlock->descriptors[2]->name, "File7");
+		strcpy(nextBlock->descriptors[3]->name, "File8");
 		
-		printf("%d", index);
+		/* Save the blocks */
+		descriptorBlock_store(desBlock);
+		descriptorBlock_store(nextBlock);
+	
+		descriptorBlock_t * lastBlock = descriptorBlock_load_last();
+		
+		descriptorBlock_list_files(lastBlock);
 	
 		
 	
