@@ -15,7 +15,11 @@
 #include "descriptorblock.h"
 #include "volume.h"
 
-
+/*
+	Creates a descriptor block at the given address in the volume.
+	Pre: An address in the volume
+	Post: A pointer to that descriptor block is returned.
+*/
 descriptorBlock_t * descriptorBlock_create(int address)
 {
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
@@ -33,6 +37,11 @@ descriptorBlock_t * descriptorBlock_create(int address)
 	return block;
 }
 
+/*
+	Frees up the memory for a descriptor block.
+	Pre: The block to be destroyed
+	Post: The memory of the descriptor block is destroyed.
+*/
 void descriptorBlock_destroy(descriptorBlock_t * block)
 {
 	/* destroy file descriptors */
@@ -46,6 +55,11 @@ void descriptorBlock_destroy(descriptorBlock_t * block)
 	
 }
 
+/*
+	Frees up the memory for a descriptor block.
+	Pre: The block to be destroyed
+	Post: The memory of the descriptor block is destroyed.
+*/
 void descriptorBlock_store(descriptorBlock_t * block)
 {
 	int i = 0; /* general purpose iterator */
@@ -78,18 +92,22 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	volume_store_block(block->address, buffer);   
 }
 
+/*
+	Loads a descriptor block from a specified address in the volume.
+	Pre: An address in the volume.
+	Post: Returns a descriptor block from the volume.
+*/
 descriptorBlock_t * descriptorBlock_load(int address)
 {
-	int i = 0;
-	int offset = 0;
-	char * buffer = volume_load_block(address);
-	descriptorBlock_t * block = descriptorBlock_create(address);
+	int i = 0; /* a general iterator */
+	int offset = 0; /* offset in the buffer */
+	char * buffer = volume_load_block(address); /* data from the volume */
+	descriptorBlock_t * block = descriptorBlock_create(address); /* loaded block */
 	
 	/* read the first 4 bytes as the address of the previous block */
 	memcpy(&(block->previousBlock), buffer, 4);
 	offset += 4;
 
-	
 	/* Load the current block into the file descriptor array */
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
@@ -113,6 +131,12 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	return block;  
 }
 
+
+/*
+	Loads the last descriptor block of the VTOC.
+	Pre: None.
+	Post: Returns a pointer to the last descriptor block in the volume.
+*/
 descriptorBlock_t * descriptorBlock_load_last()
 {
     descriptorBlock_t * current = descriptorBlock_load(0);
@@ -131,6 +155,7 @@ descriptorBlock_t * descriptorBlock_load_last()
     }
     return current;
 }
+
 
 int descriptorBlock_find_file(descriptorBlock_t * block, char * name)
 {
