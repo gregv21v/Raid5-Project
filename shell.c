@@ -55,6 +55,8 @@ int main(int argc, char **argv)
 		
 		filetable_display_details(table);
 		
+		
+		file_display(filetable_find_file(table, "Test3"));
 
 		
 	
