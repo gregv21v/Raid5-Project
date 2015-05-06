@@ -160,7 +160,6 @@ void descriptorBlock_display_details(descriptorBlock_t * block)
 int descriptorBlock_find_last_free(descriptorBlock_t * block)
 {
 	int index = descriptorBlock_find_file(block, "");
-	printf("Index: %d\n", index);
 	if(index > 0 && index < FILES_PER_BLOCK)
 	{
 		return block->descriptors[index-1]->start + block->descriptors[index-1]->blockCount;
