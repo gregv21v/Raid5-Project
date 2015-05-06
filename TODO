@@ -5,5 +5,5 @@ Test a filetable with multiple descriptor blocks
 
 
 TODO:
-
-Comment code
+Add header comments to all functions 
+Check for memory leaks
