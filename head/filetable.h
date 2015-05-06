@@ -14,7 +14,7 @@
 #include "descriptorblock.h"
 
 typedef struct Table {
-	fileDescriptor_t * currentFile;
+	file_t * currentFile;
 	descriptorBlock_t * currentFileBlock;
 	descriptorBlock_t * lastFileBlock;
 } table_t;
