@@ -8,9 +8,7 @@
  #ifndef __FILEDESCRIPTOR_H 
  #define __FILEDESCRIPTOR_H 
  
- 
  #define NAME_LENGTH 28 
- 
  
  /* Each file descriptor is 38 bytes large. */ 
  /* That leaves 8 bytes to store the address to the next block */ 
@@ -20,13 +18,8 @@
  	unsigned int blockCount; /* 4 bytes: The number of blocks that the file takes up. */ 
  } file_t; 
  
- 
- 
  file_t * file_create(); 
  void file_destroy(file_t * file); 
  void file_display(file_t * file); 
 
- 
- 
- 
  #endif	 
