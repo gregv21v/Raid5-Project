@@ -6,12 +6,13 @@
 #include "volume.h"
 
 
-descriptorBlock_t * descriptorBlock_create()
+descriptorBlock_t * descriptorBlock_create(int address)
 {
 	descriptorBlock_t * block = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
 	
 	block->previousBlock = 0;
 	block->nextBlock = 0;
+	block->address = 0;
 	
 	int i = 0;
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
@@ -61,10 +62,7 @@ descriptorBlock_t * descriptorBlock_load(int address)
 	int i = 0;
 	int offset = 0;
 	char * buffer = volume_load_block(address);
-	descriptorBlock_t * block = descriptorBlock_create();
-	
-	
-	block->address = address;
+	descriptorBlock_t * block = descriptorBlock_create(address);
 	
 	/* read the first 4 bytes as the address of the previous block */
 	memcpy(&(block->previousBlock), buffer, 4);
@@ -132,3 +130,9 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 		printf("%s\n", block->descriptors[i]->name);
 	}
 }
+
+void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach)
+{
+	
+}
+
