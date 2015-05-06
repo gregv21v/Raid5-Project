@@ -33,6 +33,7 @@ descriptorBlock_t * descriptorBlock_load_last(); /* tested */
 int descriptorBlock_find_file(descriptorBlock_t * block, char * filename); /* returns -1 if the file is not found */
 									   /* tested */
 void descriptorBlock_list_files(descriptorBlock_t * block); /* tested */
+void descriptorBlock_display_details(descriptorBlock_t * block);
 
 void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach); /* tested */
 
