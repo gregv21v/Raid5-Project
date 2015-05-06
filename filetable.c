@@ -6,113 +6,108 @@
  * Description: This file provides a file table data structure.
  */
 
-#include <stdio.h>
-#include <stdlib.h>
-
-
-/*
-	Saving files
-	-------------
-	Each block is 42 bytes large.
-	12 file descriptors are stored in a block.
-	The last 8 bytes store the address of the next block.
-*/
 
 #include "filetable.h"
 
-/*
-	Creates the list
-	pre: none
-	post: a pointer to a new file table is created
-*/
-list_t * filetable_create() 
+table_t * filetable_create()
 {
-	list_t * new_list = NULL;
-	new_list = (list_t *) calloc(1, sizeof(list_t));
-	new_list->size = 0;
-	new_list->head = NULL;
-	new_list->tail = NULL;
-
-	return new_list;
+	table_t * table = (table_t *) malloc(sizeof(table_t));
+	
+	/* find the last descriptor block */
+	table->firstFileBlock = descriptorBlock_create(0);
+	/* TODO: Add condition for empty file table */
+	table->lastFileBlock = table->firstFileBlock; 
 }
 
 
-/*
-	Adds a file to the list
-	pre: File points to a valid file_t struct in memory, and table points to a valid list_t in memory.
-	post: Adds the file to the end of the table.
-*/
-void filetable_add_file(list_t * table, file_t * file)
+int filetable_add_file(table_t * table, char * name, int blockCount)
 {
+	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 
-	if(table->head == NULL) /* this is the first element in the list */
+	if(added == -1) 
 	{
-		table->head = (file_t *) file;
-		table->tail = (file_t *) file;
+		/* a new block needs to be created to add this file */
+		descriptorBlock_t * newBlock = descriptorBlock_create(descriptorBlock_find_last_free(table->lastFileBlock));
+	
+		descriptorBlock_attach(table->lastFileBlock, newBlock);
+
+		int index = descriptorBlock_add_file(newBlock, name, blockCount);
+		
+		/* update the blocks on the disk */
+		descriptorBlock_store(table->lastFileBlock);
+		descriptorBlock_store(newBlock);
+		
+		table->lastFileBlock = newBlock;
+		
+		free(table->lastFileBlock);
+
+		return newBlock->descriptors[index]->start;
 	}
-	else /* there are other elements in the list */
+	else
 	{
-		table->tail->next = (file_t *) file;
-		table->tail = table->tail->next;
+		return table->lastFileBlock->descriptors[added]->start;
 	}
-	table->size++;
+	
+	
 }
 
-/*
-	Displays the file names along with all the other data in the file_t struct.
-	pre: table points to a valid list_t struct.
-	post: Displays the file names, and other details about the files in the table.
-*/
-void filetable_display(list_t * table) 
+void filetable_list_files(table_t * table)
 {
+	descriptorBlock_t * current = table->lastFileBlock;
 
-	file_t * current = table->head;
-
-	while(current != NULL)
-	{
-		/* display the details of the current file */
-		printf("%s\n", current->name);
-		printf("Start: %d\n", current->start);
-		printf("Block Count: %d\n", current->blockCount);
-		printf("Disk Number: %d\n", current->diskNumber);
-
-		current = current->next;
-	}
-
+	do {
+		descriptorBlock_list_files(current);
+		if(current->nextBlock != 0)
+			current = descriptorBlock_load(current->nextBlock);
+	} while(current->nextBlock != 0);
 }
 
-/*
-	Displays the file names. This is used for the ls command.
-	pre: table points to a valid list_t struct.
-	post: Displays the file names.
-*/
-void filetable_list_files(list_t * table)
+void filetable_display_details(table_t * table)
 {
-	file_t * current = table->head;
-
-	while(current != NULL)
-	{
-		/* display the details of the current file */
-		printf("%s\n", current->name);
-
-		current = current->next;
-	}
+	descriptorBlock_t * current = table->lastFileBlock;
+	
+	
+	do {
+		descriptorBlock_display_details(current);
+		if(current->nextBlock != 0)
+			current = descriptorBlock_load(current->nextBlock);
+	} while(current->nextBlock != 0);
 }
 
 
-/*
-	Finds a file by name in the table.
-	pre: The table refers to a valid list_t struct, and the filename is a valid string
-	post: Returns a pointer to the file found or NULL if not found
-*/
-file_t * filetable_find(list_t * table, char * filename) 
+void filetable_remove_file(table_t * table, char * name)
 {
-	file_t * current = table->head;
+	descriptorBlock_t * current = table->lastFileBlock;
+	int index = -1; /* the index of the file once its found */
 
-	for(; strcmp(current->name, filename) != 0; current = current->next);
-
-	return current;
+	do {
+		current = descriptorBlock_load(current->nextBlock);
+		
+		index = descriptorBlock_find_file(current, name);
+		
+	} while(current->nextBlock != 0 && index == -1);
+	
+	strcpy(current->descriptors[index]->name, "");
 }
+
+file_t * filetable_find_file(table_t * table, char * name)
+{
+	descriptorBlock_t * current = table->lastFileBlock;
+	int index = -1; /* the index of the file once its found */
+
+	do {
+		current = descriptorBlock_load(current->nextBlock);
+		
+		index = descriptorBlock_find_file(current, name);
+	} while(current->nextBlock != 0 && index == -1);
+	
+	return current->descriptors[index];
+	
+}
+
+
+
+
 
 
 
