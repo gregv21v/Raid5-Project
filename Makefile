@@ -28,6 +28,7 @@ OBJECTS= disk.o \
 	 volume.o \
 	 filedescriptor.o \
 	 descriptorblock.o \
+	 filetable.o \
 	 shell.o 
 	 
 
