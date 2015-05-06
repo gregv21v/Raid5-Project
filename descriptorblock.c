@@ -28,9 +28,6 @@ void descriptorBlock_store(descriptorBlock_t * block)
 {
 	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
-	memset(buffer, '_', 512);
-	printf("%s\n", buffer);
-	
 	int offset = 0; /* the offset from the beginning of the buffer that you are looking at. */
 	int i = 0; /* general purpose iterator */
 	
@@ -42,6 +39,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
+		printf("%s", block->descriptors[i]->name);
 		strncpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
 		offset += NAME_LENGTH;
 		
