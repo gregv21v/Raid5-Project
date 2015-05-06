@@ -117,7 +117,6 @@ int main(int argc, char **argv)
 			int numBlocks; /*number of blocks the file will require*/
 			int endBlock; /*The block the file will end on*/
 			int i;
-			file_t* newFile;
 			
 			/*Open the file and get its size*/
 			FILE* f=fopen(arguments[1],"w");
@@ -130,11 +129,7 @@ int main(int argc, char **argv)
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
-				newFile=(file_t*)malloc(sizeof(file_t));
-				strcpy(newFile->name,arguments[1]);
-				newFile->blockCount=numBlocks;
-				newFile->start=(table->tail->start)+(table->tail->blockCount)+1;
-				filetable_add_file(table,newFile);
+				filetable_add_file(table,arguments[1],numBlocks);
 				printf("file added to table\n");
 			
 			endBlock=(newFile->start)+(newFile->blockCount);
@@ -143,22 +138,7 @@ int main(int argc, char **argv)
 			
 
 			/*Write the blocks*/
-			error=0;
-			for(i=(newFile->start);i<(endBlock+1);i++)
-			{
-				if(i%2==0)
-				{
-					open_disk(DISK_0);
-					error+=block_write(i,buffer);
-					close_disk(DISK_0);
-				}
-				else
-				{
-					open_disk(DISK_1);
-					error+=block_write(i,buffer);
-					close_disk(DISK_1);
-				}
-			}
+		
 			
 			/*remove file if all writes not successful*/
 			if(error!=0)
