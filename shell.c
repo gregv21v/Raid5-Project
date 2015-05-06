@@ -51,6 +51,8 @@ int main(int argc, char **argv)
 		
 		printf("%d", filetable_add_file(table, "Test", 100));
 		
+		filetable_display_details(table);
+		
 
 		
 	
