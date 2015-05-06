@@ -24,7 +24,7 @@ descriptorBlock_t * descriptorBlock_create()
 	return block;
 }
 
-void descriptorBlock_save(descriptorBlock_t * block)
+void descriptorBlock_store(descriptorBlock_t * block)
 {
 	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
