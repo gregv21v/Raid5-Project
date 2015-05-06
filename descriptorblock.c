@@ -132,6 +132,7 @@ void descriptorBlock_list_files(descriptorBlock_t * block)
 
 void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach)
 {
-	
+	block->nextBlock = blockToAttach->address;
+	blockToAttach->previous = block->address;
 }
 
