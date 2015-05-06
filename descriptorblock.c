@@ -166,6 +166,10 @@ int descriptorBlock_find_last_free(descriptorBlock_t * block)
 	{
 		return block->descriptors[index]->start + block->descriptors[index]->blockCount;
 	}
+	else if(index == 0)
+	{
+		return block->address + 1;
+	}
 	else
 	{
 		return block->nextBlock + 1;
