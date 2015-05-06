@@ -1,4 +1,10 @@
-/* Authors: Andrew Joyal, Evan Vadenais, Greg Venezia */
+/*
+ * shell.c
+ * Author: Andrew Joyal, Evan Vadenais, Greg Venezia 
+ * Date: 5/6/2015
+ * Course: CSC3320
+ * Description: The shell of the program.
+ */
 
 #include <pthread.h>
 #include <stdio.h>
@@ -45,23 +51,22 @@ pthread_mutex_t lock;
 
 int main(int argc, char **argv)
 {
-	char command[CMDLEN];
-	char ** arguments;
-	int argumentCount;
-		
-	int error;
+	char command[CMDLEN]; /* command string */
+	char ** arguments; /* arguments of the command */
+	int argumentCount; /* number of arguments the command has */
+	int error; /* for disk errors */
 
 	/* initialize table */
-	list_t * table = filetable_create();
+	table_t * table = filetable_create();
 
 	/* Thread stuff */
-	pthread_t tid;
+	pthread_t tid; /* threads id */
 	
-	pthread_mutex_init(&lock,NULL);
+	pthread_mutex_init(&lock, NULL);
+	
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
 
-  	/* Load the file table into memory */
   	/* Start the rebuild thread */
 
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
@@ -72,7 +77,6 @@ int main(int argc, char **argv)
 		if(strcmp(command, "ls") == 0) 
 		{
 			filetable_list_files(table);
-			/*filetable_display(table); */
 		} 
 		else if(strcmp(arguments[0],"makedisk") == 0)/* create the three disks*/
 		{
@@ -118,32 +122,23 @@ int main(int argc, char **argv)
 			int startBlock; /*The block the file will end on*/
 			int i;
 			int error;
-			descriptorBlock_t* lastBlockDescrip;
 			
 			/*Open the file and get its size*/
-			FILE* f=fopen(arguments[1],"w");
+			FILE* f = fopen(arguments[1],"w");
 			fseek(f,0,SEEK_END);
-			fileSize=ftell(f);
-			numBlocks= (fileSize%512)+1;/*calculate the blocks needed*/
+			fileSize = ftell(f);
+			numBlocks = (fileSize%512) + 1;/*calculate the blocks needed*/
 			fseek(f,0,SEEK_SET);
 			
-			buffer=(char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
+			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
 			/*Create new file_t and add to table*/
-				startBlock=filetable_add_file(table,arguments[1],numBlocks);
-				printf("file added to table\n");
-				lastBlockDescrip=descriptorBlock_load_last();
-				error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
-				if(error==-1)/*create new block*/
-				{
-					lastBlockDescrip=descriptorBlock_create(0);
-					descriptorBlockStore(lastBlockDescrip);
-					error=descriptorBlock_add_file(lastBlockDescrip,arguments[1],numBlocks);
-				}
-			for(i=startBlock;i<=(startBlock+numBlocks);i++)
+			startBlock = filetable_add_file(table,arguments[1], numBlocks);
+	
+			for(i = startBlock; i <= (startBlock+numBlocks); i++)
 			{
-				volume_store_block(i,buffer);
+				volume_store_block(i, buffer);
 			}
 		
 			if(error!=0)
@@ -158,7 +153,7 @@ int main(int argc, char **argv)
 		{
 			char buffer [512]; /*Buffer to read from the block*/
 			file_t * file = filetable_find_file(table, arguments[1]);
-			if(file!=NULL)/*Read the file if it was found*/
+			if( file != NULL)/*Read the file if it was found*/
 			{
 				int startBlock = file->start;
 				int currentBlock = startBlock;
@@ -192,9 +187,7 @@ int main(int argc, char **argv)
 			}
 		}
 	}
-	
-	/* Store the file table on disks 1 and 2 */
-	
+
   	return 0;
 
 }
