@@ -63,7 +63,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	for(i = 0; i < 512; i++) 
 	{
 	    printf("%c", buffer[i]);
-	    if(i % 28 == 0 && i != 0)
+	    if(i % 36 == 0 && i != 0)
 		  printf("\n");  
 		    
 	}
