@@ -57,7 +57,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	memcpy(buffer + offset, &(block->nextBlock), 4);
 	
 	
-	printf("%s", buffer);
+	printf("%s\n", buffer);
 	
 	volume_store_block(block->address, buffer);   
 }
