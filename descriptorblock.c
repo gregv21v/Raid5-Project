@@ -183,7 +183,7 @@ int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blo
 		
 		descriptorBlock_store(block);
 		
-		return 0;
+		return index;
 	} 
 	else 
 	{
