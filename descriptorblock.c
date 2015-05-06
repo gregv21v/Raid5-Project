@@ -37,7 +37,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	printf("%s", buffer);
 	printf("unsigned int size %d", sizeof(unsigned int));
 	
-	memcpy(buffer, &block->previousBlock, 4);
+	memcpy(buffer, (char *)&block->previousBlock, 4);
 	printf("%s", buffer);
 	offset += 4;
 	
