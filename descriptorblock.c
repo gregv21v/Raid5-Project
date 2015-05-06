@@ -32,8 +32,9 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	int i = 0; /* general purpose iterator */
 	
 	/* read the first 4 bytes as the address of the previous block */
-	printf("%d", block->previousBlock);
+	
 	memcpy(buffer, &(block->previousBlock), 4);
+	printf("%s", buffer);
 	offset += 4;
 	
 	/* Load the current block into the file descriptor array */
