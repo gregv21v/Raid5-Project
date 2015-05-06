@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 		strcpy(desBlock->descriptors[2]->name, "File3");
 		strcpy(desBlock->descriptors[3]->name, "File4");
 		
-		descriptorBlock_list_files(desBlock);
+		//descriptorBlock_list_files(desBlock);
 
 		descriptorBlock_save(desBlock);
 		
