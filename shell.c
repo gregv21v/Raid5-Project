@@ -59,7 +59,9 @@ int main(int argc, char **argv)
 
 		descriptorBlock_store(desBlock);
 
-		descriptorBlock_t * loadedBlock = descriptorBlock_load(0);
+		int index = descriptorBlock_find_file(desBlock, "File1");
+		
+		printf("%d", index);
 		
 		descriptorBlock_list_files(loadedBlock);
 		
