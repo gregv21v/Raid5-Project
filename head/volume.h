@@ -13,9 +13,9 @@
  #define DISK_2 "disk_2" 
  
  
- void volume_display_block_raw(int address); 
- char * volume_load_block(int address); 
- void volume_store_block(int address, char * block); 
+ void volume_display_block_raw(unsigned int address); 
+ char * volume_load_block(unsigned int address); 
+ void volume_store_block(unsigned int address, char * block); 
  
  
 
