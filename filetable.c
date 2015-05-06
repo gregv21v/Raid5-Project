@@ -16,18 +16,10 @@ table_t * filetable_create()
 	/* find the last descriptor block */
 	table->lastFileBlock = descriptorBlock_load_last();
 	/* TODO: Add condition for empty file table */
-	table->currentFileBlock = descriptorBlock_load(0); 
+	table->firstFileBlock = descriptorBlock_load(0); 
 	table->currentFile = NULL;
 }
 
-
-int filetable_find_last_free(table_t * table)
-{
-	int index = descriptorBlock_find_file(table->lastFileBlock, "");
-	if(index != -1) 
-		return table->lastFileBlock->descriptors[index]->start 
-			+ table->lastFileBlock->descriptors[index]->blockCount;
-}
 
 void filetable_add_file(table_t * table, char * name, int blockCount)
 {
@@ -35,36 +27,44 @@ void filetable_add_file(table_t * table, char * name, int blockCount)
 	
 	if(index != -1) 
 	{
+		/* There is space in the existing block to place this file */
 		memcpy(table->lastFileBlock->descriptors[index]->name, name, MAX_NAME_LENGTH);
-		table->lastFileBlock->descriptors[index]->start = filetable_find_last_free(table);
+		table->lastFileBlock->descriptors[index]->start = descriptorBlock_find_last_free(table->lastFileBlock);
 		table->lastFileBlock->descriptors[index]->blockCount = blockCount;
+		
+		/* update the block on the disk */
+		descriptorBlock_store(table->lastFileBlock);
 	}
-}
-
-
-
-/* private function */
-descriptorBlock_t * filetable_find_last_descriptor_block()
-{
-	descriptorBlock_t * last = (descriptorBlock_t *) malloc(sizeof(descriptorBlock_t));
-	descriptorBlock_t * current
-	
-	
-	descriptorBlock = load_descriptor_block(currentBlock);
-	
-	/* Check to see if the file is in this block */
-	/* "" means you have an empty file descriptor */
-	for(i = 0; i < FILES_PER_BLOCK && !found; i++) 
+	else 
 	{
-		/* you have found the last file */
-		if(strcmp(descriptorBlock->descriptors[i]->name, "") == 0) 
-		{
-			index = i;
-			found = 1;
-		}
+		/* a new block needs to be created to add this file */
+		descriptorBlock_t * newBlock = descriptorBlock_create(descriptorBlock_find_last_free(table->lastFileBlock));
+	
+		descriptorBlock_attach(table->lastFileBlock, newBlock);
+		
+		/* update the blocks on the disk */
+		descriptorBlock_store(table->lastFileBlock);
+		descriptorBlock_store(newBlock);
+		
+		free(table->lastFileBlock);
+
+		table->lastFileBlock = newBlock;
 	}
+}
+
+void filetable_list_files(table_t * table)
+{
+		
+}
+
+void filetable_find_file(table_t * table, char * name)
+{
 	
 }
+
+
+
+
 
 
 
