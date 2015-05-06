@@ -25,8 +25,8 @@ CFLAGS=-g -Wall -pedantic -I head
 # Basically this is just all our C files with a .o
 # extension.
 OBJECTS= volume.o \
-	disk.o \ 
 	filedescriptor.o \
+	disk.o \
 	descriptorblock.o \
 	filetable.o
 	shell.o 
