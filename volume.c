@@ -10,7 +10,7 @@
         pre: An address within the volume.
         pos: Displays the bytes of data at that address.
 */ 
-void volume_display_block_raw(int address) 
+void volume_display_block_raw(unsigned int address) 
 { 
         char * buffer = volume_load_block(address); /* holds the block from the volume */
         
@@ -31,7 +31,7 @@ void volume_display_block_raw(int address)
         pre: An address within the volume.
         pos: Returns the bytes of data at the address.
 */
-char * volume_load_block(int address) 
+char * volume_load_block(unsigned int address) 
 { 
         char * temp = (char *) malloc(512); 
         
@@ -53,7 +53,7 @@ char * volume_load_block(int address)
         pre: An address within the volume, and a 512 byte block of data.
         pos: The data has been stored in the volume at the specified address.
 */ 
-void volume_store_block(int address, char * block) 
+void volume_store_block(unsigned int address, char * block) 
 { 
     char * disk0Block = (char *) malloc(512); /* buffer for first disk block */
     char * disk1Block = (char *) malloc(512); /* buffer for second disk block */
