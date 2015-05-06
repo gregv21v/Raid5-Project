@@ -75,7 +75,8 @@ void descriptorBlock_store(descriptorBlock_t * block)
 descriptorBlock_t * descriptorBlock_load(int address)
 {
 	char * buffer = volume_load_block(address);
-`	for(i = 0; i < 512; i++) 
+	int i = 0;
+	for(i = 0; i < 512; i++) 
 	{
 	    printf("%c", buffer[i]);
 	    if(i % 36 == 0 && i != 0)
