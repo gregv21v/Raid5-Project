@@ -34,7 +34,11 @@ int descriptorBlock_find_file(descriptorBlock_t * block, char * filename); /* re
 void descriptorBlock_list_files(descriptorBlock_t * block); /* tested */
 
 void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach); /* tested */
+
 void descriptorBlock_add_file(descriptorBlock_t * block, file_t * file); 
+
+int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blockCount);
+int descriptorBlock_find_last_free(descriptorBlock_t * block);
 
 
 #endif 
