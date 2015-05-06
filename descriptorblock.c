@@ -164,11 +164,11 @@ int descriptorBlock_find_last_free(descriptorBlock_t * block)
 	int index = descriptorBlock_find_file(block, "");
 	if(index == 0)
 	{
-		return block->descriptors[index]->start + block->descriptors[index]->blockCount;
+		return block->address + 1;
 	}
 	else if(index != -1)
 	{
-		return block->address + 1;
+		return block->descriptors[index]->start + block->descriptors[index]->blockCount;
 	}
 	else
 	{
