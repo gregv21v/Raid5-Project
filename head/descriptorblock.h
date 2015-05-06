@@ -1,3 +1,14 @@
+ /*
+ * descriptorblock.h
+ * Author: Gregory Venezia
+ * Date: 4/27/2015
+ * Course: CSC3320
+ * Description: The descriptor block is a subunit of the filetable. It's the data that would be 
+ 	stored in one block of memory in the volume.
+ */
+ 
+
+ 
  #ifndef __DESCRIPTORBLOCK_H 
  #define __DESCRIPTORBLOCK_H 
  
@@ -17,9 +28,9 @@
  
  typedef struct DescriptorBlock { 
  	int address; /* not saved */ 
- 	file_t * descriptors[FILES_PER_BLOCK]; 
- 	unsigned int previousBlock; 
- 	unsigned int nextBlock; 
+ 	file_t * descriptors[FILES_PER_BLOCK]; /* these are the files */
+ 	unsigned int previousBlock; /* address of next block of the file table */
+ 	unsigned int nextBlock; /* address of the block that came before this in the file table */
  } descriptorBlock_t; 
 
  descriptorBlock_t * descriptorBlock_create(int address); /* tested */ 
@@ -29,14 +40,14 @@
  descriptorBlock_t * descriptorBlock_load_last(); /* tested */ 
  									 
  int descriptorBlock_find_file(descriptorBlock_t * block, char * filename); /* returns -1 if the file is not found */ 
- 									    /* tested */ 
+ 									                                                                  /* tested */ 
  void descriptorBlock_list_files(descriptorBlock_t * block); /* tested */ 
- void descriptorBlock_display_details(descriptorBlock_t * block); 
+ void descriptorBlock_display_details(descriptorBlock_t * block); /* tested */
 
  void descriptorBlock_attach(descriptorBlock_t * block, descriptorBlock_t * blockToAttach); /* tested */ 
  
- int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blockCount); 
- int descriptorBlock_find_last_free(descriptorBlock_t * block); 
+ int descriptorBlock_add_file(descriptorBlock_t * block, char * filename, int blockCount); /* tested */
+ int descriptorBlock_find_last_free(descriptorBlock_t * block); /* tested */
  
  
   #endif  
