@@ -17,8 +17,6 @@ table_t * filetable_create()
 	table->firstFileBlock = descriptorBlock_create(0);
 	/* TODO: Add condition for empty file table */
 	table->lastFileBlock = table->firstFileBlock; 
-	
-	table->currentFile = NULL;
 }
 
 
