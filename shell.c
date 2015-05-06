@@ -47,6 +47,17 @@ int main(int argc, char **argv)
 		make_disk(DISK_2);
 		
 		/* Volume function test */
+		char * testBlock = (char *) malloc(512);
+		memcpy(testBlock, "Testing", strlen("Testing"));
+		
+		printf("%s", testBlock);
+		
+		
+		volume_store_block(0, testBlock);
+
+		char * returnedBlock = volume_load_block(0);
+		
+		printf("%s", returnedBlock);
 		
 		
 		
