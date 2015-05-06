@@ -23,19 +23,9 @@ table_t * filetable_create()
 
 void filetable_add_file(table_t * table, char * name, int blockCount)
 {
-	int index = descriptorBlock_find_file(table->lastFileBlock, "");
+	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 	
-	if(index != -1) 
-	{
-		/* There is space in the existing block to place this file */
-		memcpy(table->lastFileBlock->descriptors[index]->name, name, MAX_NAME_LENGTH);
-		table->lastFileBlock->descriptors[index]->start = descriptorBlock_find_last_free(table->lastFileBlock);
-		table->lastFileBlock->descriptors[index]->blockCount = blockCount;
-		
-		/* update the block on the disk */
-		descriptorBlock_store(table->lastFileBlock);
-	}
-	else 
+	if(added == -1) 
 	{
 		/* a new block needs to be created to add this file */
 		descriptorBlock_t * newBlock = descriptorBlock_create(descriptorBlock_find_last_free(table->lastFileBlock));
@@ -49,6 +39,8 @@ void filetable_add_file(table_t * table, char * name, int blockCount)
 		free(table->lastFileBlock);
 
 		table->lastFileBlock = newBlock;
+		
+		descriptorBlock_add_file(newBlock, name, blockCount);
 	}
 }
 
