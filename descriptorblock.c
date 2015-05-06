@@ -32,6 +32,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	int i = 0; /* general purpose iterator */
 	
 	/* read the first 4 bytes as the address of the previous block */
+	printf("%d", block->previousBlock);
 	memcpy(buffer, &(block->previousBlock), 4);
 	offset += 4;
 	
@@ -39,9 +40,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		printf("%s", block->descriptors[i]->name);
 		strncpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
-		printf("%s", block->descriptors[i]->name);
 		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
