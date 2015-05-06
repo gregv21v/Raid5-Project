@@ -15,3 +15,8 @@ file_t * file_create()
     
     return newFile;
 }
+
+void file_destroy(file_t * file)
+{
+    free(file);
+}
