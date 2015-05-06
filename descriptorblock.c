@@ -39,7 +39,7 @@ void descriptorBlock_store(descriptorBlock_t * block)
 	for(i = 0; i < FILES_PER_BLOCK; i++) 
 	{
 		/* Copy the name from the block */
-		memcpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
+		strncpy(buffer + offset, block->descriptors[i]->name, NAME_LENGTH);
 		offset += NAME_LENGTH;
 		
 		/* Copy the start block address from the block */
