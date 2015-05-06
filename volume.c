@@ -35,10 +35,7 @@ char * volume_load_block(int address)
 	}
 	  
 	error = block_read((int) (address / 2), temp);
-	
-	printf("Error Code: %d", error);
-	printf("In volume load block: %s", temp);
-	  
+
 	close_disk();
 	return temp;
   
