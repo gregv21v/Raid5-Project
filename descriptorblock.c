@@ -1,3 +1,13 @@
+/*
+ * descriptorblock.c
+ * Author: Gregory Venezia
+ * Date: 4/27/2015
+ * Course: CSC3320
+ * Description: The descriptor block is a subunit of the filetable. It's the data that would be 
+ 	stored in one block of memory in the volume.
+ */
+
+
 #include <stdlib.h> /* malloc */
 #include <stdio.h>
 #include <string.h>
