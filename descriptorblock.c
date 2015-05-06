@@ -23,6 +23,19 @@ descriptorBlock_t * descriptorBlock_create(int address)
 	return block;
 }
 
+void descriptorBlock_destroy(descriptorBlock_t * block)
+{
+	/* destroy file descriptors */
+	int i = 0;
+	for(; i < FILES_PER_BLOCK; i++)
+	{
+		file_destroy(block->descriptors[i]);
+	}
+	
+	free(block);
+	
+}
+
 void descriptorBlock_store(descriptorBlock_t * block)
 {
 	int i = 0; /* general purpose iterator */
