@@ -28,6 +28,8 @@ void descriptorBlock_store(descriptorBlock_t * block)
 {
 	char * buffer = (char *) malloc(512); /* a buffer to temporarily hold the descriptorBlock data. */
 	
+	memset(buffer, '-', 512);
+	
 	int offset = 0; /* the offset from the beginning of the buffer that you are looking at. */
 	int i = 0; /* general purpose iterator */
 	
