@@ -57,9 +57,9 @@ int main(int argc, char **argv)
 	{
 		pthread_mutex_lock(&lock);
 		get_command(command);
-		pthread_mutex_unlock(&lock);
+	
 		build_argument_array(&arguments, &argumentCount, command);
-		
+		pthread_mutex_unlock(&lock);
 		if(strcmp(command,"ls")==0)/*List contents of table*/
 		{
 			filetable_list_files(table);
