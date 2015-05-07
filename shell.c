@@ -352,8 +352,8 @@ void* threadHandler()
 			do
 			{
 				printf("Would you like to initialize the system? (y/n)\n");
-				/*scanf("%c", &choice);
-				printf("%c",choice);*/
+				scanf("%c", &choice);
+				/*printf("%c",choice);*/
 				if(choice == 'y')
 				{
 					printf("Initialize\n");
