@@ -287,7 +287,7 @@ void* threadHandler()
 	while(1)
 	{
 		/* grab the lock */
-		pthread_mutex_lock(&lock);
+		
 		
 		disk_errors = 0;
 		disk_number = 0;
@@ -320,7 +320,7 @@ void* threadHandler()
 			disk_errors++;
 		}
 		close_disk();
-		
+		pthread_mutex_lock(&lock);
 		/* if all three are gone, we need to initialize the system */
 		switch(disk_errors)
 		{
