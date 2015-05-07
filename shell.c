@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 			int numBlocks; /*number of blocks the file will require*/
 			int startBlock; /*The block the file will end on*/
 			int i;
-			int error;
+			int error=0;
 			
 			/*Open the file and get its size*/
 			FILE* f = fopen(arguments[1],"w");
@@ -152,7 +152,7 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
-			char buffer [512]; /*Buffer to read from the block*/
+			/*char buffer [512]; /*Buffer to read from the block*/
 			file_t * file = filetable_find_file(table, arguments[1]);
 			if( file != NULL)/*Read the file if it was found*/
 			{
