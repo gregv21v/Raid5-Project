@@ -139,7 +139,7 @@ void filetable_display_details(table_t * table)
 */
 int filetable_remove_file(table_t * table, char * name)
 {
-	descriptorBlock_t * current = table->lastFileBlock;
+	descriptorBlock_t * current = table->firstFileBlock;
 	int index = -1; /* the index of the file once its found */
 
 	do {
