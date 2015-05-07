@@ -87,6 +87,7 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 	}
 	else
 	{
+		descriptorBlock_store(table->lastFileBlock);
 		return table->lastFileBlock->descriptors[index]->start;
 	}
 	
