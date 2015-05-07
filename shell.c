@@ -336,7 +336,9 @@ void* threadHandler()
 				
 				if(choice == 'y')
 				{
+					printf("Rebuilding...");
 					rebuild_disk(disk_number);
+					printf("done\n");
 				}
 				
 			}while(choice != 'y');
@@ -394,7 +396,7 @@ void* threadHandler()
 		}/* end switch */
 		
 		pthread_mutex_unlock(&lock);
-		sleep(3);
+		sleep(1);
 	}/* end outside while */
 	
 }
