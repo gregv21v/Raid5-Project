@@ -57,14 +57,19 @@ int main(int argc, char **argv)
 	{
 		pthread_mutex_lock(&lock);
 		get_command(command);
+		pthread_mutex_unlock(&lock);
 		build_argument_array(&arguments, &argumentCount, command);
 		
 		
 
-		if(strcmp(command, "ls") == 0) /*List the contents of the table*/
+		if(strcmp(command, "\n") == 0) /*List the contents of the table*/
+		{
+			/*Endline character, do nothing*/
+		} 
+		else if(strcmp(command,"ls")==0)
 		{
 			filetable_list_files(table);
-		} 
+		}
 		else if(strcmp(command,"format") == 0)/* create the three disks*/
 		{
 			error = make_disk("disk_0");
@@ -170,11 +175,16 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(arguments[0],"delete")==0)
 		{
-			/*file_t* file=filetable_find(table,arguments[1]);*/
-			
-			/*Need a remove file command*/
-			
-			printf("File was removed successfully\n");
+			int error;
+			error=filetable_remove_file(arguments[1]);
+			if(error==-1)
+			{
+				printf("File not found\n");
+			}
+			else
+			{
+				printf("File was removed successfully\n");
+			}
 		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)/*Some other command was given*/
 		{
@@ -184,7 +194,6 @@ int main(int argc, char **argv)
 				printf("Execution failed\n");
 			}
 		}
-		pthread_mutex_unlock(&lock);
 	}
 
   	return 0;
