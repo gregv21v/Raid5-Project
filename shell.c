@@ -31,6 +31,7 @@ int build_argument_array(char***, int*, char*);
 void get_command(char *);
 
 pthread_mutex_t lock;
+table_t * table;
 
 int main(int argc, char **argv)
 {
@@ -40,7 +41,7 @@ int main(int argc, char **argv)
 	int error; /* for disk errors */
 
 	/* initialize table */
-	table_t * table;
+
 
 	/* Thread stuff */
 	pthread_t tid; /* threads id */
