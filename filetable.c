@@ -28,6 +28,7 @@ table_t * filetable_create()
 }
 
 
+
 /*
 	Frees up the memory used for the table
 	Pre: None
@@ -42,6 +43,19 @@ void filetable_destroy(table_t * table)
 	if(table != NULL)	
 		free(table);
 }
+
+table_t * filetable_load()
+{
+	table_t * table = (table_t *) malloc(sizeof(table_t));
+	
+	/* find the last descriptor block */
+	table->firstFileBlock = descriptorBlock_load(0);
+	/* TODO: Add condition for empty file table */
+	table->lastFileBlock = descriptorBlock_load_last();
+	
+	return table;
+}
+
 
 /*
 	Adds a file to the table
@@ -130,6 +144,8 @@ void filetable_remove_file(table_t * table, char * name)
 	} while(current->nextBlock != 0 && index == -1);
 	
 	strcpy(current->descriptors[index]->name, "*removed*");
+	
+	return index;
 }
 
 /*
