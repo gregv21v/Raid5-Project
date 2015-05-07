@@ -50,9 +50,10 @@ int main(int argc, char **argv)
 	pthread_create(&tid, NULL, threadHandler, NULL);
 
   	/* Start the rebuild thread */
-	pthread_mutex_lock(&lock);
+	
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
+		pthread_mutex_lock(&lock);
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
 
@@ -165,8 +166,9 @@ int main(int argc, char **argv)
 				printf("Execution failed\n");
 			}
 		}
+		pthread_mutex_unlock(&lock);
 	}
-pthread_mutex_unlock(&lock);
+
   	return 0;
 
 }
