@@ -116,7 +116,7 @@ int main(int argc, char **argv)
 			fseek(f,0,SEEK_SET);
 			
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
-			fscanf(f,"%s",buffer);/*Read the file into the buffer*/
+			fgets(buffer,sizeof(buffer),f);/*Read the file into the buffer*/
 			
 			for(i=0;i<fileSize+1;i++)
 			{
