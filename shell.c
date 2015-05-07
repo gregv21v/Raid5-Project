@@ -394,6 +394,7 @@ void* threadHandler()
 		}/* end switch */
 		
 		pthread_mutex_unlock(&lock);
+		sleep(3);
 	}/* end outside while */
 	
 }
