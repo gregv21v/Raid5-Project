@@ -373,6 +373,8 @@ void* threadHandler()
 				if(choice == 'y')
 				{
 					printf("Initialize\n");
+					table = filetable_create();
+					
 					make_error = make_disk("disk_0");
 					if(make_error == 0)
 					{
