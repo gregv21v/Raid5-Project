@@ -152,9 +152,7 @@ int filetable_remove_file(table_t * table, char * name)
 			current = descriptorBlock_load(current->nextBlock);
 	
 	} while(current->nextBlock != 0 && index == -1);
-	
-	printf("index: %d", index);
-	
+
 	if(index != -1) 
 	{
 		strcpy(current->descriptors[index]->name, "*removed*");
