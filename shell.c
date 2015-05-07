@@ -39,6 +39,7 @@ int main(int argc, char **argv)
 	char ** arguments; /* arguments of the command */
 	int argumentCount; /* number of arguments the command has */
 	int error; /* for disk errors */
+	table_t * table;
 
 	/* initialize table */
 
@@ -51,6 +52,8 @@ int main(int argc, char **argv)
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
 	sleep(1);
+	table = filetable_load();
+	
   	/* Start the rebuild thread */
 	
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
