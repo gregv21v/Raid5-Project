@@ -100,7 +100,7 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 */
 void filetable_list_files(table_t * table)
 {
-	descriptorBlock_t * current = table->lastFileBlock;
+	descriptorBlock_t * current = table->firstFileBlock;
 
 	if(current != NULL)
 	{
@@ -119,7 +119,7 @@ void filetable_list_files(table_t * table)
 */
 void filetable_display_details(table_t * table)
 {
-	descriptorBlock_t * current = table->lastFileBlock;
+	descriptorBlock_t * current = table->firstFileBlock;
 
 	if(current != NULL)
 	{
