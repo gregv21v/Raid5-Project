@@ -23,14 +23,6 @@
 #define CMDLEN	1024
 
 
-
-/*Define the disk names*/
-#define DISK_0 "disk_0"
-#define DISK_1 "disk_1"
-#define DISK_2 "disk_2"
-
-
-
 int rebuild_disk(int);
 void * threadHandler();
 void sanitize_string(char *);
@@ -416,11 +408,11 @@ int rebuild_disk(int disk_number)
 		{
 			open_disk(DISK_1);
 			block_read(block_number,buffer_a);
-			close_disk(DISK_1);
+			close_disk();
 			
 			open_disk(DISK_2);
 			block_read(block_number,buffer_b);
-			close_disk(DISK_2);
+			close_disk();
 			
 			for(i = 0;i<512;i++)
 			{
@@ -429,7 +421,7 @@ int rebuild_disk(int disk_number)
 			
 			open_disk(DISK_0);
 			block_write(block_number,parity_buffer);
-			close_disk(DISK_0);
+			close_disk();
 		}
 	}
 	else if(disk_number == 1)
@@ -440,11 +432,11 @@ int rebuild_disk(int disk_number)
 		{
 			open_disk(DISK_0);
 			block_read(block_number,buffer_a);
-			close_disk(DISK_0);
+			close_disk();
 			
 			open_disk(DISK_2);
 			block_read(block_number,buffer_b);
-			close_disk(DISK_2);
+			close_disk();
 			
 			for(i = 0;i<512;i++)
 			{
@@ -453,7 +445,7 @@ int rebuild_disk(int disk_number)
 			
 			open_disk(DISK_1);
 			block_write(block_number,parity_buffer);
-			close_disk(DISK_1);
+			close_disk();
 		}
 	}else if(disk_number == 2)
 	{
@@ -463,11 +455,11 @@ int rebuild_disk(int disk_number)
 		{
 			open_disk(DISK_0);
 			block_read(block_number,buffer_a);
-			close_disk(DISK_0);
+			close_disk();
 			
 			open_disk(DISK_1);
 			block_read(block_number,buffer_b);
-			close_disk(DISK_1);
+			close_disk();
 			
 			for(i = 0;i<512;i++)
 			{
@@ -476,7 +468,7 @@ int rebuild_disk(int disk_number)
 			
 			open_disk(DISK_2);
 			block_write(block_number,parity_buffer);
-			close_disk(DISK_2);
+			close_disk();
 		}
 	}
 	
