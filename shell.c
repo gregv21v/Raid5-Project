@@ -53,9 +53,9 @@ int main(int argc, char **argv)
 	
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
-		
-		get_command(command);
 		pthread_mutex_lock(&lock);
+		get_command(command);
+		pthread_mutex_unlock(&lock);
 		build_argument_array(&arguments, &argumentCount, command);
 
 		if(strcmp(command, "ls") == 0) /*List the contents of the table*/
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
 				printf("Execution failed\n");
 			}
 		}
-		pthread_mutex_unlock(&lock);
+		/*pthread_mutex_unlock(&lock);*/
 	}
 
   	return 0;
