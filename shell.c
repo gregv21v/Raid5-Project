@@ -208,8 +208,8 @@ void get_command(char *cmd)
 	
 	/* Prompt for the command. */
 	printf("msh> ");
-	/*fgets(cmd, CMDLEN, stdin);*/
-	scanf("%s",cmd);
+	fgets(cmd, CMDLEN, stdin);
+	/*scanf("%s",cmd);*/
 
 	/* Strip a trailing newline. */
 	cmd[strlen(cmd) - 1] = '\0';
