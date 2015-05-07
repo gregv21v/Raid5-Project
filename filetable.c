@@ -102,11 +102,14 @@ void filetable_list_files(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
 
-	do {
-		descriptorBlock_list_files(current);
-		if(current->nextBlock != 0)
-			current = descriptorBlock_load(current->nextBlock);
-	} while(current->nextBlock != 0);
+	if(current != NULL)
+	{
+		do {
+			descriptorBlock_list_files(current);
+			if(current->nextBlock != 0)
+				current = descriptorBlock_load(current->nextBlock);
+		} while(current->nextBlock != 0);	
+	}
 }
 
 /*
@@ -118,11 +121,14 @@ void filetable_display_details(table_t * table)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
 
-	do {
-		descriptorBlock_display_details(current);
-		if(current->nextBlock != 0)
-			current = descriptorBlock_load(current->nextBlock);
-	} while(current->nextBlock != 0);
+	if(current != NULL)
+	{
+		do {
+			descriptorBlock_display_details(current);
+			if(current->nextBlock != 0)
+				current = descriptorBlock_load(current->nextBlock);
+		} while(current->nextBlock != 0);
+	}
 }
 
 
