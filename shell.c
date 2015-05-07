@@ -354,7 +354,7 @@ void* threadHandler()
 				printf("Would you like to initialize the system? (y/n)\n");
 				/*scanf("%c", &choice);
 				printf("%c",choice);*/
-				if(1)
+				if(choice == 'y')
 				{
 					printf("Initialize\n");
 					make_error = make_disk("disk_0");
@@ -387,7 +387,7 @@ void* threadHandler()
 						printf("Error creating disk 3.\n");
 					}
 				}
-			}while(0);
+			}while(choice != 'y');
 			
 			break;
 		default:
