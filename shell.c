@@ -132,7 +132,7 @@ int main(int argc, char **argv)
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
 			
-			for(i = startBlock, j = 0; i <= (startBlock+numBlocks); i++, j++)/*Write to the volume*/
+			for(i = startBlock - 1, j = 0; i <= (startBlock+numBlocks); i++, j++)/*Write to the volume*/
 			{
 			
 				volume_store_block(i, buffer + (j*512));
