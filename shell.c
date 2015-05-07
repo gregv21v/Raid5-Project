@@ -116,6 +116,11 @@ int main(int argc, char **argv)
 			
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fscanf(f,"%s",buffer);/*Read the file into the buffer*/
+			
+			for(i=0;i<fileSize+1;i++)
+			{
+				printf("%c",buffer[i]);
+			}
 			printf("Test 1\n");
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
