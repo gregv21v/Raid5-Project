@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 	int error; /* for disk errors */
 
 	/* initialize table */
-	table_t * table = filetable_create();
+	table_t * table;
 
 	/* Thread stuff */
 	pthread_t tid; /* threads id */
