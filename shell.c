@@ -134,7 +134,7 @@ int main(int argc, char **argv)
 			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
 			{
 			
-				volume_store_block(i, buffer);
+				volume_store_block(i, buffer + (i*512));
 			}
 		
 			if(error!=0)
