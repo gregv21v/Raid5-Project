@@ -68,7 +68,6 @@ table_t * filetable_load()
 int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 {
 	int index = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
-	descriptorBlock_list_files(table->lastFileBlock);
 	
 	if(index == -1) 
 	{
