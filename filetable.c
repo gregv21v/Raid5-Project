@@ -27,6 +27,22 @@ table_t * filetable_create()
 	return table;
 }
 
+
+/*
+	Frees up the memory used for the table
+	Pre: None
+	Post: Adds a table to the volume with a reference in memory.
+*/
+void filetable_destroy(table_t * table)
+{
+	if(table->firstFileBlock != NULL)
+		free(table->firstFileBlock);
+	if(table->lastFileBlock != NULL)
+		free(table->lastFileBlock);
+	if(table != NULL)	
+		free(table);
+}
+
 /*
 	Adds a file to the table
 	Pre: table must be created, name length must be less than or equal to NAME_LENGTH.
