@@ -111,12 +111,13 @@ int main(int argc, char **argv)
 			
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
-
+			printf("Test 1\n");
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,arguments[1], numBlocks);
-	
+			printf("Test 2\n");
 			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
 			{
+				printf("Test 3\n");
 				volume_store_block(i, buffer);
 			}
 		
