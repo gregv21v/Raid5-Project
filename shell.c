@@ -215,7 +215,8 @@ void get_command(char *cmd)
 	
 	/* Prompt for the command. */
 	printf("msh> ");
-	fgets(cmd, CMDLEN, stdin);
+	/*fgets(cmd, CMDLEN, stdin);*/
+	scanf("%s",cmd);
 
 	/* Strip a trailing newline. */
 	cmd[strlen(cmd) - 1] = '\0';
@@ -359,7 +360,7 @@ void* threadHandler()
 			do
 			{
 				printf("Would you like to rebuild the disk? (y/n)\n");
-				scanf("%c", &choice);
+				choice = getchar();
 				
 				if(choice == 'y')
 				{
