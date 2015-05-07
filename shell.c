@@ -153,7 +153,8 @@ int main(int argc, char **argv)
 			{
 				int startBlock = file->start;
 				int currentBlock = startBlock;
-				int endBlock = startBlock + 22;/*(file->blockCount);*/
+				int endBlock = startBlock + (file->blockCount);
+				printf("Block count: %d",file->blockCount);
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
 					volume_display_block_raw(currentBlock);
