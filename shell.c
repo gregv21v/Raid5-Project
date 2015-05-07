@@ -132,7 +132,7 @@ int main(int argc, char **argv)
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
 			
-			for(i = startBlock - 1, j = 0; i <= (startBlock+numBlocks); i++, j++)/*Write to the volume*/
+			for(i = startBlock, j = 0; i <= (startBlock+numBlocks); i++, j++)/*Write to the volume*/
 			{
 			
 				volume_store_block(i, buffer + (j*512));
@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 				printf("Block count: %d",file->blockCount);
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
-					volume_display_block_raw(currentBlock);
+					volume_display_block_raw(currentBlock-1);
 					currentBlock++;/*Iterate through the blocks of the file*/
 				}
 			}
