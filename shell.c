@@ -332,7 +332,7 @@ void* threadHandler()
 				
 				if(choice == 'y')
 				{
-					printf("rebuld\n");
+					
 					rebuild_disk(disk_number);
 				}
 				
@@ -347,10 +347,11 @@ void* threadHandler()
 			do
 			{
 				printf("Would you like to initialize the system? (y/n)\n");
-				scanf("%s", &choice);
-				
+				scanf("%c", &choice);
+				printf("%c",choice);
 				if(choice == 'y')
 				{
+					printf("rebuld\n");
 					make_error = make_disk("disk_0");
 					if(make_error == 0)
 					{
