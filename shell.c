@@ -379,7 +379,7 @@ void* threadHandler()
 			do
 			{
 				printf("Would you like to initialize the system? (y/n)\n");
-				fgets(choice,1,stdin);
+				fgets(&choice,1,stdin);
 				/*printf("%c",choice);*/
 				if(choice == 'y')
 				{
