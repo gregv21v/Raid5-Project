@@ -15,11 +15,12 @@ void volume_display_block_raw(unsigned int address)
         char * buffer = volume_load_block(address); /* holds the block from the volume */
         
         int i; /* iterator */ 
-        for(; i < 512; i++)  
+        for(i = 0; i < 512; i++)  
         { 
-                printf("%c", buffer[i]); 
+                printf("%c", buffer[i]);
+                /*
                 if(i % 32 == 0 && i != 0) 
-                        printf("\n");
+                        printf("\n");*/
         } 
 } 
 
