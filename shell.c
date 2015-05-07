@@ -472,7 +472,9 @@ int rebuild_disk(int disk_number)
 		}
 	}
 	
-	
+	free(buffer_a);
+	free(buffer_b);
+	free(parity_buffer);
 	
 	return 0;
 }
