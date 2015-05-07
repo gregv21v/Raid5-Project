@@ -121,13 +121,13 @@ int main(int argc, char **argv)
 			{
 				printf("%c",buffer[i]);
 			}
-			printf("Test 1\n");
+			
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
-			printf("Test 2\n");
+			
 			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
 			{
-				printf("Test 3\n");
+			
 				volume_store_block(i, buffer);
 			}
 		
