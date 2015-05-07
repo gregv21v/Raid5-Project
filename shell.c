@@ -351,7 +351,7 @@ void* threadHandler()
 				if(choice == 'y')
 				{
 					printf("rebuild\n");
-					make_error = make_disk("disk_A");
+					make_error = make_disk("disk_0");
 					if(make_error == 0)
 					{
 						printf("Disk created\n");
