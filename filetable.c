@@ -146,10 +146,11 @@ int filetable_remove_file(table_t * table, char * name)
 	int index = -1; /* the index of the file once its found */
 
 	do {
-		current = descriptorBlock_load(current->nextBlock);
-		
 		index = descriptorBlock_find_file(current, name);
 		
+		if(current->nextBlock != 0)
+			current = descriptorBlock_load(current->nextBlock);
+	
 	} while(current->nextBlock != 0 && index == -1);
 	
 	printf("index: %d", index);
