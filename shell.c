@@ -461,7 +461,7 @@ int rebuild_disk(int disk_number)
 	else if(disk_number == 1)
 	{
 		make_disk(DISK_1);
-		printf("make 1\n");
+		
 		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
 		{
 			open_disk(DISK_0);
@@ -506,11 +506,11 @@ int rebuild_disk(int disk_number)
 			close_disk();
 		}
 	}
-	printf("free");
+	
 	free(buffer_a);
 	free(buffer_b);
 	free(parity_buffer);
-	printf("free complete");
+	
 	
 	return 0;
 }
