@@ -110,7 +110,7 @@ int main(int argc, char **argv)
 			
 			/*Open the file and get its size*/
 			FILE* f = fopen(arguments[1],"r");
-			fileName=basename(arguments[1]);
+			fileName=arguments[2];
 			fseek(f,0,SEEK_END);
 			fileSize = ftell(f);
 			numBlocks = (int) (fileSize/512);
