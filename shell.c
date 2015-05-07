@@ -328,10 +328,13 @@ void* threadHandler()
 			do
 			{
 				printf("Would you like to rebuild the disk? (y/n)\n");
-				scanf("%s", &choice);
+				scanf("%c", &choice);
 				
 				if(choice == 'y')
+				{
+					printf("rebuld\n");
 					rebuild_disk(disk_number);
+				}
 				
 			}while(choice != 'y');
 			break;
