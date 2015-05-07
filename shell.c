@@ -64,6 +64,7 @@ int main(int argc, char **argv)
 
 		if(strcmp(command, "\n") == 0) /*List the contents of the table*/
 		{
+			printf("Endline character\n");
 			/*Endline character, do nothing*/
 		} 
 		else if(strcmp(command,"ls")==0)
