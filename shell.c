@@ -69,7 +69,7 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(command,"format") == 0)/* create the three disks*/
 		{
-			error = make_disk("disk_0");
+			error = make_disk(DISK_0);
 			if(error == 0)
 			{
 				printf("Disk created\n");
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
 				printf("Error creating disk 1.\n");
 			}
 			
-			error= make_disk("disk_1");
+			error= make_disk(DISK_1);
 			if(error==0)
 			{
 				printf("Disk created\n");
@@ -89,7 +89,7 @@ int main(int argc, char **argv)
 				printf("Error creating disk 2.\n");
 			}
 			
-			error=make_disk("disk_2");
+			error=make_disk(DISK_2);
 			if(error==0)
 			{
 				printf("Disk created\n");
@@ -185,12 +185,7 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)/*Some other command was given*/
 		{
-			/*
-			error = execvp(arguments[0],arguments);
-			if(error == -1)
-			{
-				printf("Execution failed\n");
-			}*/
+
 		}
 	}
 
