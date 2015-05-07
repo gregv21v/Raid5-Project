@@ -207,6 +207,7 @@ void get_command(char *cmd)
 	/* Zero the cmd buffer. */
 	memset(cmd, CMDLEN, 0);
 	
+	fflush(stdin);
 	/* Prompt for the command. */
 	printf("msh> ");
 	fgets(cmd, CMDLEN, stdin);
