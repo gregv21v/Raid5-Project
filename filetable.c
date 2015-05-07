@@ -51,7 +51,10 @@ table_t * filetable_load()
 	/* find the last descriptor block */
 	table->firstFileBlock = descriptorBlock_load(0);
 	/* TODO: Add condition for empty file table */
-	table->lastFileBlock = descriptorBlock_load_last();
+	if(table->firstFileBlock->nextBlock != 0)
+		table->lastFileBlock = descriptorBlock_load_last();
+	else 
+		table->lastFileBlock = table->firstFileBlock;
 	
 	return table;
 }
