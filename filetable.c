@@ -131,7 +131,7 @@ void filetable_display_details(table_t * table)
 	Pre: table has been created, name is less than or equal to NAME_LENGTH
 	Post: The file is removed from the table.
 */
-void filetable_remove_file(table_t * table, char * name)
+int filetable_remove_file(table_t * table, char * name)
 {
 	descriptorBlock_t * current = table->lastFileBlock;
 	int index = -1; /* the index of the file once its found */
