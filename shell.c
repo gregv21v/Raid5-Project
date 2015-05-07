@@ -182,11 +182,12 @@ int main(int argc, char **argv)
 		}
 		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)/*Some other command was given*/
 		{
+			/*
 			error = execvp(arguments[0],arguments);
 			if(error == -1)
 			{
 				printf("Execution failed\n");
-			}
+			}*/
 		}
 	}
 
