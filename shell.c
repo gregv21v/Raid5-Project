@@ -15,6 +15,7 @@
 #include <ctype.h>
 #include <disk.h>
 #include <unistd.h>
+#include <libgen.h>
 
 #include "filetable.h"
 #include "volume.h"
