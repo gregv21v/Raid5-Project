@@ -60,13 +60,7 @@ int main(int argc, char **argv)
 		pthread_mutex_unlock(&lock);
 		build_argument_array(&arguments, &argumentCount, command);
 		
-		
-
-		if(strcmp(command, "\n") == 0) /*List the contents of the table*/
-		{
-			/*Endline*/
-		} 
-		else if(strcmp(command,"ls")==0)
+		if(strcmp(command,"ls")==0)/*List contents of table*/
 		{
 			filetable_list_files(table);
 		}
