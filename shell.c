@@ -55,6 +55,7 @@ int main(int argc, char **argv)
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
 		pthread_mutex_lock(&lock);
+		strcpy(command, "");
 		get_command(command);
 		pthread_mutex_unlock(&lock);
 		build_argument_array(&arguments, &argumentCount, command);
