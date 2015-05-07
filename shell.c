@@ -127,11 +127,12 @@ int main(int argc, char **argv)
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,sizeof(char),fileSize+1,f);/*Read the file into the buffer*/
 			
+			/*
 			for(i=0;i<fileSize+1;i++)
 			{
 				printf("%c",buffer[i]);
 			}
-			
+			*/
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
 			
@@ -471,7 +472,7 @@ int rebuild_disk(int disk_number)
 			block_read(block_number,buffer_b);
 			close_disk();
 			
-			printf("enter for loop\n");
+			/*printf("enter for loop\n");*/
 			for(i = 0;i<512;i++)
 			{
 				parity_buffer[i] = buffer_a[i] ^ buffer_b[i];
