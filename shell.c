@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 				printf("Block count: %d",file->blockCount);
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
-					volume_display_block_raw(currentBlock-1);
+					volume_display_block_raw(currentBlock);
 					currentBlock++;/*Iterate through the blocks of the file*/
 				}
 			}
