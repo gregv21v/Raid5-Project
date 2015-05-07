@@ -31,17 +31,6 @@
 
 
 
-
-/* List of Commands: 
-	ls
-	makedisk [disk-name]
-	opendisk [disk-name]
-	closedisk [disk-name]
-	writefile [file-name] [local-file-name]
-	readfile [file-name] 
-
-*/
-
 int rebuild_disk(int);
 void * threadHandler();
 void sanitize_string(char *);
@@ -75,7 +64,7 @@ int main(int argc, char **argv)
 		get_command(command);
 		build_argument_array(&arguments, &argumentCount, command);
 
-		if(strcmp(command, "ls") == 0) 
+		if(strcmp(command, "ls") == 0) /*List the contents of the table*/
 		{
 			filetable_list_files(table);
 		} 
@@ -112,16 +101,13 @@ int main(int argc, char **argv)
 			}
 		
 		}
-		/* writes a file that is on the local filesystem to the disk */
-		else if(strcmp(arguments[0],"write") == 0)
+		else if(strcmp(arguments[0],"write") == 0)/*Write files to the disks*/
 		{
-			
-			
 			char* buffer; /*The buffer to hold the text of the file*/
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
 			int startBlock; /*The block the file will end on*/
-			int i;
+			int i; /*iterator*/
 			int error=0;
 			
 			/*Open the file and get its size*/
@@ -134,10 +120,10 @@ int main(int argc, char **argv)
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
 			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
 
-			/*Create new file_t and add to table*/
+			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,arguments[1], numBlocks);
 	
-			for(i = startBlock; i <= (startBlock+numBlocks); i++)
+			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
 			{
 				volume_store_block(i, buffer);
 			}
@@ -148,11 +134,10 @@ int main(int argc, char **argv)
 				printf("Failed to execute all writes\n");
 			}
 			
-			free(buffer);
+			free(buffer);/*Free the buffer*/
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
-			/*char buffer [512]; /*Buffer to read from the block*/
 			file_t * file = filetable_find_file(table, arguments[1]);
 			if( file != NULL)/*Read the file if it was found*/
 			{
@@ -163,6 +148,7 @@ int main(int argc, char **argv)
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
 					volume_display_block_raw(currentBlock);
+					currentBlock++;/*Iterate through the blocks of the file*/
 				}
 			}
 			else /*The file was not found*/
@@ -178,9 +164,8 @@ int main(int argc, char **argv)
 			
 			printf("File was removed successfully\n");
 		}
-		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)
+		else if(strcmp(command,"exit") != 0 && strcmp(command,"quit") != 0)/*Some other command was given*/
 		{
-			/*We can change the creation of files later if we want*/	
 			error = execvp(arguments[0],arguments);
 			if(error == -1)
 			{
