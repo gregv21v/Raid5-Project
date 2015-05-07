@@ -176,7 +176,7 @@ int main(int argc, char **argv)
 		else if(strcmp(arguments[0],"delete")==0)
 		{
 			int error;
-			error=filetable_remove_file(arguments[1]);
+			error=filetable_remove_file(table,arguments[1]);
 			if(error==-1)
 			{
 				printf("File not found\n");
