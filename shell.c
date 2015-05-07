@@ -48,12 +48,12 @@ int main(int argc, char **argv)
 	
 	/* Create the thread, giving it threadHandler() as a function */
 	pthread_create(&tid, NULL, threadHandler, NULL);
-
+	sleep(1);
   	/* Start the rebuild thread */
 	
 	while(strcmp(command, "exit") != 0 && strcmp(command, "quit") != 0)
 	{
-	
+		pthread_mutex_lock(&lock);
 		get_command(command);
 		
 		build_argument_array(&arguments, &argumentCount, command);
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
 				printf("Execution failed\n");
 			}
 		}
-		/*pthread_mutex_unlock(&lock);*/
+		pthread_mutex_unlock(&lock);
 	}
 
   	return 0;
@@ -188,8 +188,7 @@ void get_command(char *cmd)
 	
 	/* Prompt for the command. */
 	printf("msh> ");
-	/*fgets(cmd, CMDLEN, stdin);*/
-	scanf("%s",cmd);
+	fgets(cmd, CMDLEN, stdin);
 
 	/* Strip a trailing newline. */
 	cmd[strlen(cmd) - 1] = '\0';
