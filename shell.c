@@ -381,7 +381,7 @@ void* threadHandler()
 						printf("Error creating disk 3.\n");
 					}
 				}
-			}while(choice != 'y');
+			}while(0);
 			
 			break;
 		default:
