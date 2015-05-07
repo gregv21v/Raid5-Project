@@ -112,7 +112,11 @@ int main(int argc, char **argv)
 			fileName=basename(arguments[1]);
 			fseek(f,0,SEEK_END);
 			fileSize = ftell(f);
-			numBlocks = (fileSize%512) + 1;/*calculate the blocks needed*/
+			numBlocks = (int) (fileSize/512);
+			if(fileSize%512 != 0)
+			{
+				numBlocks++;
+			}
 			fseek(f,0,SEEK_SET);
 			
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
@@ -149,8 +153,6 @@ int main(int argc, char **argv)
 				int startBlock = file->start;
 				int currentBlock = startBlock;
 				int endBlock = startBlock + (file->blockCount);
-				printf("endBlock: ");
-				printf("%d\n\n\n", endBlock);
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
 					volume_display_block_raw(currentBlock);
