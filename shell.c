@@ -438,7 +438,7 @@ int rebuild_disk(int disk_number)
 	else if(disk_number == 1)
 	{
 		make_disk(DISK_1);
-		
+		printf("make 1\n");
 		for(block_number = 0;block_number < DISK_BLOCKS;block_number++)
 		{
 			open_disk(DISK_0);
@@ -449,6 +449,7 @@ int rebuild_disk(int disk_number)
 			block_read(block_number,buffer_b);
 			close_disk();
 			
+			printf("enter for loop\n");
 			for(i = 0;i<512;i++)
 			{
 				parity_buffer[i] = buffer_a[i] ^ buffer_b[i];
@@ -482,10 +483,11 @@ int rebuild_disk(int disk_number)
 			close_disk();
 		}
 	}
-	
+	printf("free");
 	free(buffer_a);
 	free(buffer_b);
 	free(parity_buffer);
+	printf("free complete");
 	
 	return 0;
 }
