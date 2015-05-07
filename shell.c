@@ -105,6 +105,7 @@ int main(int argc, char **argv)
 			int numBlocks; /*number of blocks the file will require*/
 			int startBlock; /*The block the file will end on*/
 			int i; /*iterator*/
+			int j;
 			int error=0;
 			
 			/*Open the file and get its size*/
@@ -131,10 +132,10 @@ int main(int argc, char **argv)
 			/*Add fileto the table*/
 			startBlock = filetable_add_file(table,fileName, numBlocks);
 			
-			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
+			for(i = startBlock, j = 0; i <= (startBlock+numBlocks); i++, j++)/*Write to the volume*/
 			{
 			
-				volume_store_block(i, buffer + (i*512));
+				volume_store_block(i, buffer + (j*512));
 			}
 		
 			if(error!=0)
