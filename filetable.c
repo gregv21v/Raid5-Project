@@ -22,7 +22,9 @@ table_t * filetable_create()
 	/* find the last descriptor block */
 	table->firstFileBlock = descriptorBlock_create(0);
 	/* TODO: Add condition for empty file table */
-	table->lastFileBlock = table->firstFileBlock; 
+	table->lastFileBlock = table->firstFileBlock;
+	
+	return table;
 }
 
 /*
@@ -33,7 +35,8 @@ table_t * filetable_create()
 int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 {
 	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
-
+	int index;
+	
 	if(added == -1) 
 	{
 		/* a new block needs to be created to add this file */
@@ -41,7 +44,7 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 	
 		descriptorBlock_attach(table->lastFileBlock, newBlock);
 
-		int index = descriptorBlock_add_file(newBlock, name, blockCount);
+		index = descriptorBlock_add_file(newBlock, name, blockCount);
 		
 		/* update the blocks on the disk */
 		descriptorBlock_store(table->lastFileBlock);
