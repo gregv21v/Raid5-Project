@@ -162,7 +162,7 @@ int main(int argc, char **argv)
 				
 				while(currentBlock<=endBlock)/*Iterate through the blocks of the file*/
 				{
-					volume_display_raw(currentBlock);
+					volume_display_block_raw(currentBlock);
 				}
 			}
 			else /*The file was not found*/
