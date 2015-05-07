@@ -64,7 +64,7 @@ int main(int argc, char **argv)
 		{
 			filetable_list_files(table);
 		} 
-		else if(strcmp(command,"format") == 0)/* create the three disks*/
+		else if(strcmp(arguments[0],"format") == 0)/* create the three disks*/
 		{
 			error = make_disk("disk_0");
 			if(error == 0)
