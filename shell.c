@@ -98,6 +98,7 @@ int main(int argc, char **argv)
 		else if(strcmp(arguments[0],"write") == 0)/*Write files to the disks*/
 		{
 			char* buffer; /*The buffer to hold the text of the file*/
+			char* fileName;
 			int fileSize; /*the size of the file*/
 			int numBlocks; /*number of blocks the file will require*/
 			int startBlock; /*The block the file will end on*/
@@ -105,17 +106,18 @@ int main(int argc, char **argv)
 			int error=0;
 			
 			/*Open the file and get its size*/
-			FILE* f = fopen(arguments[1],"w");
+			FILE* f = fopen(arguments[1],"r");
+			fileName=basename(arguments[1]);
 			fseek(f,0,SEEK_END);
 			fileSize = ftell(f);
 			numBlocks = (fileSize%512) + 1;/*calculate the blocks needed*/
 			fseek(f,0,SEEK_SET);
 			
 			buffer = (char *)malloc(sizeof(char) * (fileSize+1));/*Allocate space for the buffer*/
-			fread(buffer,fileSize,1,f);/*Read the file into the buffer*/
+			fscanf(f,"%s",buffer);/*Read the file into the buffer*/
 			printf("Test 1\n");
 			/*Add fileto the table*/
-			startBlock = filetable_add_file(table,arguments[1], numBlocks);
+			startBlock = filetable_add_file(table,fileName, numBlocks);
 			printf("Test 2\n");
 			for(i = startBlock; i <= (startBlock+numBlocks); i++)/*Write to the volume*/
 			{
@@ -130,6 +132,7 @@ int main(int argc, char **argv)
 			}
 			
 			free(buffer);/*Free the buffer*/
+			fclose(f);
 		}
 		else if(strcmp(arguments[0],"readfile")==0)
 		{
