@@ -50,8 +50,7 @@ void filetable_destroy(table_t * table)
 */
 int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 {
-	int added = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
-	int index;
+	int index = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 	
 	if(added == -1) 
 	{
@@ -74,7 +73,7 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 	}
 	else
 	{
-		return table->lastFileBlock->descriptors[added]->start;
+		return table->lastFileBlock->descriptors[index]->start;
 	}
 	
 	
