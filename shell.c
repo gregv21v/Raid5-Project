@@ -324,7 +324,7 @@ void* threadHandler()
 		}
 		close_disk();
 		pthread_mutex_lock(&lock);
-		
+		printf("Locked\n");
 		/* if all three are gone, we need to initialize the system */
 		switch(disk_errors)
 		{
