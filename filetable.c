@@ -52,7 +52,7 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 {
 	int index = descriptorBlock_add_file(table->lastFileBlock, name, blockCount);
 	
-	if(added == -1) 
+	if(index == -1) 
 	{
 		/* a new block needs to be created to add this file */
 		descriptorBlock_t * newBlock = descriptorBlock_create(descriptorBlock_find_last_free(table->lastFileBlock));
