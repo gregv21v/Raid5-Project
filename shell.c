@@ -97,7 +97,7 @@ int main(int argc, char **argv)
 			}
 		
 		}
-		else if(strcmp(arguments[0],"write") == 0)/*Write files to the disks*/
+		else if(strcmp(command,"write") == 0)/*Write files to the disks*/
 		{
 			char* buffer; /*The buffer to hold the text of the file*/
 			char* fileName;
@@ -147,7 +147,7 @@ int main(int argc, char **argv)
 			free(buffer);/*Free the buffer*/
 			fclose(f);
 		}
-		else if(strcmp(arguments[0],"readfile")==0)
+		else if(strcmp(command,"readfile")==0)
 		{
 			file_t * file = filetable_find_file(table, arguments[1]);
 			if( file != NULL)/*Read the file if it was found*/
@@ -167,7 +167,7 @@ int main(int argc, char **argv)
 				printf("File not found\n");
 			}
 		}
-		else if(strcmp(arguments[0],"delete")==0)
+		else if(strcmp(command,"delete")==0)
 		{
 			int error;
 			error=filetable_remove_file(table,arguments[1]);
