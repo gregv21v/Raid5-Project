@@ -78,10 +78,10 @@ int filetable_add_file(table_t * table, char * name, unsigned int blockCount)
 		/* update the blocks on the disk */
 		descriptorBlock_store(table->lastFileBlock);
 		descriptorBlock_store(newBlock);
+
+		free(table->lastFileBlock);
 		
 		table->lastFileBlock = newBlock;
-		
-		free(table->lastFileBlock);
 
 		return newBlock->descriptors[index]->start;
 	}
