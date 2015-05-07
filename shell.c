@@ -369,7 +369,7 @@ void* threadHandler()
 		case 2:
 			/* nothing we can do here really */
 			printf("We have encountered a problem with 2 out of 3 disks. Sorry, we cannot rebuild\n");
-			break;
+		
 		case 3:
 			/* prompt the user to initialize the three disks */
 			do
